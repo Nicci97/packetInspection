@@ -209,6 +209,42 @@ struct ndpi_workflow* ndpi_workflow_init(const struct ndpi_workflow_prefs * pref
   return workflow;
 }
 
+// reset workflow values
+void ndpi_workflow_reset(struct ndpi_workflow * workflow) {
+  set_ndpi_malloc(malloc_wrapper), set_ndpi_free(free_wrapper);
+  set_ndpi_flow_malloc(NULL), set_ndpi_flow_free(NULL);
+  /* TODO: just needed here to init ndpi malloc wrapper */
+  struct ndpi_detection_module_struct * module = ndpi_init_detection_module();
+
+  //struct ndpi_workflow * workflow = ndpi_calloc(1, sizeof(struct ndpi_workflow));
+
+  workflow->ndpi_struct = module;
+
+  if(workflow->ndpi_struct == NULL) {
+    NDPI_LOG(0, NULL, NDPI_LOG_ERROR, "global structure initialization failed\n");
+    exit(-1);
+  }
+
+  ndpi_set_log_level(module, nDPI_LogLevel);
+
+  if(_debug_protocols != NULL && ! _debug_protocols_ok) {
+    if(parse_debug_proto(module,_debug_protocols))
+      exit(-1);
+    _debug_protocols_ok = 1;
+  }
+
+#ifdef NDPI_ENABLE_DEBUG_MESSAGES
+  NDPI_BITMASK_RESET(module->debug_bitmask);
+  if(_debug_protocols_ok)
+    module->debug_bitmask = debug_bitmask;
+#endif
+
+  workflow->ndpi_flows_root = ndpi_calloc(workflow->prefs.num_roots, sizeof(void *));
+
+  //return workflow;
+}
+
+
 /* ***************************************************** */
 
 void ndpi_flow_info_freer(void *node) {
@@ -696,6 +732,7 @@ struct ndpi_proto ndpi_workflow_process_packet (struct ndpi_workflow * workflow,
   /*
    * Declare pointers to packet headers
    */
+ 
   /* --- Ethernet header --- */
   const struct ndpi_ethhdr *ethernet;
   /* --- LLC header --- */

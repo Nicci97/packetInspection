@@ -61,6 +61,9 @@
 #include "ndpi_util.h"
 
 /** Client parameters **/
+static int mbufInit = 1;
+static int pauseDur = 10;
+static struct rte_mempool *mbuf_pool;
 static char *_pcap_file[MAX_NUM_READER_THREADS]; /**< Ingress pcap file/interfaces */
 static FILE *playlist_fp[MAX_NUM_READER_THREADS] = { NULL }; /**< Ingress playlist */
 static FILE *results_file           = NULL;
@@ -95,6 +98,7 @@ static u_int16_t num_loops = 1;
 static u_int8_t shutdown_app = 0, quiet_mode = 0;
 static u_int8_t num_threads = 1;
 static struct timeval startup_time, begin, end;
+static struct timeval startSlice, endSlice;
 #ifdef linux
 static int core_affinity[MAX_NUM_READER_THREADS];
 #endif
@@ -451,6 +455,7 @@ void extcap_capture() {
  * @brief Option parser
  */
 static void parseOptions(int argc, char **argv) {
+  
   int option_idx = 0, do_capture = 0;
   char *__pcap_file = NULL, *bind_mask = NULL;
   int thread_id, opt;
@@ -2126,7 +2131,7 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
     for(thread_id = 0; thread_id < num_threads; thread_id++) {
       for(i=0; i<NUM_ROOTS; i++)
         ndpi_twalk(ndpi_thread_info[thread_id].workflow->ndpi_flows_root[i], node_print_known_proto_walker, &thread_id);
-    }
+    } 
 
     qsort(all_flows, num_flows, sizeof(struct flow_info), cmpFlows);
 
@@ -2278,6 +2283,7 @@ void sigproc(int sig) {
 }
 
 
+
 /**
  * @brief Get the next pcap file from a passed playlist
  */
@@ -2333,16 +2339,22 @@ static pcap_t * openPcapFileOrDevice(u_int16_t thread_id, const u_char * pcap_fi
 
   /* trying to open a live interface */
 #ifdef USE_DPDK
-  struct rte_mempool *mbuf_pool = rte_pktmbuf_pool_create("MBUF_POOL", NUM_MBUFS,
+    if (mbufInit == 1) {
+      mbuf_pool = rte_pktmbuf_pool_create("MBUF_POOL", NUM_MBUFS,
 							  MBUF_CACHE_SIZE, 0,
 							  RTE_MBUF_DEFAULT_BUF_SIZE,
 							  rte_socket_id());
 
-  if(mbuf_pool == NULL)
-    rte_exit(EXIT_FAILURE, "Cannot create mbuf pool: are hugepages ok?\n");
+    if (mbuf_pool == NULL) {
+      rte_exit(EXIT_FAILURE, "Cannot create mbuf pool: are hugepages ok?\n");
+    }
 
-  if(dpdk_port_init(dpdk_port_id, mbuf_pool) != 0)
-    rte_exit(EXIT_FAILURE, "DPDK: Cannot init port %u: please see README.dpdk\n", dpdk_port_id);
+    if(dpdk_port_init(dpdk_port_id, mbuf_pool) != 0)
+      rte_exit(EXIT_FAILURE, "DPDK: Cannot init port %u: please see README.dpdk\n", dpdk_port_id);
+
+    mbufInit = 0;
+    }
+    
 #else
   if((pcap_handle = pcap_open_live((char*)pcap_file, snaplen,
 				   promisc, 500, pcap_error_buffer)) == NULL) {
@@ -2406,12 +2418,12 @@ static void ndpi_process_packet(u_char *args,
   struct ndpi_proto p;
   u_int16_t thread_id = *((u_int16_t*)args);
 
+  printf("This is the data: %s\n", packet);
+
   /* allocate an exact size buffer to check overflows */
   uint8_t *packet_checked = malloc(header->caplen);
-
   memcpy(packet_checked, packet, header->caplen);
   p = ndpi_workflow_process_packet(ndpi_thread_info[thread_id].workflow, header, packet_checked);
-
   if((capture_until != 0) && (header->ts.tv_sec >= capture_until)) {
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
       pcap_breakloop(ndpi_thread_info[thread_id].workflow->pcap_handle);
@@ -2521,9 +2533,52 @@ static void ndpi_process_packet(u_char *args,
  * @brief Call pcap_loop() to process packets from a live capture or savefile
  */
 static void runPcapLoop(u_int16_t thread_id) {
-  if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL))
-    pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
+
+  if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
+
+    pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+    struct pcap_pkthdr *header;
+    const u_char  *packet;
+    int count = 0;
+    while (pcap_next_ex(handler, &header, &packet) >= 0)
+    {
+      count++;
+        printf("len %d:\n",count);
+    }
+
+    //pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
+  }
 }
+
+// /**
+//  * @brief Call pcap_loop() to process packets
+//  */
+// static void runPcapLoop(u_int16_t thread_id) {
+//   if ((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->dagfd >= 0)) {
+//     while (!done) {
+//       len = get_new_frame(&frame, &timestamp); //<== new function to get packets
+//       if (len < 0) {
+//         done = 1;
+//       } else if (len > 0) {
+//         process_input_pcacket(thread_id, timestamp, (const u_char *)frame, len);
+//       }
+//     }
+//   }
+// }
+
+// /**
+//  * @brief Process input packet
+//  */
+// static void process_input_pcacket(uint16_t thread_id, uint64_t timestamp, const u_char *packet, int len) {
+//   struct pcap_pkthdr header;
+//   header.ts.tv_sec = timestamp/1000;
+//   header.ts.tv_usec = 1000*(timestamp%1000);
+//   heaader.caplen = len;
+//   header.len = len;
+//   u_char *args = (u_char*)&thread_id;
+//   pcap_process_packet(args, &header, packet);
+// }
+
 
 /**
  * @brief Process a running thread
@@ -2549,6 +2604,9 @@ void * processing_thread(void *_thread_id) {
     if((!json_flag) && (!quiet_mode)) printf("Running thread %ld...\n", thread_id);
 
 #ifdef USE_DPDK
+  printf("Entering USE_DPDK option\n");
+  gettimeofday(&startSlice, NULL);
+  printf("*****The start time is: %ld\n", startSlice.tv_sec);
   while(dpdk_run_capture) {
     struct rte_mbuf *bufs[BURST_SIZE];
     u_int16_t num = rte_eth_rx_burst(dpdk_port_id, 0, bufs, BURST_SIZE);
@@ -2558,26 +2616,47 @@ void * processing_thread(void *_thread_id) {
       usleep(1);
       continue;
     }
-
+    
     for(i = 0; i < PREFETCH_OFFSET && i < num; i++)
       rte_prefetch0(rte_pktmbuf_mtod(bufs[i], void *));
-
+    
     for(i = 0; i < num; i++) {
+      
+
       char *data = rte_pktmbuf_mtod(bufs[i], char *);
+      
       int len = rte_pktmbuf_pkt_len(bufs[i]);
       struct pcap_pkthdr h;
 
+      
       h.len = h.caplen = len;
+      
       gettimeofday(&h.ts, NULL);
-
       ndpi_process_packet((u_char*)&thread_id, &h, (const u_char *)data);
       rte_pktmbuf_free(bufs[i]);
     }
+
+    gettimeofday(&endSlice, NULL);
+    //printf("*****The end time is: %ld\n", endSlice.tv_sec);
+    if ((endSlice.tv_sec - startSlice.tv_sec) > pauseDur) {
+      printf("Stop and go to next loop\n");
+      startSlice.tv_sec = endSlice.tv_sec;
+      
+      
+      u_int64_t processing_time_usec, setup_time_usec;
+      processing_time_usec = endSlice.tv_sec*1000000 + endSlice.tv_usec - (startSlice.tv_sec*1000000 + startSlice.tv_usec);
+      setup_time_usec = startSlice.tv_sec*1000000 + startSlice.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
+      printResults(processing_time_usec, setup_time_usec);
+
+      printf("New start time is: %ld\n", startSlice.tv_sec);
+        ndpi_workflow_reset(ndpi_thread_info[thread_id].workflow);
+    }
   }
+  
 #else
+  printf("Entering runPcapLoop option\n");
 pcap_loop:
   runPcapLoop(thread_id);
-
   if(playlist_fp[thread_id] != NULL) { /* playlist: read next file */
     char filename[256];
 
@@ -2611,6 +2690,7 @@ void test_lib() {
 #endif
 
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("Thread %ld is opening a file\n", thread_id);
     pcap_t *cap;
 
 #ifdef DEBUG_TRACE
@@ -2627,7 +2707,9 @@ void test_lib() {
   void * thd_res;
 
   /* Running processing threads */
+  printf("#####: Number of threads to run on is: %d\n", num_threads);
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("##### Running process of thread with id: %ld\n", thread_id);
     status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, processing_thread, (void *) thread_id);
     /* check pthreade_create return value */
     if(status != 0) {
@@ -2654,6 +2736,7 @@ void test_lib() {
   setup_time_usec = begin.tv_sec*1000000 + begin.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
 
   /* Printing cumulative results */
+  //printf("\n\nTHE RESULTS GO HERE \n\n");
   printResults(processing_time_usec, setup_time_usec);
 
   if(stats_flag) {
@@ -3304,10 +3387,11 @@ int orginal_main(int argc, char **argv) {
     }
 
     signal(SIGINT, sigproc);
-
-    for(i=0; i<num_loops; i++)
+    
+    for(i=0; i<num_loops; i++) {
       test_lib();
-
+    }
+    
     if(results_path)  free(results_path);
     if(results_file)  fclose(results_file);
     if(extcap_dumper) pcap_dump_close(extcap_dumper);

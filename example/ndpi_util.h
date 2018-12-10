@@ -161,6 +161,10 @@ typedef struct ndpi_workflow {
 struct ndpi_workflow * ndpi_workflow_init(const struct ndpi_workflow_prefs * prefs, pcap_t * pcap_handle);
 
 
+/* workflow reset buffers back to empty */
+void ndpi_workflow_reset(struct ndpi_workflow * workflow);
+
+
  /* workflow main free function */
 void ndpi_workflow_free(struct ndpi_workflow * workflow);
 
