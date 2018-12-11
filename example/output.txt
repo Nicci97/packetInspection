@@ -1,33 +1,221 @@
-MDNS	4	375	2
-NetBIOS	5	460	4
-DHCP	1	342	1
-SSL	4	609	1
-SSH	2694	268480	1
-DHCPV6	3	424	3
-Dropbox	3	589	3
-LLMNR	17	1554	9
+MDNS	4	922	3
+NetBIOS	28	3931	18
+SSDP	6	972	4
+SSH	6145	1444646	1
+ICMPV6	1	86	1
+DHCPV6	1	155	1
+Dropbox	8	1568	4
+Skype	1	60	1
+LLMNR	49	4126	27
+Microsoft	14	6461	1
 
-	1	TCP 172.16.62.118:53498 <-> 172.16.102.24:22 [proto: 92/SSH][cat: RemoteAccess/12][2538 pkts/187420 bytes <-> 156 pkts/81060 bytes]
-	2	TCP 40.77.226.250:443 <-> 172.16.102.24:47260 [proto: 91/SSL][cat: Web/5][2 pkts/446 bytes <-> 2 pkts/163 bytes]
-	3	UDP 0.0.0.0:68 -> 255.255.255.255:67 [proto: 18/DHCP][cat: Network/14][1 pkts/342 bytes -> 0 pkts/0 bytes]
-	4	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/255 bytes -> 0 pkts/0 bytes]
-	5	UDP 172.16.63.207:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/219 bytes -> 0 pkts/0 bytes]
-	6	UDP [fe80::3c0e:116:d43:145a]:50483 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	7	UDP [fe80::3c0e:116:d43:145a]:60365 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	8	UDP [fe80::bd19:c401:219:cbd2]:60395 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	9	UDP [fe80::bd19:c401:219:cbd2]:64930 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	10	UDP 172.16.62.60:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/185 bytes -> 0 pkts/0 bytes]
-	11	UDP 172.16.62.60:17500 -> 255.255.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/185 bytes -> 0 pkts/0 bytes]
-	12	UDP 172.16.123.170:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][2 pkts/184 bytes -> 0 pkts/0 bytes]
-	13	UDP 172.16.64.83:50483 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	14	UDP 172.16.64.83:60365 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	15	UDP 172.16.64.115:60395 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	16	UDP 172.16.64.115:64930 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	17	UDP [fe80::74e4:9a7d:40c8:7466]:546 -> [ff02::1:2]:547 [proto: 103/DHCPV6][cat: Network/14][1 pkts/155 bytes -> 0 pkts/0 bytes]
-	18	UDP [fe80::55c1:6a07:bb5d:7179]:546 -> [ff02::1:2]:547 [proto: 103/DHCPV6][cat: Network/14][1 pkts/153 bytes -> 0 pkts/0 bytes]
-	19	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/120 bytes -> 0 pkts/0 bytes]
-	20	UDP [fe80::2c0:b7ff:fedc:4189]:546 -> [ff02::1:2]:547 [proto: 103/DHCPV6][cat: Network/14][1 pkts/116 bytes -> 0 pkts/0 bytes]
-	21	UDP 172.16.0.22:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
-	22	UDP 172.16.63.95:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.64.32:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
-	24	UDP 172.16.89.197:61048 -> 172.16.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	1	TCP 172.16.62.118:57878 <-> 172.16.102.24:22 [proto: 92/SSH][cat: RemoteAccess/12][5689 pkts/419698 bytes <-> 456 pkts/1024948 bytes]
+	2	TCP 172.16.102.24:48328 <-> 40.77.226.250:443 [proto: 91.212/SSL.Microsoft][cat: Web/5][8 pkts/2025 bytes <-> 6 pkts/4436 bytes][client: vortex.data.microsoft.com][server: *.vortex.data.microsoft.com]
+	3	UDP 172.16.63.157:17500 -> 255.255.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][5 pkts/995 bytes -> 0 pkts/0 bytes]
+	4	UDP 172.16.64.186:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][4 pkts/864 bytes -> 0 pkts/0 bytes]
+	5	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/736 bytes -> 0 pkts/0 bytes][switch_ec0bd6-F45214EC0BD6_tcn_mxyzzy--F45214EC0BD6._tcp.local]
+	6	UDP 172.16.0.28:63927 -> 255.255.255.255:1900 [proto: 12/SSDP][cat: System/18][2 pkts/430 bytes -> 0 pkts/0 bytes]
+	7	UDP [fe80::cd8e:947e:8ed7:c281]:59181 -> [ff02::c]:1900 [proto: 12/SSDP][cat: System/18][2 pkts/416 bytes -> 0 pkts/0 bytes]
+	8	UDP 172.16.63.106:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	9	UDP 172.16.64.100:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	10	UDP 172.16.64.186:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	11	UDP 172.16.62.65:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/240 bytes -> 0 pkts/0 bytes]
+	12	UDP 172.16.63.205:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/237 bytes -> 0 pkts/0 bytes]
+	13	UDP 172.16.123.168:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/236 bytes -> 0 pkts/0 bytes]
+	14	UDP 172.16.62.75:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/234 bytes -> 0 pkts/0 bytes]
+	15	UDP 172.16.89.199:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/233 bytes -> 0 pkts/0 bytes]
+	16	UDP 172.16.52.3:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/231 bytes -> 0 pkts/0 bytes]
+	17	UDP [fe80::ed05:d7f6:3892:6edf]:53828 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	18	UDP [fe80::ed05:d7f6:3892:6edf]:63932 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	19	UDP [fe80::bd19:c401:219:cbd2]:55126 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	20	UDP [fe80::bd19:c401:219:cbd2]:57771 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	21	UDP 172.16.63.157:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/199 bytes -> 0 pkts/0 bytes]
+	22	UDP 172.16.64.114:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/199 bytes -> 0 pkts/0 bytes]
+	23	UDP [fe80::d53d:3970:6ed2:3a4a]:63209 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes][Host: testcuffdbserve]
+	24	UDP [fe80::5565:d7f2:409a:bae9]:51246 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/186 bytes -> 0 pkts/0 bytes][Host: neliusr-e7470]
+	25	UDP [fe80::5565:d7f2:409a:bae9]:55416 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/186 bytes -> 0 pkts/0 bytes][Host: neliusr-e7470]
+	26	UDP 172.16.123.170:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][2 pkts/184 bytes -> 0 pkts/0 bytes]
+	27	UDP 172.16.63.42:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/175 bytes -> 0 pkts/0 bytes]
+	28	UDP 172.16.62.98:52162 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: 183.98.16.172.in-addr.arpa]
+	29	UDP [fe80::ed05:d7f6:3892:6edf]:55487 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/168 bytes -> 0 pkts/0 bytes][Host: wpad]
+	30	UDP [fe80::ed05:d7f6:3892:6edf]:63677 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/168 bytes -> 0 pkts/0 bytes][Host: wpad]
+	31	UDP [fe80::7d97:6d02:6c3f:2cd5]:54579 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/168 bytes -> 0 pkts/0 bytes][Host: wpad]
+	32	UDP 172.16.64.100:53828 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	33	UDP 172.16.64.100:63932 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	34	UDP 172.16.64.115:55126 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	35	UDP 172.16.64.115:57771 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	36	UDP [fe80::dd4:26f6:29e5:9fe8]:546 -> [ff02::1:2]:547 [proto: 103/DHCPV6][cat: Network/14][1 pkts/155 bytes -> 0 pkts/0 bytes]
+	37	UDP 172.16.54.5:63209 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/150 bytes -> 0 pkts/0 bytes][Host: testcuffdbserve]
+	38	UDP 172.16.62.123:51246 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/146 bytes -> 0 pkts/0 bytes][Host: neliusr-e7470]
+	39	UDP 172.16.62.123:55416 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/146 bytes -> 0 pkts/0 bytes][Host: neliusr-e7470]
+	40	UDP 172.16.123.170:64966 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/140 bytes -> 0 pkts/0 bytes][Host: keysersoze]
+	41	UDP 172.16.63.106:54579 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/128 bytes -> 0 pkts/0 bytes][Host: wpad]
+	42	UDP 172.16.64.100:55487 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/128 bytes -> 0 pkts/0 bytes][Host: wpad]
+	43	UDP 172.16.64.100:63677 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/128 bytes -> 0 pkts/0 bytes][Host: wpad]
+	44	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/126 bytes -> 0 pkts/0 bytes][fe80:0:0:0:37ef:eda7:a733:8030%enp0s3.local]
+	45	UDP [fe80::ed05:d7f6:3892:6edf]:56713 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	46	UDP [fe80::ed05:d7f6:3892:6edf]:60355 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	47	UDP 172.16.62.60:50636 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	48	UDP 172.16.62.60:61033 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	49	UDP 172.16.62.67:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	50	UDP 172.16.64.186:56089 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	51	UDP 172.16.64.186:58045 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	52	UDP 172.16.64.186:58122 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	53	UDP 172.16.64.186:58627 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][1 pkts/92 bytes -> 0 pkts/0 bytes]
+	54	ICMPV6 [fe80::cd8e:947e:8ed7:c281]:0 -> [ff02::1:ff46:c283]:0 [proto: 102/ICMPV6][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
+	55	UDP 172.16.63.228:58554 -> 255.255.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	56	UDP 172.16.64.100:56713 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	57	UDP 172.16.64.100:60355 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	58	UDP 172.16.0.28:52482 -> 172.16.255.255:32412 [proto: 12/SSDP][cat: System/18][1 pkts/63 bytes -> 0 pkts/0 bytes]
+	59	UDP 172.16.0.28:52485 -> 172.16.255.255:32414 [proto: 12/SSDP][cat: System/18][1 pkts/63 bytes -> 0 pkts/0 bytes]
+	60	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/60 bytes -> 0 pkts/0 bytes]
+	61	UDP 172.16.64.114:57846 -> 172.16.255.255:1534 [proto: 125/Skype][cat: VoIP/10][1 pkts/60 bytes -> 0 pkts/0 bytes]
+Unknown	10	5870	3
+MDNS	26	4664	15
+NetBIOS	45	5941	24
+SSDP	6	972	4
+ICMP	1	60	1
+IGMP	1	60	1
+SSH	12014	2536232	2
+ICMPV6	3	258	2
+DHCPV6	1	155	1
+Dropbox	14	2840	6
+Skype	1	60	1
+UPnP	2	416	1
+LLMNR	109	9522	63
+BJNP	2	120	1
+Microsoft	14	6461	1
+
+	1	TCP 172.16.62.118:57878 <-> 172.16.102.24:22 [proto: 92/SSH][cat: RemoteAccess/12][5517 pkts/404406 bytes <-> 352 pkts/687180 bytes]
+	2	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][5 pkts/1423 bytes -> 0 pkts/0 bytes]
+	3	UDP 172.16.63.158:17500 -> 255.255.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][5 pkts/1060 bytes -> 0 pkts/0 bytes]
+	4	UDP 172.16.64.186:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][6 pkts/552 bytes -> 0 pkts/0 bytes]
+	5	UDP [fe80::1045:63e7:d87f:dfdf]:5353 -> [ff02::fb]:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/505 bytes -> 0 pkts/0 bytes]
+	6	UDP 172.16.63.4:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][2 pkts/489 bytes -> 0 pkts/0 bytes]
+	7	UDP 172.16.62.60:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/485 bytes -> 0 pkts/0 bytes]
+	8	UDP [fe80::cd8e:947e:8ed7:c281]:59181 -> [ff02::c]:1900 [proto: 153/UPnP][cat: Network/14][2 pkts/416 bytes -> 0 pkts/0 bytes]
+	9	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][3 pkts/378 bytes -> 0 pkts/0 bytes]
+	10	UDP 172.16.62.73:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	11	UDP 172.16.123.170:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	12	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][4 pkts/240 bytes -> 0 pkts/0 bytes]
+	13	UDP 172.16.89.199:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/233 bytes -> 0 pkts/0 bytes]
+	14	UDP 172.16.63.158:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/212 bytes -> 0 pkts/0 bytes]
+	15	UDP [fe80::ed05:d7f6:3892:6edf]:50655 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	16	UDP [fe80::ed05:d7f6:3892:6edf]:50951 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	17	UDP [fe80::ed05:d7f6:3892:6edf]:51744 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	18	UDP [fe80::ed05:d7f6:3892:6edf]:57119 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	19	UDP [fe80::3c0e:116:d43:145a]:50173 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	20	UDP [fe80::3c0e:116:d43:145a]:63264 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	21	UDP [fe80::f5e1:8723:7d23:9791]:50426 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	22	UDP [fe80::f5e1:8723:7d23:9791]:54770 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	23	UDP [fe80::bd19:c401:219:cbd2]:51663 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	24	UDP [fe80::bd19:c401:219:cbd2]:56517 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	25	UDP [fe80::c589:a14c:b6c0:587a]:59049 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
+	26	UDP 172.16.62.67:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][2 pkts/184 bytes -> 0 pkts/0 bytes]
+	27	ICMPV6 [fe80::cd8e:947e:8ed7:c281]:0 -> [ff02::1:ff46:c283]:0 [proto: 102/ICMPV6][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
+	28	UDP 172.16.62.67:53468 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/170 bytes -> 0 pkts/0 bytes]
+	29	UDP 172.16.63.200:50426 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	30	UDP 172.16.63.200:54770 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	31	UDP 172.16.64.83:50173 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	32	UDP 172.16.64.83:63264 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	33	UDP 172.16.64.100:50655 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	34	UDP 172.16.64.100:50951 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	35	UDP 172.16.64.100:51744 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	36	UDP 172.16.64.100:57119 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	37	UDP 172.16.64.115:51663 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	38	UDP 172.16.64.115:56517 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	39	UDP 172.16.54.7:59049 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/150 bytes -> 0 pkts/0 bytes]
+	40	UDP [fe80::dd4:26f6:29e5:9fe8]:5353 -> [ff02::fb]:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes]
+	41	UDP [fe80::4896:a6c3:7eb7:8a32]:5353 -> [ff02::fb]:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/143 bytes -> 0 pkts/0 bytes]
+	42	UDP 172.16.123.170:62733 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/140 bytes -> 0 pkts/0 bytes]
+	43	UDP 172.16.62.67:59900 -> 255.255.255.255:8612 [proto: 204/BJNP][cat: System/18][2 pkts/120 bytes -> 0 pkts/0 bytes]
+	44	UDP [fe80::ed05:d7f6:3892:6edf]:56713 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	45	UDP [fe80::ed05:d7f6:3892:6edf]:56749 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	46	UDP [fe80::ed05:d7f6:3892:6edf]:58902 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	47	UDP [fe80::ed05:d7f6:3892:6edf]:60355 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	48	UDP 172.16.102.167:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/90 bytes -> 0 pkts/0 bytes]
+	49	UDP 172.16.41.2:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/84 bytes -> 0 pkts/0 bytes]
+	50	UDP 172.16.62.67:50948 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/84 bytes -> 0 pkts/0 bytes]
+	51	UDP 172.16.41.1:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	52	UDP 172.16.52.1:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	53	UDP 172.16.52.3:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	54	UDP 172.16.63.228:58554 -> 172.16.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	55	UDP 172.16.64.100:56713 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	56	UDP 172.16.64.100:56749 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	57	UDP 172.16.64.100:58902 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	58	UDP 172.16.64.100:60355 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	59	UDP 172.16.89.197:61048 -> 255.255.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	60	UDP 172.16.123.221:54772 -> 172.16.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	61	ICMP 172.16.62.41:0 -> 224.0.0.1:0 [proto: 81/ICMP][cat: Network/14][1 pkts/60 bytes -> 0 pkts/0 bytes]
+	62	IGMP 172.16.68.9:0 -> 224.0.0.1:0 [proto: 82/IGMP][cat: Network/14][1 pkts/60 bytes -> 0 pkts/0 bytes]
+
+
+Undetected flows:
+	1	UDP [fe80::7d97:6d02:6c3f:2cd5]:62514 -> [ff02::c]:3702 [proto: 0/Unknown][8 pkts/5744 bytes -> 0 pkts/0 bytes]
+	2	UDP 172.16.0.28:52482 -> 172.16.255.255:32412 [proto: 0/Unknown][1 pkts/63 bytes -> 0 pkts/0 bytes]
+	3	UDP 172.16.0.28:52485 -> 172.16.255.255:32414 [proto: 0/Unknown][1 pkts/63 bytes -> 0 pkts/0 bytes]
+Unknown	15	6487	7
+MDNS	45	6746	24
+NetBIOS	56	7386	28
+SSDP	6	972	4
+DHCP	1	342	1
+ICMP	1	60	1
+IGMP	1	60	1
+SSH	16764	3489928	3
+ICMPV6	3	258	2
+DHCPV6	1	155	1
+Dropbox	16	3190	8
+Skype	1	60	1
+UPnP	4	832	2
+LLMNR	142	12464	86
+BJNP	2	120	1
+Microsoft	14	6461	1
+
+	1	TCP 172.16.62.118:57878 <-> 172.16.102.24:22 [proto: 92/SSH][cat: RemoteAccess/12][4436 pkts/327464 bytes <-> 314 pkts/626232 bytes]
+	2	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][3 pkts/687 bytes -> 0 pkts/0 bytes]
+	3	UDP 172.16.89.199:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][2 pkts/466 bytes -> 0 pkts/0 bytes]
+	4	UDP 172.16.123.170:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][5 pkts/460 bytes -> 0 pkts/0 bytes]
+	5	UDP [fe80::cd8e:947e:8ed7:c281]:59181 -> [ff02::c]:1900 [proto: 153/UPnP][cat: Network/14][2 pkts/416 bytes -> 0 pkts/0 bytes]
+	6	UDP 0.0.0.0:68 -> 255.255.255.255:67 [proto: 18/DHCP][cat: Network/14][1 pkts/342 bytes -> 0 pkts/0 bytes]
+	7	UDP 172.16.62.67:137 -> 172.16.255.255:137 [proto: 10/NetBIOS][cat: System/18][3 pkts/276 bytes -> 0 pkts/0 bytes]
+	8	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/252 bytes -> 0 pkts/0 bytes]
+	9	UDP 172.16.63.207:138 -> 172.16.255.255:138 [proto: 10/NetBIOS][cat: System/18][1 pkts/243 bytes -> 0 pkts/0 bytes]
+	10	UDP [fe80::ed05:d7f6:3892:6edf]:60513 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	11	UDP [fe80::ed05:d7f6:3892:6edf]:60601 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	12	UDP [fe80::bd19:c401:219:cbd2]:55552 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	13	UDP [fe80::bd19:c401:219:cbd2]:62260 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/204 bytes -> 0 pkts/0 bytes]
+	14	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][3 pkts/180 bytes -> 0 pkts/0 bytes]
+	15	UDP 172.16.102.167:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/180 bytes -> 0 pkts/0 bytes]
+	16	UDP 172.16.64.1:17500 -> 172.16.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/175 bytes -> 0 pkts/0 bytes]
+	17	UDP 172.16.64.1:17500 -> 255.255.255.255:17500 [proto: 121/Dropbox][cat: Cloud/13][1 pkts/175 bytes -> 0 pkts/0 bytes]
+	18	UDP 172.16.81.7:51991 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
+	19	UDP 172.16.41.2:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/168 bytes -> 0 pkts/0 bytes]
+	20	UDP 172.16.41.1:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	21	UDP 172.16.52.1:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	22	UDP 172.16.52.3:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	23	UDP 172.16.64.100:60513 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	24	UDP 172.16.64.100:60601 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	25	UDP 172.16.64.115:55552 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	26	UDP 172.16.64.115:62260 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/164 bytes -> 0 pkts/0 bytes]
+	27	UDP 172.16.123.170:59574 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][2 pkts/140 bytes -> 0 pkts/0 bytes]
+	28	UDP 172.16.64.1:5353 -> 224.0.0.251:5353 [proto: 8/MDNS][cat: Network/14][1 pkts/123 bytes -> 0 pkts/0 bytes]
+	29	UDP [fe80::ed05:d7f6:3892:6edf]:56749 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	30	UDP [fe80::ed05:d7f6:3892:6edf]:58902 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	31	UDP [fe80::3c0e:116:d43:145a]:51303 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	32	UDP [fe80::3c0e:116:d43:145a]:63747 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/102 bytes -> 0 pkts/0 bytes]
+	33	UDP [fe80::c56b:dcb5:e5fd:f9dc]:53157 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
+	34	UDP [fe80::c56b:dcb5:e5fd:f9dc]:63575 -> [ff02::1:3]:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
+	35	UDP 172.16.64.83:51303 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	36	UDP 172.16.64.83:63747 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	37	UDP 172.16.64.100:56749 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	38	UDP 172.16.64.100:58902 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	39	UDP 172.16.89.197:61048 -> 172.16.255.255:1947 [proto: 154/LLMNR][cat: Network/14][1 pkts/82 bytes -> 0 pkts/0 bytes]
+	40	UDP 172.16.63.78:53157 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/75 bytes -> 0 pkts/0 bytes]
+	41	UDP 172.16.63.78:63575 -> 224.0.0.252:5355 [proto: 154/LLMNR][cat: Network/14][1 pkts/75 bytes -> 0 pkts/0 bytes]
+
+
+Undetected flows:
+	1	UDP [fe80::2431:452:eefd:e046]:546 -> [ff02::1:2]:547 [proto: 0/Unknown][2 pkts/296 bytes -> 0 pkts/0 bytes]
+	2	UDP [fe80::7d97:6d02:6c3f:2cd5]:546 -> [ff02::1:2]:547 [proto: 0/Unknown][1 pkts/163 bytes -> 0 pkts/0 bytes]
+	3	UDP [fe80::2c0:b7ff:fef7:53c4]:546 -> [ff02::1:2]:547 [proto: 0/Unknown][1 pkts/98 bytes -> 0 pkts/0 bytes]
+	4	UDP 172.16.64.114:1534 -> 172.16.255.255:1534 [proto: 0/Unknown][1 pkts/60 bytes -> 0 pkts/0 bytes]

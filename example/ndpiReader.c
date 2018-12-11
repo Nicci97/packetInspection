@@ -62,7 +62,7 @@
 
 /** Client parameters **/
 static int mbufInit = 1;
-static int pauseDur = 10;
+static int pauseDur = 3;
 static struct rte_mempool *mbuf_pool;
 static char *_pcap_file[MAX_NUM_READER_THREADS]; /**< Ingress pcap file/interfaces */
 static FILE *playlist_fp[MAX_NUM_READER_THREADS] = { NULL }; /**< Ingress playlist */
@@ -2538,12 +2538,12 @@ static void runPcapLoop(u_int16_t thread_id) {
 
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
-    const u_char  *packet;
+    const u_char *packet;
     int count = 0;
     while (pcap_next_ex(handler, &header, &packet) >= 0)
     {
       count++;
-        printf("len %d:\n",count);
+      printf("len %s:\n",packet);
     }
 
     //pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
