@@ -97,6 +97,7 @@ static u_int16_t decode_tunnels = 0;
 static u_int16_t num_loops = 1;
 static u_int8_t shutdown_app = 0, quiet_mode = 0;
 static u_int8_t num_threads = 1;
+static u_int8_t num_pcap_files = 1;
 static struct timeval startup_time, begin, end;
 static struct timeval startSlice, endSlice;
 #ifdef linux
@@ -652,26 +653,26 @@ static void parseOptions(int argc, char **argv) {
     }
 
     if(strchr(_pcap_file[0], ',')) { /* multiple ingress interfaces */
-      num_threads = 0;               /* setting number of threads = number of interfaces */
+      num_pcap_files = 0;               /* setting number of threads = number of interfaces */
       __pcap_file = strtok(_pcap_file[0], ",");
-      while(__pcap_file != NULL && num_threads < MAX_NUM_READER_THREADS) {
-        _pcap_file[num_threads++] = __pcap_file;
+      while(__pcap_file != NULL && num_pcap_files < MAX_NUM_READER_THREADS) {
+        _pcap_file[num_pcap_files++] = __pcap_file;
         __pcap_file = strtok(NULL, ",");
       }
     } else {
-      if(num_threads > MAX_NUM_READER_THREADS) num_threads = MAX_NUM_READER_THREADS;
-      for(thread_id = 1; thread_id < num_threads; thread_id++)
+      if(num_pcap_files > MAX_NUM_READER_THREADS) num_pcap_files = MAX_NUM_READER_THREADS;
+      for(thread_id = 1; thread_id < num_pcap_files; thread_id++)
         _pcap_file[thread_id] = _pcap_file[0];
     }
 
 #ifdef linux
-    for(thread_id = 0; thread_id < num_threads; thread_id++)
+    for(thread_id = 0; thread_id < num_pcap_files; thread_id++)
       core_affinity[thread_id] = -1;
 
     if(num_cores > 1 && bind_mask != NULL) {
       char *core_id = strtok(bind_mask, ":");
       thread_id = 0;
-      while(core_id != NULL && thread_id < num_threads) {
+      while(core_id != NULL && thread_id < num_pcap_files) {
         core_affinity[thread_id++] = atoi(core_id) % num_cores;
         core_id = strtok(NULL, ":");
       }
@@ -2361,7 +2362,7 @@ static pcap_t * openPcapFileOrDevice(u_int16_t thread_id, const u_char * pcap_fi
     capture_for = capture_until = 0;
 
     live_capture = 0;
-    num_threads = 1; /* Open pcap files in single threads mode */
+    //num_threads = 1; /* Open pcap files in single threads mode */
 
     /* trying to open a pcap file */
     if((pcap_handle = pcap_open_offline((char*)pcap_file, pcap_error_buffer)) == NULL) {
@@ -2418,7 +2419,7 @@ static void ndpi_process_packet(u_char *args,
   struct ndpi_proto p;
   u_int16_t thread_id = *((u_int16_t*)args);
 
-  printf("This is the data: %s\n", packet);
+  //printf("This is the data: %s\n", packet);
 
   /* allocate an exact size buffer to check overflows */
   uint8_t *packet_checked = malloc(header->caplen);
@@ -2528,25 +2529,78 @@ static void ndpi_process_packet(u_char *args,
   }
 }
 
+/**
+ * @brief get packets to process and send to processing
+ */
+static void process_allocation(u_int16_t thread_id) {
+  pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+  struct pcap_pkthdr *header;
+  const u_char *packet;
+
+  while (pcap_next_ex(handler, &header, &packet) >= 0)
+    {
+      printf("len %s:\n",packet);
+    }
+}
+
 
 /**
  * @brief Call pcap_loop() to process packets from a live capture or savefile
  */
 static void runPcapLoop(u_int16_t thread_id) {
 
+  if (!shutdown_app) {
+   printf("THREADIDDD %d\n", thread_id);
+  } else if (ndpi_thread_info[thread_id].workflow->pcap_handle) {
+    // do  nothing esle
+  }
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
 
-    pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
-    struct pcap_pkthdr *header;
-    const u_char *packet;
-    int count = 0;
-    while (pcap_next_ex(handler, &header, &packet) >= 0)
-    {
-      count++;
-      printf("len %s:\n",packet);
-    }
+    // pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+    // struct pcap_pkthdr *header;
+    // const u_char *packet;
+    // int count = 0;
 
-    //pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
+    // int status;
+    // void * thd_res;
+
+    // /* Running processing threads */
+    // for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    //   status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, processing_thread, (void *) thread_id);
+    //   /* check pthreade_create return value */
+    //   if(status != 0) {
+    //     fprintf(stderr, "error on create %ld thread\n", thread_id);
+    //     exit(-1);
+    //   }
+    // }
+    // /* Waiting for completion */
+    // for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    //   status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
+    //   /* check pthreade_join return value */
+    //   if(status != 0) {
+    //     fprintf(stderr, "error on join %ld thread\n", thread_id);
+    //     exit(-1);
+    //   }
+    //   if(thd_res != NULL) {
+    //     fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
+    //     exit(-1);
+    //   }
+    // }
+
+
+
+
+
+
+
+
+    // while (pcap_next_ex(handler, &header, &packet) >= 0)
+    // {
+    //   count++;
+    //   //printf("len %s:\n",packet);
+    // }
+    printf("Packets being printed from pcap file\n");
+    pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
   }
 }
 
@@ -2689,7 +2743,7 @@ void test_lib() {
   if(trace) fprintf(trace, "Num threads: %d\n", num_threads);
 #endif
 
-  for(thread_id = 0; thread_id < num_threads; thread_id++) {
+  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
     printf("Thread %ld is opening a file\n", thread_id);
     pcap_t *cap;
 
@@ -2706,30 +2760,38 @@ void test_lib() {
   int status;
   void * thd_res;
 
-  /* Running processing threads */
-  printf("#####: Number of threads to run on is: %d\n", num_threads);
-  for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    printf("##### Running process of thread with id: %ld\n", thread_id);
-    status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, processing_thread, (void *) thread_id);
-    /* check pthreade_create return value */
-    if(status != 0) {
-      fprintf(stderr, "error on create %ld thread\n", thread_id);
-      exit(-1);
-    }
+  printf(".... %d\n", num_pcap_files);
+  printf("Starting to run pcap processing_thread method with the first pcap packet\n");
+  for(long file_id = 0; file_id < num_pcap_files; file_id++) {
+    printf("FILEID: %ld\n", file_id);
+    processing_thread((void *)file_id);
   }
-  /* Waiting for completion */
-  for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
-    /* check pthreade_join return value */
-    if(status != 0) {
-      fprintf(stderr, "error on join %ld thread\n", thread_id);
-      exit(-1);
-    }
-    if(thd_res != NULL) {
-      fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
-      exit(-1);
-    }
-  }
+
+
+  // /* Running processing threads */
+  // printf("#####: Number of threads to run on is: %d\n", num_threads);
+  // for(thread_id = 0; thread_id < num_threads; thread_id++) {
+  //   printf("##### Running process of thread with id: %ld\n", thread_id);
+  //   status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, processing_thread, (void *) thread_id);
+  //   /* check pthreade_create return value */
+  //   if(status != 0) {
+  //     fprintf(stderr, "error on create %ld thread\n", thread_id);
+  //     exit(-1);
+  //   }
+  // }
+  // /* Waiting for completion */
+  // for(thread_id = 0; thread_id < num_threads; thread_id++) {
+  //   status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
+  //   /* check pthreade_join return value */
+  //   if(status != 0) {
+  //     fprintf(stderr, "error on join %ld thread\n", thread_id);
+  //     exit(-1);
+  //   }
+  //   if(thd_res != NULL) {
+  //     fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
+  //     exit(-1);
+  //   }
+  // }
 
   gettimeofday(&end, NULL);
   processing_time_usec = end.tv_sec*1000000 + end.tv_usec - (begin.tv_sec*1000000 + begin.tv_usec);
