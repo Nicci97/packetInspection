@@ -1912,7 +1912,12 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
 
   memset(&cumulative_stats, 0, sizeof(cumulative_stats));
 
+#ifdef USE_DPDK
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+#else 
+  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+#endif
+  //for(thread_id = 0; thread_id < num_threads; thread_id++) {
     if((ndpi_thread_info[thread_id].workflow->stats.total_wire_bytes == 0)
        && (ndpi_thread_info[thread_id].workflow->stats.raw_packet_count == 0))
       continue;
@@ -1923,7 +1928,7 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
       if(verbose == 3 || stats_flag) ndpi_twalk(ndpi_thread_info[thread_id].workflow->ndpi_flows_root[i],
 						port_stats_walker, &thread_id);
     }
-
+    
     /* Stats aggregation */
     cumulative_stats.guessed_flow_protocols += ndpi_thread_info[thread_id].workflow->stats.guessed_flow_protocols;
     cumulative_stats.raw_packet_count += ndpi_thread_info[thread_id].workflow->stats.raw_packet_count;
@@ -1949,10 +1954,10 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
       cumulative_stats.packet_len[i] += ndpi_thread_info[thread_id].workflow->stats.packet_len[i];
     cumulative_stats.max_packet_len += ndpi_thread_info[thread_id].workflow->stats.max_packet_len;
   }
-
+  
   if(cumulative_stats.total_wire_bytes == 0)
     goto free_stats;
-
+  
   if(!quiet_mode) {
     printf("\nnDPI Memory statistics:\n");
     printf("\tnDPI Memory (once):      %-13s\n", formatBytes(ndpi_get_ndpi_detection_module_size(), buf, sizeof(buf)));
@@ -2113,7 +2118,7 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
   }
 
   // printf("\n\nTotal Flow Traffic: %llu (diff: %llu)\n", total_flow_bytes, cumulative_stats.total_ip_bytes-total_flow_bytes);
-
+ 
   if((verbose == 1) || (verbose == 2)) {
     FILE *out = results_file ? results_file : stdout;
     u_int32_t total_flows = 0;
@@ -2227,7 +2232,6 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
     json_object_array_add(jArray_topStats, jObj_stats);
 #endif
   }
-
 free_stats:
   if(scannerHosts) {
     deleteScanners(scannerHosts);
@@ -2549,11 +2553,6 @@ static void process_allocation(u_int16_t thread_id) {
  */
 static void runPcapLoop(u_int16_t thread_id) {
 
-  if (!shutdown_app) {
-   printf("THREADIDDD %d\n", thread_id);
-  } else if (ndpi_thread_info[thread_id].workflow->pcap_handle) {
-    // do  nothing esle
-  }
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
 
     // pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
@@ -2600,7 +2599,9 @@ static void runPcapLoop(u_int16_t thread_id) {
     //   //printf("len %s:\n",packet);
     // }
     printf("Packets being printed from pcap file\n");
+    printf("%d\n", thread_id);
     pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
+    printf("%d\n", thread_id);
   }
 }
 
@@ -2759,11 +2760,9 @@ void test_lib() {
 
   int status;
   void * thd_res;
-
-  printf(".... %d\n", num_pcap_files);
+  printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$ %d\n", num_threads);
   printf("Starting to run pcap processing_thread method with the first pcap packet\n");
   for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-    printf("FILEID: %ld\n", file_id);
     processing_thread((void *)file_id);
   }
 
@@ -2792,13 +2791,13 @@ void test_lib() {
   //     exit(-1);
   //   }
   // }
-
   gettimeofday(&end, NULL);
   processing_time_usec = end.tv_sec*1000000 + end.tv_usec - (begin.tv_sec*1000000 + begin.tv_usec);
   setup_time_usec = begin.tv_sec*1000000 + begin.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
 
   /* Printing cumulative results */
   //printf("\n\nTHE RESULTS GO HERE \n\n");
+
   printResults(processing_time_usec, setup_time_usec);
 
   if(stats_flag) {
@@ -2806,8 +2805,13 @@ void test_lib() {
     json_close_stats_file();
 #endif
   }
-
+  
+#ifdef USE_DPDK
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+#else 
+  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+#endif 
+  //for(thread_id = 0; thread_id < num_threads; thread_id++) {
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
       pcap_close(ndpi_thread_info[thread_id].workflow->pcap_handle);
 
