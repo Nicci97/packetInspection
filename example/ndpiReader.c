@@ -2598,10 +2598,8 @@ static void runPcapLoop(u_int16_t thread_id) {
     //   count++;
     //   //printf("len %s:\n",packet);
     // }
-    printf("Packets being printed from pcap file\n");
-    printf("%d\n", thread_id);
+    printf("Packets being processed from pcap file\n");
     pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
-    printf("%d\n", thread_id);
   }
 }
 
@@ -2694,7 +2692,6 @@ void * processing_thread(void *_thread_id) {
     gettimeofday(&endSlice, NULL);
     //printf("*****The end time is: %ld\n", endSlice.tv_sec);
     if ((endSlice.tv_sec - startSlice.tv_sec) > pauseDur) {
-      printf("Stop and go to next loop\n");
       startSlice.tv_sec = endSlice.tv_sec;
       
       
@@ -2745,7 +2742,6 @@ void test_lib() {
 #endif
 
   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-    printf("Thread %ld is opening a file\n", thread_id);
     pcap_t *cap;
 
 #ifdef DEBUG_TRACE
@@ -2760,8 +2756,6 @@ void test_lib() {
 
   int status;
   void * thd_res;
-  printf("$$$$$$$$$$$$$$$$$$$$$$$$$$$ %d\n", num_threads);
-  printf("Starting to run pcap processing_thread method with the first pcap packet\n");
   for(long file_id = 0; file_id < num_pcap_files; file_id++) {
     processing_thread((void *)file_id);
   }
