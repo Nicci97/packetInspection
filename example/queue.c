@@ -46,7 +46,11 @@ int full(int tail,const int size)
 */
 int empty(int head, int tail)
 {
-    return tail == head;
+    if (tail == head) {
+        return 1;
+    } 
+    return 0;
+    //return tail == head;
 }
 
 /*

@@ -2622,6 +2622,9 @@ static void runPcapLoop(u_int16_t thread_id) {
         // wait
       }
       enqueue(q, &tail, element);
+      printf("Before: %d\n", threadQueueTails[0]);
+      threadQueueTails[0] = tail;
+      printf("After: %d\n", threadQueueTails[0]);
       // add mutex lock here
 
 
@@ -3466,8 +3469,6 @@ void * thread_waiting_loop(void *_thread_id) {
   //u_char **q = packetDistributionArray[0];
   //printf("uck %s\n", q[0]);
 
-
-
   // packetDistributionArray[0] = element;
   // printf("uck %s\n", packetDistributionArray[0]);
 
@@ -3477,10 +3478,13 @@ void * thread_waiting_loop(void *_thread_id) {
    int tail = threadQueueTails[thread_id];
    int head = threadQueueHeads[thread_id];
    //printf("AMiDEQUING\n");
-   if (empty(head,tail) == 1) {
+   if (empty(head,tail) == 0) {
      u_char **q = packetDistributionArray[thread_id];
      u_char* deq = dequeue(q, &head);
-     printf("This is the dequed thing %s\n", deq);
+     printf("before head: %d\n", threadQueueHeads[thread_id]);
+     threadQueueHeads[thread_id] = head;
+     printf("after head: %d\n", threadQueueHeads[thread_id]);
+     printf("This is the dequed thing %s from thread %d\n", deq, thread_id);
    }
   }
 
