@@ -2,7 +2,7 @@ CC=@CC@
 CFLAGS=-g -I../src/include @CFLAGS@
 LIBNDPI=../src/lib/libndpi.a
 LDFLAGS=$(LIBNDPI) @PCAP_LIB@ -lpthread @LDFLAGS@
-OBJS=ndpiReader.o ndpi_util.o
+OBJS=ndpiReader.o ndpi_util.o queue.o
 PREFIX?=/usr/local
 
 all: ndpiReader @DPDK_TARGET@

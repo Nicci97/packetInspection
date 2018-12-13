@@ -53,16 +53,25 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <libgen.h>
+#include <sys/types.h>
+
 
 #ifdef HAVE_JSON_C
 #include <json.h>
 #endif
 
 #include "ndpi_util.h"
+#include "queue.h"
+
 
 /** Client parameters **/
+static u_char** packetDistributionArray;
+static int *threadQueueTails;
+static int *threadQueueHeads;
+static int keepThreadsRunning = 1;
 static int mbufInit = 1;
 static int pauseDur = 3;
+static int queueLength = 1000;
 static struct rte_mempool *mbuf_pool;
 static char *_pcap_file[MAX_NUM_READER_THREADS]; /**< Ingress pcap file/interfaces */
 static FILE *playlist_fp[MAX_NUM_READER_THREADS] = { NULL }; /**< Ingress playlist */
@@ -215,6 +224,8 @@ static int dpdk_port_id = 0, dpdk_run_capture = 1;
 #endif
 
 void test_lib(); /* Forward */
+void start_threads();
+void * thread_waiting_loop(void *_thread_id);
 
 /* ********************************** */
 
@@ -2276,6 +2287,7 @@ static void breakPcapLoop(u_int16_t thread_id) {
  * @brief Sigproc is executed for each packet in the pcap file
  */
 void sigproc(int sig) {
+  keepThreadsRunning = 0;
 
   static int called = 0;
   int thread_id;
@@ -2283,8 +2295,14 @@ void sigproc(int sig) {
   if(called) return; else called = 1;
   shutdown_app = 1;
 
-  for(thread_id=0; thread_id<num_threads; thread_id++)
+#ifdef USE_DPDK
+  for(thread_id=0; thread_id<num_threads; thread_id++) {
+#else
+  for(thread_id=0; thread_id<num_pcap_files; thread_id++) {
+#endif
+  //for(thread_id=0; thread_id<num_threads; thread_id++)
     breakPcapLoop(thread_id);
+  }
 }
 
 
@@ -2555,10 +2573,9 @@ static void runPcapLoop(u_int16_t thread_id) {
 
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
 
-    // pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
-    // struct pcap_pkthdr *header;
-    // const u_char *packet;
-    // int count = 0;
+    pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+    struct pcap_pkthdr *header;
+    const u_char *packet;
 
     // int status;
     // void * thd_res;
@@ -2586,18 +2603,39 @@ static void runPcapLoop(u_int16_t thread_id) {
     //   }
     // }
 
+    while (pcap_next_ex(handler, &header, &packet) >= 0) {
+      //printf("len %s:\n",packet);
+      //printf("Putting a packet on the queue\n");
+
+      // const char* x = "hello";
+      // unsigned char* y;
+      // y = (unsigned char*) x;
+
+      u_char *element;
+      element = (u_char*)packet;
+
+      u_char **q = packetDistributionArray[0];
+      int tail = threadQueueTails[0];
+      int head = threadQueueHeads[0];
+      // loop to test if tail = head etc
+      while ((tail == head) && (tail != 0)) {
+        // wait
+      }
+      enqueue(q, &tail, element);
+      // add mutex lock here
 
 
-
-
-
-
-
-    // while (pcap_next_ex(handler, &header, &packet) >= 0)
-    // {
-    //   count++;
-    //   //printf("len %s:\n",packet);
-    // }
+      //printf("SIZE: %d\n", sizeof(packet));
+      //u_char *currentQueue;
+      //currentQueue = packetDistributionArray[0];
+      //printf("ey: %d", threadQueueTails[0]);
+      //enqueue(currentQueue, threadQueueTails[0], &element);
+      //enqueue(queue, &tail, *element);
+      //packetDistributionArray[0] = queue;
+      //print
+      //printf("len %s:\n",packet);
+    }
+    keepThreadsRunning = 0;
     printf("Packets being processed from pcap file\n");
     pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
   }
@@ -2654,7 +2692,11 @@ void * processing_thread(void *_thread_id) {
     }
   } else
 #endif
-    if((!json_flag) && (!quiet_mode)) printf("Running thread %ld...\n", thread_id);
+
+#ifdef USE_DPDK
+  if((!json_flag) && (!quiet_mode)) printf("Running thread %ld...\n", thread_id);
+#endif
+    
 
 #ifdef USE_DPDK
   printf("Entering USE_DPDK option\n");
@@ -2753,14 +2795,16 @@ void test_lib() {
   }
 
   gettimeofday(&begin, NULL);
+  
+  start_threads();
+  // // MY STUFF
+  // int status;
+  // void * thd_res;
+  // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
+  //   processing_thread((void *)file_id);
+  // }
 
-  int status;
-  void * thd_res;
-  for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-    processing_thread((void *)file_id);
-  }
-
-
+  
   // /* Running processing threads */
   // printf("#####: Number of threads to run on is: %d\n", num_threads);
   // for(thread_id = 0; thread_id < num_threads; thread_id++) {
@@ -3401,6 +3445,120 @@ static void produceBpfFilter(char *filePath) {
 
 /* *********************************************** */
 
+/**
+ * Processes all packets assigned to it's buffer
+ */
+void * thread_waiting_loop(void *_thread_id) {
+  long thread_id = (long) _thread_id;
+  // create local queue corresponding to this thread's workload
+  // int head, tail;
+  // u_char *queue[queueLength];
+  // init(&head,&tail);
+  // packetDistributionArray[thread_id] = &queue;
+
+  //u_char* element = "helloyou\n";
+  //element = "bybye\n";
+  //enqueue(queue, &tail, element);
+  //u_char* deq = dequeue(queue, &head);
+  //printf("This is the dequed thing %s\n", deq);
+
+  
+  //u_char **q = packetDistributionArray[0];
+  //printf("uck %s\n", q[0]);
+
+
+
+  // packetDistributionArray[0] = element;
+  // printf("uck %s\n", packetDistributionArray[0]);
+
+  
+  while(keepThreadsRunning) {
+   //do the processing using processing_thread(); function I guess??
+   int tail = threadQueueTails[thread_id];
+   int head = threadQueueHeads[thread_id];
+   //printf("AMiDEQUING\n");
+   if (empty(head,tail) == 1) {
+     u_char **q = packetDistributionArray[thread_id];
+     u_char* deq = dequeue(q, &head);
+     printf("This is the dequed thing %s\n", deq);
+   }
+  }
+
+  return NULL;
+}
+
+/**
+ * starts functionality of distribution of packets to different threads according to their hash value
+ */
+void * distributePacketsThread(void *_thread_id) {
+  long thread_id = (long) _thread_id;
+  for(long file_id = 0; file_id < num_pcap_files; file_id++) {
+    processing_thread((void *)file_id);
+  }
+  return NULL;
+}
+
+/**\
+ * Starts pthreads
+ */
+void start_threads() {
+  long thread_id;
+  int status;
+  void * thd_res;
+  /* Running processing threads */
+  printf("#####: Number of threads to run on is: %d\n", num_threads);
+  for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("##### Creating thread with id: %ld\n", thread_id);
+    status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, thread_waiting_loop, (void *) thread_id);
+    printf("Processing THREAD %ld is running\n", thread_id);
+    /* Create a queue for each thread, from which to process packets */
+    int head, tail;
+    u_char *queue[queueLength];
+    init(&head,&tail);
+    packetDistributionArray[thread_id] = &queue;
+
+    /* check pthreade_create return value */
+    if(status != 0) {
+      fprintf(stderr, "error on create %ld thread\n", thread_id);
+      exit(-1);
+    }
+  }
+  /* Running thread responsible for distribution of packets */
+  thread_id = num_threads;
+  status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, distributePacketsThread, (void *) thread_id);
+  printf("Distributing THREAD %ld is running\n", thread_id);
+  /* check pthreade_create return value */
+  if(status != 0) {
+    fprintf(stderr, "error on create %ld thread\n", thread_id);
+    exit(-1);
+  }
+  /* Waiting for completion of processing threads*/
+  for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
+    /* check pthreade_join return value */
+    if(status != 0) {
+      fprintf(stderr, "error on join %ld thread\n", thread_id);
+      exit(-1);
+    }
+    if(thd_res != NULL) {
+      fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
+      exit(-1);
+    }
+  }
+  /* waiting for completion of thread responsible for distribution of packets */
+  thread_id = num_threads;
+  status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
+    /* check pthreade_join return value */
+    if(status != 0) {
+      fprintf(stderr, "error on join %ld thread\n", thread_id);
+      exit(-1);
+    }
+    if(thd_res != NULL) {
+      fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
+      exit(-1);
+    }
+
+}
 
 /**
    @brief MAIN FUNCTION
@@ -3410,8 +3568,7 @@ int orginal_main(int argc, char **argv) {
 #else
   int main(int argc, char **argv) {
 #endif
-    int i;    
-    
+    int i;  
     if(ndpi_get_api_version() != NDPI_API_VERSION) {
       printf("nDPI Library version mismatch: please make sure this code and the nDPI library are in sync\n");
       return(-1);
@@ -3427,6 +3584,21 @@ int orginal_main(int argc, char **argv) {
     memset(ndpi_thread_info, 0, sizeof(ndpi_thread_info));
 
     parseOptions(argc, argv);
+    
+    /* Create an array within which to put the queues for each thread */
+    packetDistributionArray = malloc(sizeof(u_char*) * num_threads);
+    threadQueueTails = malloc(sizeof(*threadQueueTails) * num_threads);
+    threadQueueHeads = malloc(sizeof(*threadQueueHeads) * num_threads);
+    for (int i = 0; i < num_threads; i++) {
+      threadQueueTails[i] = 0;
+      threadQueueHeads[i] = 0;
+      packetDistributionArray[i] = NULL;
+    }
+
+    if (!packetDistributionArray) {
+        /* handle malloc failure here */
+        printf("Count not allocate space for packet work distribution array\n");
+    }
 
     if(bpf_filter_flag) {
 #ifdef HAVE_JSON_C
@@ -3448,9 +3620,9 @@ int orginal_main(int argc, char **argv) {
 
     signal(SIGINT, sigproc);
     
-    for(i=0; i<num_loops; i++) {
-      test_lib();
-    }
+    //for(i=0; i<num_loops; i++) {
+    test_lib();
+    //}
     
     if(results_path)  free(results_path);
     if(results_file)  fclose(results_file);
