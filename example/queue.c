@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "queue.h"
 
 // Utility function to allocate the new queue node
@@ -59,7 +60,9 @@ struct Node* dequeue(struct Node **front, struct Node **rear) // delete at the b
 void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear) // insertion at the end
 {
 	// Allocate the new node in the heap
-	struct Node* node = newNode(item, header);
+	struct pcap_pkthdr *headerCopy;
+	memcpy(headerCopy, *header, sizeof(*header));
+	struct Node* node = newNode(item, &headerCopy);
 	//printf("Inserting %s\n", item);
 
 	// special case: queue was empty

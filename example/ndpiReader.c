@@ -2598,10 +2598,10 @@ static void runPcapLoop(u_int16_t thread_id) {
       struct Node *front = threadQueueFronts[count];
       enqueue(element, &header, &front, &rear);
       
-      // struct Node* fuck = dequeue(&front, &rear);
+      struct Node* temp2 = dequeue(&front, &rear);
 
-      // printf("this is thread ID: %d\n", fuck->header);
-      // ndpi_process_packet((u_char*)&thread_id, fuck->header, (const u_char *)fuck->data);
+      //printf("this is thread ID: %c\n", temp2->data);
+      ndpi_process_packet((u_char*)&thread_id, temp2->header, (const u_char *)temp2->data);
       //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
       threadQueueRears[count] = rear;
       threadQueueFronts[count] = front;
@@ -2609,7 +2609,7 @@ static void runPcapLoop(u_int16_t thread_id) {
       if (count == num_threads) {
         count = 0;
       }
-
+      
     }
     //busyDistributing = 0;
     //pthread_mutex_unlock(&lock);
