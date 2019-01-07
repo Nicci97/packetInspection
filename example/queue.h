@@ -4,15 +4,20 @@
  * Purpose: stack header file
  * Sourced from: http://www.zentut.com/c-tutorial/c-queue/
  */
-#ifndef QUEUE_H_INCLUDED
-#define QUEUE_H_INCLUDED
+// #ifndef QUEUE_H_INCLUDED
+// #define QUEUE_H_INCLUDED
+ #include <sys/types.h>
 
-#include <sys/types.h>
+// A linked list node
+struct Node
+{
+	u_char* data;				// integer data
+	struct Node* next;		// pointer to the next node
+};
 
-void init(int *head, int *tail);
-void enqueue(u_char **q,int *tail, u_char *element);
-u_char* dequeue(u_char *q,int *head);
-int empty(int head,int tail);
-int full(int tail,const int size);
-void display(u_char *q,int head,int tail);
-#endif // QUEUE_H_INCLUDED
+struct Node* newNode(u_char* item);
+u_char* dequeue(struct Node **front, struct Node **rear);
+void enqueue(u_char* item, struct Node **front, struct Node **rear);
+u_char* peek(struct Node *front);
+int isEmpty(struct Node **front, struct Node **rear);
+// #endif // QUEUE_H_INCLUDED

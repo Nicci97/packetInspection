@@ -1,67 +1,116 @@
-/*
- * File   : queue.c
- * Author : zentut.com
- * Purpose: stack header file
- * Sourced from: http://www.zentut.com/c-tutorial/c-queue/
- */
-/*
-    initialize queue pointers
-*/
+/* Sourced from https://www.techiedelight.com/queue-implementation-using-linked-list/ and altered*/
+
 #include <stdio.h>
-#include <sys/types.h>
+#include <stdlib.h>
+#include "queue.h"
 
-void init(int *head, int *tail)
+// Utility function to allocate the new queue node
+struct Node* newNode(u_char* item)
 {
-    *head = *tail = 0;
+	// Allocate the new node in the heap
+	struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+
+	// check if queue (heap) is full. Then inserting an element would
+	// lead to heap overflow
+	if (node != NULL)
+	{
+		// set the data in allocated node and return the node
+		node->data = item;
+		node->next = NULL;
+		return node;
+	}
+	else
+	{
+		printf("\nHeap Overflow");
+		exit(EXIT_FAILURE);
+	}
 }
 
-/*
-   enqueue an element
-   precondition: the queue is not full
-*/
-void enqueue(u_char **q ,int *tail, u_char *element)
+// Utility function to remove front element from the queue
+u_char* dequeue(struct Node **front, struct Node **rear) // delete at the beginning
 {
-    q[(*tail)++] = element;
+	if (*front == NULL) 
+	{
+		printf("\nQueue Underflow");
+		exit(EXIT_FAILURE);
+	}
+
+	struct Node *temp = *front;
+	//printf("Removing %s\n", temp->data);
+
+	// advance front to the next node
+	*front = (*front)->next;
+
+	// if list becomes empty
+	if (*front == NULL) {
+		*rear = NULL;
+	}
+
+	// deallocate the memory of removed node and 
+	// optionally return the removed item
+	u_char* item = temp->data;
+	//free(temp);
+	//printf("Dequeue %s\n", item);
+	return item;
 }
 
-/*
-    dequeue an element
-    precondition: queue is not empty
-*/
-u_char* dequeue(u_char **q,int *head)
+// Utility function to add an item in the queue
+void enqueue(u_char* item, struct Node **front, struct Node **rear) // insertion at the end
 {
-    return q[(*head)++];
+	// Allocate the new node in the heap
+	struct Node* node = newNode(item);
+	//printf("Inserting %s\n", item);
+
+	// special case: queue was empty
+	if (*front == NULL) 
+	{
+		// initialize both front and rear
+		*front = node;
+		*rear = node;
+	}
+	else
+	{
+		// update rear
+		(*rear)->next = node;
+		*rear = node;
+	}
 }
 
-/*
-    return 1 if queue is full, otherwise return 0
-*/
-int full(int tail,const int size)
+// Utility function to return top element in a queue
+u_char* peek(struct Node *front)
 {
-    return tail == size;
+	// check for empty queue
+	if (front != NULL)
+		return front->data;
+	else
+		exit(EXIT_FAILURE);
 }
 
-/*
-  return 1 if the queue is empty, otherwise return 0
-*/
-int empty(int head, int tail)
+// Utility function to check if the queue is empty or not
+int isEmpty(struct Node **front, struct Node **rear)
 {
-    if (tail == head) {
-        return 1;
-    } 
-    return 0;
-    //return tail == head;
+	return *rear == NULL && *front == NULL;
 }
 
-/*
-  display queue content
-*/
-void display(u_char *q,int head,int tail)
-{
-    int i = tail - 1;
-    while(i >= head)
-    {
-        printf("%d ",q[i--]);
-    }
-    printf("\n");
-}
+// main function
+// int main()
+// {
+// 	enqueue(1);
+// 	enqueue(2);
+// 	enqueue(3);
+// 	enqueue(4);
+ 
+// 	printf("Front element is %d\n", peek());
+
+// 	dequeue();
+// 	dequeue();
+// 	dequeue();
+// 	dequeue();
+ 
+// 	if (isEmpty())
+// 		printf("Queue is empty");
+// 	else
+// 		printf("Queue is not empty");
+
+// 	return 0;
+// }

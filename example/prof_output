@@ -1,0 +1,314 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ns/call  ns/call  name    
+ 56.76      0.21     0.21 10000000    21.00    27.00  processing_thread
+ 24.32      0.30     0.09                             distributePacketsThread
+ 16.22      0.36     0.06 10000000     6.00     6.00  runPcapLoop
+  2.70      0.37     0.01                             ndpi_patricia_lookup
+  0.00      0.37     0.00    72089     0.00     0.00  free_wrapper
+  0.00      0.37     0.00    36094     0.00     0.00  malloc_wrapper
+  0.00      0.37     0.00     5086     0.00     0.00  get_ndpi_flow_info
+  0.00      0.37     0.00     5086     0.00     0.00  ndpi_workflow_process_packet
+  0.00      0.37     0.00     5086     0.00     0.00  packet_processing
+  0.00      0.37     0.00     5084     0.00     0.00  ndpi_workflow_node_cmp
+  0.00      0.37     0.00        4     0.00     0.00  formatBytes
+  0.00      0.37     0.00        4     0.00     0.00  ndpi_free_flow_info_half
+  0.00      0.37     0.00        4     0.00     0.00  process_ndpi_collected_info
+  0.00      0.37     0.00        2     0.00     0.00  formatPackets
+  0.00      0.37     0.00        2     0.00     0.00  formatTraffic
+  0.00      0.37     0.00        2     0.00     0.00  ndpi_flow_info_freer
+  0.00      0.37     0.00        2     0.00     0.00  node_proto_guess_walker
+  0.00      0.37     0.00        2     0.00     0.00  on_protocol_discovered
+  0.00      0.37     0.00        1     0.00     0.00  automataUnitTest
+  0.00      0.37     0.00        1     0.00     0.00  configurePcapHandle
+  0.00      0.37     0.00        1     0.00     0.00  ndpi_workflow_free
+  0.00      0.37     0.00        1     0.00     0.00  ndpi_workflow_init
+  0.00      0.37     0.00        1     0.00     0.00  ndpi_workflow_set_flow_detected_callback
+  0.00      0.37     0.00        1     0.00     0.00  openPcapFileOrDevice
+  0.00      0.37     0.00        1     0.00     0.00  parseOptions
+  0.00      0.37     0.00        1     0.00     0.00  printResults
+  0.00      0.37     0.00        1     0.00     0.00  setupDetection
+  0.00      0.37     0.00        1     0.00     0.00  start_threads
+  0.00      0.37     0.00        1     0.00     0.00  terminateDetection
+  0.00      0.37     0.00        1     0.00     0.00  test_lib
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 2.70% of 0.37 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     97.3    0.09    0.27                 distributePacketsThread [1]
+                0.21    0.06 10000000/10000000     processing_thread [2]
+-----------------------------------------------
+                0.21    0.06 10000000/10000000     distributePacketsThread [1]
+[2]     73.0    0.21    0.06 10000000         processing_thread [2]
+                0.06    0.00 10000000/10000000     runPcapLoop [3]
+-----------------------------------------------
+                0.06    0.00 10000000/10000000     processing_thread [2]
+[3]     16.2    0.06    0.00 10000000         runPcapLoop [3]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]      2.7    0.01    0.00                 ndpi_patricia_lookup [4]
+-----------------------------------------------
+                0.00    0.00       1/72089       main [258]
+                0.00    0.00       1/72089       addDefaultPort.constprop.19 [47]
+                0.00    0.00       2/72089       ndpi_flow_info_freer [16]
+                0.00    0.00       3/72089       ndpi_workflow_free [21]
+                0.00    0.00       6/72089       ndpi_free_flow_info_half [12]
+                0.00    0.00       6/72089       ndpi_Destroy_Patricia [263]
+                0.00    0.00      88/72089       ndpi_realloc [398]
+                0.00    0.00     502/72089       ndpi_exit_detection_module [304]
+                0.00    0.00     632/72089       ndpi_tdestroy_recurse [569]
+                0.00    0.00    8162/72089       ac_automata_release [41]
+                0.00    0.00   16300/72089       node_release [589]
+                0.00    0.00   46386/72089       ndpi_Clear_Patricia [260]
+[5]      0.0    0.00    0.00   72089         free_wrapper [5]
+-----------------------------------------------
+                0.00    0.00       1/36094       ndpi_init_detection_module [340]
+                0.00    0.00       6/36094       get_ndpi_flow_info [7]
+                0.00    0.00      12/36094       ac_automata_init [39]
+                0.00    0.00      88/36094       ndpi_realloc [398]
+                0.00    0.00     160/36094       addDefaultPort.constprop.19 [47]
+                0.00    0.00     161/36094       ndpi_tsearch [572]
+                0.00    0.00     243/36094       ndpi_strdup [563]
+                0.00    0.00    4075/36094       node_create [577]
+                0.00    0.00    8150/36094       node_init [584]
+                0.00    0.00   23198/36094       ndpi_calloc [280]
+[6]      0.0    0.00    0.00   36094         malloc_wrapper [6]
+-----------------------------------------------
+                0.00    0.00    5086/5086        packet_processing [9]
+[7]      0.0    0.00    0.00    5086         get_ndpi_flow_info [7]
+                0.00    0.00       6/36094       malloc_wrapper [6]
+-----------------------------------------------
+                0.00    0.00    5086/5086        ndpi_process_packet [395]
+[8]      0.0    0.00    0.00    5086         ndpi_workflow_process_packet [8]
+                0.00    0.00    5086/5086        packet_processing [9]
+-----------------------------------------------
+                0.00    0.00    5086/5086        ndpi_workflow_process_packet [8]
+[9]      0.0    0.00    0.00    5086         packet_processing [9]
+                0.00    0.00    5086/5086        get_ndpi_flow_info [7]
+                0.00    0.00       2/4           process_ndpi_collected_info [13]
+-----------------------------------------------
+                0.00    0.00    5084/5084        ndpi_tfind [570]
+[10]     0.0    0.00    0.00    5084         ndpi_workflow_node_cmp [10]
+-----------------------------------------------
+                0.00    0.00       4/4           printResults [26]
+[11]     0.0    0.00    0.00       4         formatBytes [11]
+-----------------------------------------------
+                0.00    0.00       2/4           ndpi_flow_info_freer [16]
+                0.00    0.00       2/4           process_ndpi_collected_info [13]
+[12]     0.0    0.00    0.00       4         ndpi_free_flow_info_half [12]
+                0.00    0.00       6/72089       free_wrapper [5]
+-----------------------------------------------
+                0.00    0.00       2/4           node_proto_guess_walker [17]
+                0.00    0.00       2/4           packet_processing [9]
+[13]     0.0    0.00    0.00       4         process_ndpi_collected_info [13]
+                0.00    0.00       2/4           ndpi_free_flow_info_half [12]
+                0.00    0.00       2/2           on_protocol_discovered [18]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [26]
+[14]     0.0    0.00    0.00       2         formatPackets [14]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [26]
+[15]     0.0    0.00    0.00       2         formatTraffic [15]
+-----------------------------------------------
+                0.00    0.00       2/2           ndpi_tdestroy_recurse [569]
+[16]     0.0    0.00    0.00       2         ndpi_flow_info_freer [16]
+                0.00    0.00       2/4           ndpi_free_flow_info_half [12]
+                0.00    0.00       2/72089       free_wrapper [5]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [26]
+[17]     0.0    0.00    0.00       2         node_proto_guess_walker [17]
+                0.00    0.00       2/4           process_ndpi_collected_info [13]
+-----------------------------------------------
+                0.00    0.00       2/2           process_ndpi_collected_info [13]
+[18]     0.0    0.00    0.00       2         on_protocol_discovered [18]
+-----------------------------------------------
+                0.00    0.00       1/1           main [258]
+[19]     0.0    0.00    0.00       1         automataUnitTest [19]
+-----------------------------------------------
+                0.00    0.00       1/1           openPcapFileOrDevice [24]
+[20]     0.0    0.00    0.00       1         configurePcapHandle [20]
+-----------------------------------------------
+                0.00    0.00       1/1           terminateDetection [29]
+[21]     0.0    0.00    0.00       1         ndpi_workflow_free [21]
+                0.00    0.00       3/72089       free_wrapper [5]
+-----------------------------------------------
+                0.00    0.00       1/1           setupDetection [27]
+[22]     0.0    0.00    0.00       1         ndpi_workflow_init [22]
+-----------------------------------------------
+                0.00    0.00       1/1           setupDetection [27]
+[23]     0.0    0.00    0.00       1         ndpi_workflow_set_flow_detected_callback [23]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [30]
+[24]     0.0    0.00    0.00       1         openPcapFileOrDevice [24]
+                0.00    0.00       1/1           configurePcapHandle [20]
+-----------------------------------------------
+                0.00    0.00       1/1           main [258]
+[25]     0.0    0.00    0.00       1         parseOptions [25]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [30]
+[26]     0.0    0.00    0.00       1         printResults [26]
+                0.00    0.00       4/4           formatBytes [11]
+                0.00    0.00       2/2           node_proto_guess_walker [17]
+                0.00    0.00       2/2           formatTraffic [15]
+                0.00    0.00       2/2           formatPackets [14]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [30]
+[27]     0.0    0.00    0.00       1         setupDetection [27]
+                0.00    0.00       1/1           ndpi_workflow_init [22]
+                0.00    0.00       1/1           ndpi_workflow_set_flow_detected_callback [23]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [30]
+[28]     0.0    0.00    0.00       1         start_threads [28]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [30]
+[29]     0.0    0.00    0.00       1         terminateDetection [29]
+                0.00    0.00       1/1           ndpi_workflow_free [21]
+-----------------------------------------------
+                0.00    0.00       1/1           main [258]
+[30]     0.0    0.00    0.00       1         test_lib [30]
+                0.00    0.00       1/1           openPcapFileOrDevice [24]
+                0.00    0.00       1/1           setupDetection [27]
+                0.00    0.00       1/1           start_threads [28]
+                0.00    0.00       1/1           printResults [26]
+                0.00    0.00       1/1           terminateDetection [29]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [19] automataUnitTest       [12] ndpi_free_flow_info_half [9] packet_processing (ndpi_util.c)
+  [20] configurePcapHandle (ndpiReader.c) [4] ndpi_patricia_lookup [25] parseOptions (ndpiReader.c)
+   [1] distributePacketsThread [21] ndpi_workflow_free    [26] printResults (ndpiReader.c)
+  [11] formatBytes            [22] ndpi_workflow_init     [13] process_ndpi_collected_info
+  [14] formatPackets          [10] ndpi_workflow_node_cmp  [2] processing_thread
+  [15] formatTraffic           [8] ndpi_workflow_process_packet [3] runPcapLoop (ndpiReader.c)
+   [5] free_wrapper (ndpi_util.c) [23] ndpi_workflow_set_flow_detected_callback (ndpi_util.h) [27] setupDetection (ndpiReader.c)
+   [7] get_ndpi_flow_info (ndpi_util.c) [17] node_proto_guess_walker (ndpiReader.c) [28] start_threads
+   [6] malloc_wrapper (ndpi_util.c) [18] on_protocol_discovered (ndpiReader.c) [29] terminateDetection (ndpiReader.c)
+  [16] ndpi_flow_info_freer   [24] openPcapFileOrDevice (ndpiReader.c) [30] test_lib
