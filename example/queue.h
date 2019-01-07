@@ -12,12 +12,13 @@
 struct Node
 {
 	u_char* data;				// integer data
+	struct pcap_pkthdr* header; // header for current packet
 	struct Node* next;		// pointer to the next node
 };
 
-struct Node* newNode(u_char* item);
-u_char* dequeue(struct Node **front, struct Node **rear);
-void enqueue(u_char* item, struct Node **front, struct Node **rear);
+struct Node* newNode(u_char* item, struct pcap_pkthdr **h);
+struct Node* dequeue(struct Node **front, struct Node **rear);
+void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear);
 u_char* peek(struct Node *front);
 int isEmpty(struct Node **front, struct Node **rear);
 // #endif // QUEUE_H_INCLUDED

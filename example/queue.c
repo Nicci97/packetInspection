@@ -5,7 +5,7 @@
 #include "queue.h"
 
 // Utility function to allocate the new queue node
-struct Node* newNode(u_char* item)
+struct Node* newNode(u_char* item, struct pcap_pkthdr **h)
 {
 	// Allocate the new node in the heap
 	struct Node* node = (struct Node*)malloc(sizeof(struct Node));
@@ -16,6 +16,7 @@ struct Node* newNode(u_char* item)
 	{
 		// set the data in allocated node and return the node
 		node->data = item;
+		node->header = *h;
 		node->next = NULL;
 		return node;
 	}
@@ -27,7 +28,7 @@ struct Node* newNode(u_char* item)
 }
 
 // Utility function to remove front element from the queue
-u_char* dequeue(struct Node **front, struct Node **rear) // delete at the beginning
+struct Node* dequeue(struct Node **front, struct Node **rear) // delete at the beginning
 {
 	if (*front == NULL) 
 	{
@@ -51,14 +52,14 @@ u_char* dequeue(struct Node **front, struct Node **rear) // delete at the beginn
 	u_char* item = temp->data;
 	//free(temp);
 	//printf("Dequeue %s\n", item);
-	return item;
+	return temp;
 }
 
 // Utility function to add an item in the queue
-void enqueue(u_char* item, struct Node **front, struct Node **rear) // insertion at the end
+void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear) // insertion at the end
 {
 	// Allocate the new node in the heap
-	struct Node* node = newNode(item);
+	struct Node* node = newNode(item, header);
 	//printf("Inserting %s\n", item);
 
 	// special case: queue was empty

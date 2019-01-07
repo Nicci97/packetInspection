@@ -2589,45 +2589,55 @@ static void runPcapLoop(u_int16_t thread_id) {
 
     busyDistributing = 1;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
-      count++;
       u_char *element;
       element = (u_char*)packet;
+      //element = "hello";
+      //hashedDistributionValue(thread_id, handler, header, packet);
 
-      hashedDistributionValue(thread_id, handler, header, packet);
+      struct Node *rear = threadQueueRears[count]; 
+      struct Node *front = threadQueueFronts[count];
+      enqueue(element, &header, &front, &rear);
+      
+      // struct Node* fuck = dequeue(&front, &rear);
 
-      struct Node *rear = threadQueueRears[0]; 
-      struct Node *front = threadQueueFronts[0];
-      //enqueue(element, &front, &rear);
-      ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
-      threadQueueRears[0] = rear;
-      threadQueueFronts[0] = front;
+      // printf("this is thread ID: %d\n", fuck->header);
+      // ndpi_process_packet((u_char*)&thread_id, fuck->header, (const u_char *)fuck->data);
+      //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
+      threadQueueRears[count] = rear;
+      threadQueueFronts[count] = front;
+      count++;
+      if (count == num_threads) {
+        count = 0;
+      }
 
     }
-    busyDistributing = 0;
+    //busyDistributing = 0;
     //pthread_mutex_unlock(&lock);
     //********************************* dequeue from the queue
-    // struct Node *rear; 
-    // struct Node *front;
-    // int pcount = 0;
-    // //for (int k = 0; k < count; k++) {
-    // while (pcount <= 5090) {
-    //   rear = threadQueueRears[0]; 
-    //   front = threadQueueFronts[0];
+    struct Node *rear; 
+    struct Node *front;
+    int pcount = 0;
+    //for (int k = 0; k < count; k++) {
+    while (pcount <= 5090) {
+      rear = threadQueueRears[0]; 
+      front = threadQueueFronts[0];
 
-    //   if (!isEmpty(&front, &rear)) {
-    //     //count++;
+      if (!isEmpty(&front, &rear)) {
+        //count++;
 
-    //     u_char* deq = dequeue(&front, &rear);
-    //     if (front == NULL) {
-    //       threadQueueRears[0] = rear;
-    //       threadQueueFronts[0] = front;
-    //     } else {
-    //       threadQueueFronts[0] = front;
-    //     }
-    //     printf("%s %d\n", deq, pcount);
-    //   }
-    //   pcount++;
-    // }
+        struct Node* temp = dequeue(&front, &rear);
+        if (front == NULL) {
+          threadQueueRears[0] = rear;
+          threadQueueFronts[0] = front;
+        } else {
+          threadQueueFronts[0] = front;
+        }
+        ndpi_process_packet((u_char*)&thread_id, temp->header, (const u_char *)temp->data);
+
+        printf("%s %d\n", temp->data, pcount);
+      }
+      pcount++;
+    }
     //****************************
     // int waitTillEmpty = 1;
     // while (waitTillEmpty) {
@@ -3443,6 +3453,8 @@ void * thread_waiting_loop(void *_thread_id) {
   struct Node *rear; 
   struct Node *front;
   int pcount = 0;
+  struct pcap_pkthdr *header;
+  
   while(keepThreadsRunning) {
     //while (pcount <= 5090) {
 
@@ -3453,14 +3465,17 @@ void * thread_waiting_loop(void *_thread_id) {
 
       if (!isEmpty(&front, &rear)) {
         
-        u_char* deq = dequeue(&front, &rear);
+        struct Node* temp = dequeue(&front, &rear);
+        u_char* packet = temp->data;
+        struct pcap_pkthdr *header = temp->header;
         if (front == NULL) {
           threadQueueRears[thread_id] = rear;
           threadQueueFronts[thread_id] = front;
         } else {
         threadQueueFronts[thread_id] = front;
         }
-        printf("%s %d %ld\n", deq, pcount, thread_id);
+        ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
+        printf("%s %d %ld\n", packet, pcount, thread_id);
         pcount++;
       }
       pthread_mutex_unlock(&lock);
