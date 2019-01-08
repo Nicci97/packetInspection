@@ -16,9 +16,9 @@ struct Node
 	struct Node* next;		// pointer to the next node
 };
 
-struct Node* newNode(u_char* item, struct pcap_pkthdr **h);
+struct Node* newNode(u_char* item, struct pcap_pkthdr *h);
 struct Node* dequeue(struct Node **front, struct Node **rear);
-void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear);
+void enqueue(u_char** item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear);
 u_char* peek(struct Node *front);
 int isEmpty(struct Node **front, struct Node **rear);
 // #endif // QUEUE_H_INCLUDED

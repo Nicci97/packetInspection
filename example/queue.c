@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "queue.h"
+#include "bits/types/struct_timeval.h"
+#include "pcap.h"
 
 // Utility function to allocate the new queue node
-struct Node* newNode(u_char* item, struct pcap_pkthdr **h)
+struct Node* newNode(u_char* item, struct pcap_pkthdr *h)
 {
 	// Allocate the new node in the heap
 	struct Node* node = (struct Node*)malloc(sizeof(struct Node));
@@ -17,7 +19,7 @@ struct Node* newNode(u_char* item, struct pcap_pkthdr **h)
 	{
 		// set the data in allocated node and return the node
 		node->data = item;
-		node->header = *h;
+		node->header = h;
 		node->next = NULL;
 		return node;
 	}
@@ -57,13 +59,23 @@ struct Node* dequeue(struct Node **front, struct Node **rear) // delete at the b
 }
 
 // Utility function to add an item in the queue
-void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear) // insertion at the end
+void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Node **rear) // insertion at the end
 {
-	// Allocate the new node in the heap
+	// Create a deep copy of the header in memory
+	// copy header struct
+	struct pcap_pkthdr *header = *h;	
 	struct pcap_pkthdr *headerCopy;
-	memcpy(headerCopy, *header, sizeof(*header));
-	struct Node* node = newNode(item, &headerCopy);
-	//printf("Inserting %s\n", item);
+	headerCopy = malloc(sizeof(struct pcap_pkthdr));
+	memcpy(headerCopy, header, sizeof(struct pcap_pkthdr));
+	
+	// copy packet data
+	u_char* item = *i;
+	u_char* itemCopy;
+	itemCopy = malloc(header->caplen);
+	memcpy(itemCopy, item, header->caplen);
+	
+	// create new node to put in linked list
+	struct Node* node = newNode(itemCopy, headerCopy);
 
 	// special case: queue was empty
 	if (*front == NULL) 
