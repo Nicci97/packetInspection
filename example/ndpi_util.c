@@ -772,13 +772,10 @@ struct ndpi_proto ndpi_workflow_process_packet (struct ndpi_workflow * workflow,
   u_int16_t frag_off = 0, vlan_id = 0;
   u_int8_t proto = 0;
   u_int32_t label;
-
   /* counters */
   u_int8_t vlan_packet = 0;
-
   /* Increment raw packet counter */
   workflow->stats.raw_packet_count++;
-
   /* setting time */
   time = ((uint64_t) header->ts.tv_sec) * TICK_RESOLUTION + header->ts.tv_usec / (1000000 / TICK_RESOLUTION);
 
@@ -789,10 +786,10 @@ struct ndpi_proto ndpi_workflow_process_packet (struct ndpi_workflow * workflow,
   }
   /* update last time value */
   workflow->last_time = time;
-
+  
   /*** check Data Link type ***/
   int datalink_type;
-
+  
 #ifdef USE_DPDK
   datalink_type = DLT_EN10MB;
 #else
@@ -1068,7 +1065,7 @@ iph_check:
       }
     }
   }
-
+  
   /* process the packet */
   return(packet_processing(workflow, time, vlan_id, iph, iph6,
 			   ip_offset, header->caplen - ip_offset, header->caplen));
