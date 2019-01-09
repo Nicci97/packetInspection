@@ -1941,11 +1941,11 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
 
   memset(&cumulative_stats, 0, sizeof(cumulative_stats));
 
-#ifdef USE_DPDK
+//#ifdef USE_DPDK
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-#else 
-  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-#endif
+//#else 
+//  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+//#endif
   //for(thread_id = 0; thread_id < num_threads; thread_id++) {
     if((ndpi_thread_info[thread_id].workflow->stats.total_wire_bytes == 0)
        && (ndpi_thread_info[thread_id].workflow->stats.raw_packet_count == 0))
@@ -3049,6 +3049,7 @@ void * processing_thread(void *_thread_id) {
   gettimeofday(&startSlice, NULL);
   printf("*****The start time is: %ld\n", startSlice.tv_sec);
   while(dpdk_run_capture) {
+    busyDistributing = 1;
     struct rte_mbuf *bufs[BURST_SIZE];
     u_int16_t num = rte_eth_rx_burst(dpdk_port_id, 0, bufs, BURST_SIZE);
     u_int i;
@@ -3077,21 +3078,22 @@ void * processing_thread(void *_thread_id) {
       //liso
       // my test code
 
+      //pthread_mutex_lock(&lock);
       struct Node *rear = threadQueueRears[0]; 
       struct Node *front = threadQueueFronts[0];
       //printf("this is the count: %d %d\n", count, tempCount);
+      
+      //printf("I am enqueuing something\n");
       enqueue(&element, &header, &front, &rear);
       
-      //struct Node* temp2 = dequeue(&front, &rear);
-      //ndpi_process_packet((u_char*)&thread_id, temp2->header, (const u_char *)temp2->data);
+    
       threadQueueRears[0] = rear;
       threadQueueFronts[0] = front;
-
+      //pthread_mutex_unlock(&lock);
 
       /////////////
+      //printf("toprocesspacket\n");
       //ndpi_process_packet((u_char*)&thread_id, &h, (const u_char *)data);
-
-
 
       rte_pktmbuf_free(bufs[i]);
     }
@@ -3099,16 +3101,41 @@ void * processing_thread(void *_thread_id) {
     gettimeofday(&endSlice, NULL);
     //printf("*****The end time is: %ld\n", endSlice.tv_sec);
     if ((endSlice.tv_sec - startSlice.tv_sec) > pauseDur) {
+      busyDistributing = 0;
       startSlice.tv_sec = endSlice.tv_sec;
       
       
       u_int64_t processing_time_usec, setup_time_usec;
       processing_time_usec = endSlice.tv_sec*1000000 + endSlice.tv_usec - (startSlice.tv_sec*1000000 + startSlice.tv_usec);
       setup_time_usec = startSlice.tv_sec*1000000 + startSlice.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
-      printResults(processing_time_usec, setup_time_usec);
+      // printResults(processing_time_usec, setup_time_usec);
 
       printf("New start time is: %ld\n", startSlice.tv_sec);
-        ndpi_workflow_reset(ndpi_thread_info[thread_id].workflow);
+
+      int queuesNotEmpty = 1;
+      int queuesEmpty[num_threads];
+      for (int i = 0; i < num_threads; i++) {
+        queuesEmpty[i] = 0;
+      }
+
+      while (queuesNotEmpty) {
+        for (int i = 0; i < num_threads; i++) {
+          struct Node *rear = threadQueueRears[i]; 
+          struct Node *front = threadQueueFronts[i];
+          if (isEmpty(&front, &rear)) {
+            queuesEmpty[i] = 1;
+          }
+        }
+        queuesNotEmpty = 0; 
+        for (int i = 0; i < num_threads; i++) {
+          if (queuesEmpty[i] == 0) {
+            queuesNotEmpty = 1; 
+          }
+        }
+      }
+      
+      printResults(processing_time_usec, setup_time_usec);
+      ndpi_workflow_reset(ndpi_thread_info[thread_id].workflow);
     }
   }
   
@@ -3165,6 +3192,7 @@ void test_lib() {
 
   gettimeofday(&begin, NULL);
   
+  printf("should start threads\n");
   start_threads();
   // // MY STUFF
   // int status;
@@ -3827,43 +3855,41 @@ void * thread_waiting_loop(void *_thread_id) {
   struct Node *front;
   int pcount = 0;
   struct pcap_pkthdr *header;
-  // if (thread_id == 1) {
-    while(keepThreadsRunning) {
-
-      if (!busyDistributing) {
-        //printf("here %ld\n", thread_id);
+  while(keepThreadsRunning) {
+    printf("entering here at least\n");
+    if (!busyDistributing) {
+      //printf("here %ld\n", thread_id);
+      //pthread_mutex_lock(&lock);
+      rear = threadQueueRears[thread_id]; 
+      front = threadQueueFronts[thread_id];
+      if (!isEmpty(&front, &rear)) {
         //pthread_mutex_lock(&lock);
-        rear = threadQueueRears[thread_id]; 
-        front = threadQueueFronts[thread_id];
-        if (!isEmpty(&front, &rear)) {
-          struct Node* temp = dequeue(&front, &rear);
-          u_char* packet = temp->data;
-          struct pcap_pkthdr *header = temp->header;
-          if (front == NULL) {
-            threadQueueRears[thread_id] = rear;
-            threadQueueFronts[thread_id] = front;
-          } else {
-          threadQueueFronts[thread_id] = front;
-          }
-          // TODO check why this must be equal to 0 to work..????
-          //printf("%s %d %ld\n", packet, pcount, thread_id);
-
-          long thread_id_workflow = 0;
-          ndpi_process_packet((u_char*)&thread_id_workflow, header, (const u_char *)packet);
-
+        struct Node* temp = dequeue(&front, &rear);
+        printf("I am dequeueud something %s\n", temp->data);
           
-          //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
-
-          free(packet);
-          free(header);
-          pcount++;
+        u_char* packet = temp->data;
+        struct pcap_pkthdr *header = temp->header;
+        if (front == NULL) {
+          threadQueueRears[thread_id] = rear;
+          threadQueueFronts[thread_id] = front;
+        } else {
+          threadQueueFronts[thread_id] = front;
         }
         //pthread_mutex_unlock(&lock);
+        // TODO check why this must be equal to 0 to work..????
+        //printf("%s %d %ld\n", packet, pcount, thread_id);
+
+        long thread_id_workflow = 0;
+        ndpi_process_packet((u_char*)&thread_id_workflow, header, (const u_char *)packet);
+        //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
+
+        free(packet);
+        free(header);
+        pcount++;
       }
-
+      //pthread_mutex_unlock(&lock);
     }
-
-  // }
+  }
   return NULL;
 }
 
@@ -3871,47 +3897,24 @@ void * thread_waiting_loop(void *_thread_id) {
  * starts functionality of distribution of packets to different threads according to their hash value
  */
 void * distributePacketsThread(void *_thread_id) {
+  //sim
+#ifdef USE_DPDK
   long thread_id = (long) _thread_id;
-  #ifdef USE_DPDK
-      processing_thread((void *)thread_id);
-      keepThreadsRunning = 0;
-      return NULL;
-  #else
-    for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-    // // int k = 0;
-    // // while (k < 20) {
-    //  //  printf("here\n");
-
-    //  //for(int i = 0; i < num_threads; i++) {
-    //     pcap_t *cap;
-
-    // #ifdef DEBUG_TRACE
-    //     if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[i]);
-    // #endif
-
-    //     cap = openPcapFileOrDevice(file_id, (const u_char*)_pcap_file[file_id]);
-    //     for (int i = 0; i < num_threads; i++) {
-    //       printf("setting up detection for thread %d\n", i);
-    //       setupDetection(i, cap);
-    //     }
-    //     // setupDetection(i, cap);
-    //   //}
-
+  // next line is temporary
+  thread_id = 0;
+  processing_thread((void *)thread_id);
+  printf("and here\n");
+  keepThreadsRunning = 0;
+  return NULL;
+#else
+  long thread_id = (long) _thread_id;
+  for(long file_id = 0; file_id < num_pcap_files; file_id++) {
       processing_thread((void *)file_id);
-
-      // for (int i = 0; i < num_threads; i++) {
-      // printf("terminating detections thread %d\n", i);
-      // terminateDetection(i);
-      // }
-    // nicole du toit
-    //   k++;
-    // }
   }
   printf("and here\n");
   keepThreadsRunning = 0;
   return NULL;
-  #endif
-  
+#endif
 }
 
 /**\
@@ -3927,11 +3930,6 @@ void start_threads() {
     printf("##### Creating thread with id: %ld\n", thread_id);
     status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, thread_waiting_loop, (void *) thread_id);
     printf("Processing THREAD %ld is running\n", thread_id);
-    /* Create a queue for each thread, from which to process packets */
-    // int head, tail;
-    // u_char *queue[queueLength];
-    // init(&head,&tail);
-    // packetDistributionArray[thread_id] = &queue;
 
     /* check pthreade_create return value */
     if(status != 0) {

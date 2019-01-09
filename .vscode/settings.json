@@ -1,0 +1,15 @@
+{
+    "C_Cpp.dimInactiveRegions": false,
+    "files.associations": {
+        "unistd.h": "c",
+        "ndpi_util.h": "c",
+        "mman.h": "c",
+        "stat.h": "c",
+        "pthread.h": "c",
+        "in.h": "c",
+        "getopt.h": "c",
+        "sched.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
+    }
+}
