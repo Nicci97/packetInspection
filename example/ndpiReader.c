@@ -2582,7 +2582,6 @@ static int hashedDistributionValue(u_int16_t thread_id, pcap_t *handler, struct 
  * @brief Call pcap_loop() to process packets from a live capture or savefile
  */
 static void runPcapLoop(u_int16_t thread_id) {
-
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
 
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
@@ -2616,45 +2615,29 @@ static void runPcapLoop(u_int16_t thread_id) {
       
     }
     busyDistributing = 0;
-    //pthread_mutex_unlock(&lock);
-    //********************************* dequeue from the queue
-    // struct Node *rear; 
-    // struct Node *front;
-    // int pcount = 0;
-    // //for (int k = 0; k < count; k++) {
-    // while (pcount <= 5090) {
-    //   rear = threadQueueRears[0]; 
-    //   front = threadQueueFronts[0];
 
-    //   if (!isEmpty(&front, &rear)) {
-    //     //count++;
+    int queuesNotEmpty = 1;
+    int queuesEmpty[num_threads];
+    for (int i = 0; i < num_threads; i++) {
+      queuesEmpty[i] = 0;
+    }
 
-    //     struct Node* temp = dequeue(&front, &rear);
-    //     if (front == NULL) {
-    //       threadQueueRears[count] = rear;
-    //       threadQueueFronts[count] = front;
-    //     } else {
-    //       threadQueueFronts[count] = front;
-    //     }
-    //     printf("packet about to be processed %s\n", temp->data);
-    //     ndpi_process_packet((u_char*)&thread_id, temp->header, (const u_char *)temp->data);
-
-    //     //printf("%s %d\n", temp->data, pcount);
-    //   }
-    //   pcount++;
-    // }
-    //****************************
-    // int waitTillEmpty = 1;
-    // while (waitTillEmpty) {
-    //   struct Node *rear = threadQueueRears[0]; 
-    //   struct Node *front = threadQueueFronts[0];
-    //   if (isEmpty(&front, &rear)) {
-    //     keepThreadsRunning = 0;
-    //     waitTillEmpty = 0;
-    //   }
-    // }
-    //printf("Packets being processed from pcap file\n");
-    pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
+    while (queuesNotEmpty) {
+      for (int i = 0; i < num_threads; i++) {
+        struct Node *rear = threadQueueRears[i]; 
+        struct Node *front = threadQueueFronts[i];
+        if (isEmpty(&front, &rear)) {
+          queuesEmpty[i] = 1;
+        }
+      }
+      queuesNotEmpty = 0; 
+      for (int i = 0; i < num_threads; i++) {
+        if (queuesEmpty[i] == 0) {
+          queuesNotEmpty = 1; 
+        }
+      }
+    }
+    //pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
   }
 }
 
@@ -3461,7 +3444,6 @@ void * thread_waiting_loop(void *_thread_id) {
   struct pcap_pkthdr *header;
   // if (thread_id == 1) {
     while(keepThreadsRunning) {
-    //while (pcount <= 5090) {
 
       if (!busyDistributing) {
         //printf("here %ld\n", thread_id);
@@ -3482,13 +3464,15 @@ void * thread_waiting_loop(void *_thread_id) {
           printf("%s %d %ld\n", packet, pcount, thread_id);
           long thread_id_workflow = 0;
           ndpi_process_packet((u_char*)&thread_id_workflow, header, (const u_char *)packet);
-          
+          free(packet);
+          free(header);
           pcount++;
         }
         //pthread_mutex_unlock(&lock);
       }
 
     }
+
   // }
   return NULL;
 }
@@ -3499,13 +3483,14 @@ void * thread_waiting_loop(void *_thread_id) {
 void * distributePacketsThread(void *_thread_id) {
   long thread_id = (long) _thread_id;
   for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-    //int k = 0;
-    //while (k < 10000000) {
+    // int k = 0;
+    // while (k < 10000000) {
       processing_thread((void *)file_id);
-     // k++;
-    //}
+    //   k++;
+    // }
     
   }
+  keepThreadsRunning = 0;
   return NULL;
 }
 
