@@ -774,6 +774,9 @@ struct ndpi_proto ndpi_workflow_process_packet (struct ndpi_workflow * workflow,
   u_int32_t label;
   /* counters */
   u_int8_t vlan_packet = 0;
+  if (workflow == NULL) {
+    printf("workflow is null\n");
+  }
   /* Increment raw packet counter */
   workflow->stats.raw_packet_count++;
   /* setting time */
