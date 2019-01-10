@@ -1473,7 +1473,7 @@ static void debug_printf(u_int32_t protocol, void *id_struct,
 static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   NDPI_PROTOCOL_BITMASK all;
   struct ndpi_workflow_prefs prefs;
-
+  
   memset(&prefs, 0, sizeof(prefs));
   prefs.decode_tunnels = decode_tunnels;
   prefs.num_roots = NUM_ROOTS;
@@ -1483,13 +1483,15 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   // memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
   printf("setting up workflow for thread %d\n", thread_id);
   // for (int i = 0; i < num_threads; i++) {
-  //   printf("ENTERING HERE\n");
+
+    pthread_t *pthreadCopy = ndpi_thread_info[thread_id].pthread;
     memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
+    ndpi_thread_info[thread_id].pthread = pthreadCopy;
     ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
   //   printf("EXITING HERE\n");
   // }
   // ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
-
+  
   /* Preferences */
   ndpi_set_detection_preferences(ndpi_thread_info[thread_id].workflow->ndpi_struct,
 				 ndpi_pref_http_dont_dissect_response, 0);
@@ -1505,7 +1507,6 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   // enable all protocols
   NDPI_BITMASK_SET_ALL(all);
   ndpi_set_protocol_detection_bitmask2(ndpi_thread_info[thread_id].workflow->ndpi_struct, &all);
-
   // clear memory for results
   memset(ndpi_thread_info[thread_id].workflow->stats.protocol_counter, 0,
 	 sizeof(ndpi_thread_info[thread_id].workflow->stats.protocol_counter));
@@ -1947,7 +1948,6 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
 //  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
 // #endif
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    printf("in print results222 %d\n", thread_id);
     if((ndpi_thread_info[thread_id].workflow->stats.total_wire_bytes == 0)
        && (ndpi_thread_info[thread_id].workflow->stats.raw_packet_count == 0))
       continue;
@@ -2938,9 +2938,7 @@ static int hashedDistributionValue(struct ndpi_workflow * workflow,
  * @brief Call pcap_loop() to process packets from a live capture or savefile
  */
 static void runPcapLoop(u_int16_t thread_id) {
-  printf("inpcaploop\n");
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
-    printf("inpcaploop2\n");
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
@@ -3951,8 +3949,9 @@ void * distributePacketsThread(void *_thread_id) {
     #ifdef DEBUG_TRACE
         if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
     #endif
-
+   
     cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+    
     if (setUpDone == 0) {
       for (int thread = 0; thread < num_threads; thread++) {
         printf("setting up  PCAP detection for thread %d(((((((((((((((((\n", thread);
@@ -3966,8 +3965,10 @@ void * distributePacketsThread(void *_thread_id) {
       }
       //workflow->pcap_handle = cap;
     }
+     
     printf("beforeing\n");
 
+    
     // TEMPORARY CHANGE
     long thread_id_workflow = 0;
     processing_thread((void *)thread_id_workflow);
@@ -3979,7 +3980,6 @@ void * distributePacketsThread(void *_thread_id) {
   // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
   //     processing_thread((void *)file_id);
   // }
-  printf("and here\n");
   keepThreadsRunning = 0;
   return NULL;
 #endif
@@ -3998,7 +3998,6 @@ void start_threads() {
     printf("##### Creating thread with id: %ld\n", thread_id);
     status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, thread_waiting_loop, (void *) thread_id);
     printf("Processing THREAD %ld is running\n", thread_id);
-
     /* check pthreade_create return value */
     if(status != 0) {
       fprintf(stderr, "error on create %ld thread\n", thread_id);
@@ -4014,14 +4013,30 @@ void start_threads() {
     fprintf(stderr, "error on create %ld thread\n", thread_id);
     exit(-1);
   }
+
+  printf("ENTERING START THREADS ------------------------------------\n");
+  if (ndpi_thread_info[1].workflow == NULL) {
+      printf("thread 1 not here3333333333333333333333333333333333333\n");
+    } else {
+      printf("thread 1 is here44444444444444444444444444444444444444\n");
+  }
+  
   /* Waiting for completion of processing threads*/
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("thread id is this now: %ld\n", thread_id);
+    if (ndpi_thread_info[1].workflow == NULL) {
+      printf("thread 1 not here3333333333333333333333333333333333333\n");
+    } else {
+      printf("thread 1 is here44444444444444444444444444444444444444\n");
+  }
     status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
     /* check pthreade_join return value */
     if(status != 0) {
       fprintf(stderr, "error on join %ld thread\n", thread_id);
+      printf("return value of %d\n", status);
       exit(-1);
     }
+    //lauren
     if(thd_res != NULL) {
       fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
       exit(-1);
