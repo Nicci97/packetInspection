@@ -1,397 +1,197 @@
-Unknown	170	105530	18
-DNS	18	1299	6
-MDNS	5	668	3
-NTP	2	188	2
-NetBIOS	7	954	2
-SSDP	2	440	2
-SNMP	5	479	4
-DHCP	1	346	1
-SMBv23	5	584	2
-SSL	2	140	2
-SSH	2611	12194914	3
-Dropbox	5	1600	2
-Skype	3	334	2
-Google	32	5467	15
-Radius	3	270	1
-LLMNR	8	640	6
-RX	3	309	2
-
-	1	TCP 172.16.102.24:22 -> 172.16.62.118:56774 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][1910 pkts/12139204 bytes -> 0 pkts/0 bytes]
-	2	TCP 172.16.62.118:56774 -> 172.16.102.24:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][699 pkts/55554 bytes -> 0 pkts/0 bytes]
-	3	TCP 172.16.63.138:51852 -> 172.16.81.5:18457 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][3 pkts/1874 bytes -> 0 pkts/0 bytes]
-	4	TCP 172.16.62.63:56554 -> 162.125.18.133:443 [VLAN: 1010][proto: 91.121/SSL.Dropbox][cat: Cloud/13][2 pkts/1157 bytes -> 0 pkts/0 bytes]
-	5	TCP 172.16.102.43:60238 -> 104.199.65.73:4070 [VLAN: 1010][proto: 126/Google][cat: Web/5][4 pkts/827 bytes -> 0 pkts/0 bytes]
-	6	TCP 104.199.65.73:4070 -> 172.16.102.43:60238 [VLAN: 202][proto: 126/Google][cat: Web/5][2 pkts/778 bytes -> 0 pkts/0 bytes]
-	7	TCP 216.58.223.3:443 -> 172.16.64.114:52415 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][6 pkts/649 bytes -> 0 pkts/0 bytes]
-	8	TCP 172.16.64.114:52415 -> 216.58.223.3:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][5 pkts/493 bytes -> 0 pkts/0 bytes]
-	9	UDP 172.16.123.170:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
-	10	UDP 172.16.89.199:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][2 pkts/474 bytes -> 0 pkts/0 bytes]
-	11	TCP 162.125.18.133:443 -> 172.16.62.63:56554 [VLAN: 202][proto: 91.121/SSL.Dropbox][cat: Cloud/13][3 pkts/443 bytes -> 0 pkts/0 bytes]
-	12	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][2 pkts/410 bytes -> 0 pkts/0 bytes]
-	13	UDP 0.0.0.0:68 -> 255.255.255.255:67 [VLAN: 202][proto: 18/DHCP][cat: Network/14][1 pkts/346 bytes -> 0 pkts/0 bytes]
-	14	TCP 172.16.64.114:52598 -> 172.16.81.25:445 [VLAN: 1010][proto: 41/SMBv23][cat: System/18][3 pkts/324 bytes -> 0 pkts/0 bytes]
-	15	UDP 172.16.81.1:53 -> 172.16.102.166:52055 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
-	16	UDP 172.16.81.25:53 -> 172.16.102.166:58071 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
-	17	UDP 172.16.102.166:52055 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
-	18	UDP 172.16.102.166:58071 -> 172.16.81.25:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
-	19	UDP 172.16.102.63:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 146/Radius][cat: Network/14][3 pkts/270 bytes -> 0 pkts/0 bytes]
-	20	UDP 172.16.102.167:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 188.126/QUIC.Google][cat: Web/5][3 pkts/270 bytes -> 0 pkts/0 bytes]
-	21	TCP 172.16.81.25:445 -> 172.16.64.114:52598 [VLAN: 202][proto: 41/SMBv23][cat: System/18][2 pkts/260 bytes -> 0 pkts/0 bytes]
-	22	UDP 172.16.62.58:52215 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][1 pkts/220 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.123.105:61457 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][1 pkts/220 bytes -> 0 pkts/0 bytes]
-	24	TCP 172.16.64.114:51421 -> 13.92.27.116:443 [VLAN: 1010][proto: 91.125/SSL.Skype][cat: VoIP/10][2 pkts/207 bytes -> 0 pkts/0 bytes]
-	25	UDP 172.25.0.102:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 223/RX][cat: RPC/16][2 pkts/206 bytes -> 0 pkts/0 bytes]
-	26	UDP 172.16.63.138:54901 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
-	27	TCP 172.16.63.94:54269 -> 172.16.64.114:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][2 pkts/156 bytes -> 0 pkts/0 bytes]
-	28	UDP 172.16.123.170:55010 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes][Host: keysersoze]
-	29	UDP 172.16.123.170:60102 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes][Host: keysersoze]
-	30	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/130 bytes -> 0 pkts/0 bytes][fe80:0:0:0:37ef:eda7:a733:8030%enp0s3.local]
-	31	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][2 pkts/128 bytes -> 0 pkts/0 bytes]
-	32	TCP 13.92.27.116:443 -> 172.16.64.114:51421 [VLAN: 202][proto: 91.125/SSL.Skype][cat: VoIP/10][1 pkts/127 bytes -> 0 pkts/0 bytes]
-	33	UDP 172.16.81.1:53 -> 172.16.102.90:36495 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
-	34	UDP 172.25.0.102:161 -> 172.16.62.63:51567 [VLAN: 202][proto: 223/RX][cat: RPC/16][1 pkts/103 bytes -> 0 pkts/0 bytes]
-	35	UDP 172.25.0.100:161 -> 172.16.62.63:58655 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/99 bytes -> 0 pkts/0 bytes]
-	36	UDP 172.16.62.63:51567 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	37	UDP 172.16.62.63:58655 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	38	UDP 172.16.102.167:33315 -> 196.10.55.57:123 [VLAN: 1010][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	39	UDP 196.10.55.57:123 -> 172.16.102.167:33315 [VLAN: 202][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	40	UDP 172.16.102.90:36495 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
-	41	UDP 172.16.62.74:49306 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	42	UDP 172.16.62.74:62825 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	43	UDP 172.16.64.83:52984 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	44	UDP 172.16.64.83:56177 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
-	45	TCP 82.208.41.65:443 -> 172.16.102.43:37680 [VLAN: 202][proto: 91/SSL][cat: Web/5][1 pkts/70 bytes -> 0 pkts/0 bytes]
-	46	TCP 172.16.102.43:37680 -> 82.208.41.65:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/70 bytes -> 0 pkts/0 bytes]
-	47	UDP 172.16.2.94:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	48	UDP 172.16.2.95:49667 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	49	UDP 172.16.2.97:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	50	UDP 172.16.2.98:49239 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	51	UDP 172.16.2.99:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	52	UDP 172.16.2.100:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	53	UDP 172.16.41.82:49209 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	54	UDP 172.16.100.10:56344 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	55	UDP 172.16.123.221:62288 -> 229.111.112.12:3071 [VLAN: 202][proto: 188.126/QUIC.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-
-
-Undetected flows:
-	1	UDP 172.16.102.20:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][29 pkts/21550 bytes -> 0 pkts/0 bytes]
-	2	UDP 172.16.23.150:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][20 pkts/20312 bytes -> 0 pkts/0 bytes]
-	3	UDP 172.16.89.57:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][18 pkts/16732 bytes -> 0 pkts/0 bytes]
-	4	UDP 172.16.102.84:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][13 pkts/12350 bytes -> 0 pkts/0 bytes]
-	5	UDP 172.16.89.53:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][12 pkts/11928 bytes -> 0 pkts/0 bytes]
-	6	UDP 172.16.54.101:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][13 pkts/3326 bytes -> 0 pkts/0 bytes]
-	7	UDP 172.16.23.100:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][13 pkts/3278 bytes -> 0 pkts/0 bytes]
-	8	UDP 172.16.89.50:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][12 pkts/3096 bytes -> 0 pkts/0 bytes]
-	9	TCP 172.16.81.5:18457 -> 172.16.63.138:51852 [VLAN: 202][proto: 0/Unknown][4 pkts/1696 bytes -> 0 pkts/0 bytes]
-	10	UDP 172.16.54.102:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	11	UDP 172.16.54.103:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	12	UDP 172.16.89.51:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	13	UDP 172.16.89.54:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	14	UDP 172.16.89.55:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	15	UDP 172.16.89.52:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][3 pkts/1506 bytes -> 0 pkts/0 bytes]
-	16	UDP 172.16.102.167:320 -> 224.0.1.129:320 [VLAN: 1010][proto: 0/Unknown][8 pkts/790 bytes -> 0 pkts/0 bytes]
-	17	UDP 172.16.68.39:5404 -> 239.192.2.225:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/680 bytes -> 0 pkts/0 bytes]
-	18	UDP 192.168.45.121:49154 -> 255.255.255.255:1947 [VLAN: 202][proto: 0/Unknown][1 pkts/86 bytes -> 0 pkts/0 bytes]
-Unknown	429	252852	50
-DNS	47	3666	18
-HTTP	1	64	1
-MDNS	10	1425	8
+Unknown	222	125078	32
+DNS	24	1929	10
+HTTP	45	28062	6
+MDNS	14	2197	6
 NTP	4	376	4
-NetBIOS	51	6321	13
-SSDP	2	440	2
-SNMP	19	1973	14
-DHCP	2	692	2
-SMBv23	79	17958	4
-ICMP	1	68	1
-SSL	10	1095	8
-SSH	4632	21751472	5
-Dropbox	6	1833	3
+NetBIOS	40	4498	13
+SSDP	9	1931	4
+SNMP	9	863	7
+DHCP	3	1281	3
+ICMP	10	780	2
+IGMP	17	1088	17
+SSL	8	866	6
+SSH	2664	11301760	2
+Dropbox	1	227	1
 Skype	3	334	2
-Google	112	19417	24
-Radius	3	270	1
-UPnP	11	2411	4
-LLMNR	31	2550	21
-OpenVPN	2	382	2
-UbuntuONE	2	188	2
-RX	3	309	2
+Google	27	4010	11
+Radius	2	180	1
+LLMNR	34	2792	18
+OpenVPN	19	5133	2
+RX	5	515	3
 
-	1	TCP 172.16.102.24:22 -> 172.16.62.118:56774 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][1483 pkts/9514002 bytes -> 0 pkts/0 bytes]
-	2	TCP 172.16.62.118:56774 -> 172.16.102.24:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][538 pkts/42556 bytes -> 0 pkts/0 bytes]
-	3	TCP 172.16.63.210:54706 -> 172.16.81.25:445 [VLAN: 1010][proto: 41/SMBv23][cat: System/18][38 pkts/9694 bytes -> 0 pkts/0 bytes]
-	4	TCP 172.16.81.25:445 -> 172.16.63.210:54706 [VLAN: 202][proto: 41/SMBv23][cat: System/18][36 pkts/7680 bytes -> 0 pkts/0 bytes]
-	5	TCP 216.58.223.5:443 -> 172.16.64.114:52486 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][25 pkts/3385 bytes -> 0 pkts/0 bytes]
-	6	TCP 172.16.64.114:52486 -> 216.58.223.5:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][16 pkts/2888 bytes -> 0 pkts/0 bytes]
-	7	TCP 172.16.64.114:52599 -> 216.58.223.7:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][12 pkts/2496 bytes -> 0 pkts/0 bytes]
-	8	TCP 216.58.223.7:443 -> 172.16.64.114:52599 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][13 pkts/2261 bytes -> 0 pkts/0 bytes]
-	9	TCP 172.16.102.43:60238 -> 104.199.65.73:4070 [VLAN: 1010][proto: 126/Google][cat: Web/5][7 pkts/1493 bytes -> 0 pkts/0 bytes]
-	10	UDP 172.16.62.58:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][12 pkts/1152 bytes -> 0 pkts/0 bytes]
-	11	TCP 104.199.65.73:4070 -> 172.16.102.43:60238 [VLAN: 202][proto: 126/Google][cat: Web/5][3 pkts/1093 bytes -> 0 pkts/0 bytes]
-	12	UDP 172.16.62.43:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][4 pkts/880 bytes -> 0 pkts/0 bytes]
-	13	UDP 172.16.62.58:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][4 pkts/880 bytes -> 0 pkts/0 bytes]
-	14	UDP 172.16.62.61:53257 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][4 pkts/876 bytes -> 0 pkts/0 bytes]
-	15	UDP 172.16.62.62:64076 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][4 pkts/876 bytes -> 0 pkts/0 bytes]
-	16	UDP 172.16.62.43:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][9 pkts/864 bytes -> 0 pkts/0 bytes]
-	17	UDP 172.16.123.170:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
-	18	UDP 172.16.123.105:61457 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][2 pkts/440 bytes -> 0 pkts/0 bytes]
-	19	UDP 172.16.102.63:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/360 bytes -> 0 pkts/0 bytes]
-	20	UDP 0.0.0.0:68 -> 255.255.255.255:67 [VLAN: 202][proto: 18/DHCP][cat: Network/14][1 pkts/346 bytes -> 0 pkts/0 bytes]
-	21	TCP 172.16.81.13:443 -> 172.16.64.114:59603 [VLAN: 202][proto: 91/SSL][cat: Web/5][2 pkts/302 bytes -> 0 pkts/0 bytes]
-	22	TCP 172.16.81.13:443 -> 172.16.64.114:59634 [VLAN: 202][proto: 91/SSL][cat: Web/5][2 pkts/302 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.64.52:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][3 pkts/288 bytes -> 0 pkts/0 bytes]
-	24	UDP 172.16.81.1:53 -> 172.16.102.166:58296 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	25	UDP 172.16.81.25:53 -> 172.16.102.166:33332 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	26	UDP 172.16.102.166:33332 -> 172.16.81.25:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	27	UDP 172.16.102.166:58296 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	28	UDP 172.16.102.167:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 5/DNS][cat: Network/14][3 pkts/270 bytes -> 0 pkts/0 bytes]
-	29	UDP 172.16.63.39:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/262 bytes -> 0 pkts/0 bytes]
-	30	UDP 172.16.63.39:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/247 bytes -> 0 pkts/0 bytes]
-	31	UDP 172.16.63.147:17500 -> 172.16.255.255:17500 [VLAN: 202][proto: 121/Dropbox][cat: Cloud/13][1 pkts/233 bytes -> 0 pkts/0 bytes]
-	32	UDP 172.25.0.102:161 -> 172.16.62.63:51567 [VLAN: 202][proto: 14/SNMP][cat: Network/14][2 pkts/232 bytes -> 0 pkts/0 bytes]
-	33	UDP 172.16.62.63:51567 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/220 bytes -> 0 pkts/0 bytes]
-	34	UDP 172.16.64.67:57635 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][1 pkts/219 bytes -> 0 pkts/0 bytes]
-	35	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/215 bytes -> 0 pkts/0 bytes]
-	36	TCP 104.154.164.197:443 -> 172.16.63.210:53807 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][2 pkts/206 bytes -> 0 pkts/0 bytes]
-	37	UDP 172.25.0.101:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 14/SNMP][cat: Network/14][2 pkts/206 bytes -> 0 pkts/0 bytes]
-	38	UDP 172.16.62.97:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][2 pkts/192 bytes -> 0 pkts/0 bytes]
-	39	UDP 172.16.63.4:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][2 pkts/192 bytes -> 0 pkts/0 bytes]
-	40	UDP 172.16.63.210:60935 -> 197.245.87.170:1194 [VLAN: 1010][proto: 159/OpenVPN][cat: VPN/2][1 pkts/191 bytes -> 0 pkts/0 bytes]
-	41	UDP 197.245.87.170:1194 -> 172.16.63.210:60935 [VLAN: 202][proto: 159/OpenVPN][cat: VPN/2][1 pkts/191 bytes -> 0 pkts/0 bytes]
-	42	UDP 172.16.63.138:54901 -> 172.25.0.101:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
-	43	UDP 172.16.62.74:50886 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	44	UDP 172.16.62.74:56080 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	45	UDP 172.16.62.74:57003 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	46	UDP 172.16.62.74:59414 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	47	UDP 172.16.64.83:53544 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	48	UDP 172.16.64.83:62713 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	49	TCP 172.16.63.138:49749 -> 172.16.81.13:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/159 bytes -> 0 pkts/0 bytes]
-	50	UDP 172.16.123.170:56691 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes]
-	51	UDP 172.16.64.52:54367 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/136 bytes -> 0 pkts/0 bytes]
-	52	UDP 172.16.81.1:53 -> 172.16.64.114:59882 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/136 bytes -> 0 pkts/0 bytes]
-	53	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/130 bytes -> 0 pkts/0 bytes]
-	54	UDP 172.25.0.100:161 -> 172.16.62.63:51567 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/129 bytes -> 0 pkts/0 bytes]
-	55	UDP 172.16.62.63:51567 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/125 bytes -> 0 pkts/0 bytes]
-	56	UDP 172.16.81.1:53 -> 172.16.102.88:36243 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes]
-	57	UDP 172.16.81.1:53 -> 172.16.102.90:50467 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes]
-	58	UDP 172.25.0.102:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/103 bytes -> 0 pkts/0 bytes]
-	59	UDP 172.25.0.100:161 -> 172.16.62.63:58663 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/99 bytes -> 0 pkts/0 bytes]
-	60	UDP 172.16.62.58:54688 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
-	61	UDP 172.16.62.58:56897 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
-	62	UDP 172.16.62.63:58663 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	63	UDP 172.16.63.138:54901 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	64	UDP 91.189.91.157:123 -> 172.16.102.63:123 [VLAN: 202][proto: 9.169/NTP.UbuntuONE][cat: Cloud/13][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	65	UDP 172.16.63.17:123 -> 172.16.102.76:123 [VLAN: 202][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	66	UDP 172.16.102.63:123 -> 91.189.91.157:123 [VLAN: 1010][proto: 9.169/NTP.UbuntuONE][cat: Cloud/13][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	67	UDP 172.16.102.76:123 -> 172.16.63.17:123 [VLAN: 1010][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	68	UDP 172.16.64.114:59882 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/91 bytes -> 0 pkts/0 bytes]
-	69	UDP 172.16.102.88:36243 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes]
-	70	UDP 172.16.102.90:50467 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes]
-	71	UDP 172.16.62.67:51374 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/87 bytes -> 0 pkts/0 bytes]
-	72	UDP 172.16.62.67:53324 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/87 bytes -> 0 pkts/0 bytes]
-	73	UDP 172.16.62.67:57959 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/87 bytes -> 0 pkts/0 bytes]
-	74	UDP 172.16.62.67:63289 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/87 bytes -> 0 pkts/0 bytes]
-	75	UDP 172.16.41.1:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	76	UDP 172.16.62.67:60992 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	77	UDP 172.16.62.67:63071 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	78	UDP 172.16.123.170:60023 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/74 bytes -> 0 pkts/0 bytes]
-	79	ICMP 172.16.80.133:0 -> 224.0.0.1:0 [VLAN: 202][proto: 81/ICMP][cat: Network/14][1 pkts/68 bytes -> 0 pkts/0 bytes]
-	80	TCP 172.16.62.63:56629 -> 172.25.0.100:80 [VLAN: 1010][proto: 7/HTTP][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	81	TCP 172.16.63.210:53807 -> 104.154.164.197:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	82	TCP 172.16.64.114:59603 -> 172.16.81.13:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	83	TCP 172.16.64.114:59634 -> 172.16.81.13:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	84	TCP 172.16.81.13:443 -> 172.16.63.138:49749 [VLAN: 202][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	85	TCP 216.58.223.3:443 -> 172.16.64.114:52415 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	86	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	1	TCP 172.16.102.24:22 -> 172.16.62.118:56774 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][1848 pkts/11238160 bytes -> 0 pkts/0 bytes]
+	2	TCP 172.16.62.118:56774 -> 172.16.102.24:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][816 pkts/63600 bytes -> 0 pkts/0 bytes]
+	3	TCP 172.16.81.85:7990 -> 172.16.102.43:43128 [VLAN: 202][proto: 7/HTTP][cat: Web/5][16 pkts/13325 bytes -> 0 pkts/0 bytes]
+	4	TCP 172.16.102.43:43128 -> 172.16.81.85:7990 [VLAN: 1010][proto: 7/HTTP][cat: Web/5][18 pkts/6707 bytes -> 0 pkts/0 bytes][Host: sourcerep1.vastech.co.za]
+	5	TCP 172.16.58.2:8081 -> 172.16.102.43:43248 [VLAN: 202][proto: 7/HTTP][cat: Web/5][1 pkts/3612 bytes -> 0 pkts/0 bytes]
+	6	UDP 197.245.87.170:1194 -> 172.16.63.210:60935 [VLAN: 202][proto: 159/OpenVPN][cat: VPN/2][9 pkts/2903 bytes -> 0 pkts/0 bytes]
+	7	UDP 172.16.63.210:60935 -> 197.245.87.170:1194 [VLAN: 1010][proto: 159/OpenVPN][cat: VPN/2][10 pkts/2230 bytes -> 0 pkts/0 bytes]
+	8	TCP 172.16.81.85:7990 -> 172.16.102.43:43190 [VLAN: 202][proto: 7/HTTP][cat: Web/5][4 pkts/1853 bytes -> 0 pkts/0 bytes]
+	9	TCP 172.16.102.43:43190 -> 172.16.81.85:7990 [VLAN: 1010][proto: 7/HTTP][cat: Web/5][4 pkts/1744 bytes -> 0 pkts/0 bytes][Host: sourcerep1.vastech.co.za]
+	10	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][5 pkts/1421 bytes -> 0 pkts/0 bytes]
+	11	TCP 172.16.102.43:60238 -> 104.199.65.73:4070 [VLAN: 1010][proto: 126/Google][cat: Web/5][6 pkts/1286 bytes -> 0 pkts/0 bytes]
+	12	TCP 104.199.65.73:4070 -> 172.16.102.43:60238 [VLAN: 202][proto: 126/Google][cat: Web/5][3 pkts/1162 bytes -> 0 pkts/0 bytes]
+	13	UDP 172.16.62.77:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][9 pkts/864 bytes -> 0 pkts/0 bytes]
+	14	TCP 172.16.102.43:43248 -> 172.16.58.2:8081 [VLAN: 1010][proto: 7/HTTP][cat: Web/5][2 pkts/821 bytes -> 0 pkts/0 bytes][Host: 172.16.58.2]
+	15	UDP 172.16.62.43:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][3 pkts/660 bytes -> 0 pkts/0 bytes]
+	16	UDP 172.16.62.67:62356 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][3 pkts/657 bytes -> 0 pkts/0 bytes]
+	17	UDP 172.16.63.85:53258 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][3 pkts/657 bytes -> 0 pkts/0 bytes]
+	18	UDP 0.0.0.0:68 -> 255.255.255.255:67 [VLAN: 202][proto: 18/DHCP][cat: Network/14][1 pkts/594 bytes -> 0 pkts/0 bytes]
+	19	UDP 172.16.62.97:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][6 pkts/576 bytes -> 0 pkts/0 bytes]
+	20	UDP 172.16.62.66:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
+	21	UDP 172.16.123.170:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
+	22	TCP 104.197.3.80:80 -> 172.16.63.210:54902 [VLAN: 202][proto: 7.126/HTTP.Google][cat: Web/5][5 pkts/462 bytes -> 0 pkts/0 bytes]
+	23	UDP 172.16.63.68:52748 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][2 pkts/438 bytes -> 0 pkts/0 bytes]
+	24	TCP 172.16.63.210:54902 -> 104.197.3.80:80 [VLAN: 1010][proto: 7.126/HTTP.Google][cat: Web/5][5 pkts/401 bytes -> 0 pkts/0 bytes]
+	25	ICMP 172.16.62.98:0 -> 172.16.64.63:0 [VLAN: 202][proto: 81/ICMP][cat: Network/14][5 pkts/390 bytes -> 0 pkts/0 bytes]
+	26	ICMP 172.16.64.63:0 -> 172.16.62.98:0 [VLAN: 1010][proto: 81/ICMP][cat: Network/14][5 pkts/390 bytes -> 0 pkts/0 bytes]
+	27	UDP 172.16.81.1:67 -> 255.255.255.255:68 [VLAN: 202][proto: 18/DHCP][cat: Network/14][1 pkts/358 bytes -> 0 pkts/0 bytes]
+	28	UDP 0.0.0.0:68 -> 255.255.255.255:67 [proto: 18/DHCP][cat: Network/14][1 pkts/329 bytes -> 0 pkts/0 bytes][Host: pl]
+	29	TCP 172.16.81.13:443 -> 172.16.63.210:65230 [VLAN: 202][proto: 91/SSL][cat: Web/5][2 pkts/302 bytes -> 0 pkts/0 bytes]
+	30	TCP 172.16.81.13:443 -> 172.16.63.210:65233 [VLAN: 202][proto: 91/SSL][cat: Web/5][2 pkts/302 bytes -> 0 pkts/0 bytes]
+	31	UDP 172.16.63.4:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][3 pkts/288 bytes -> 0 pkts/0 bytes]
+	32	UDP 172.16.81.25:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][3 pkts/288 bytes -> 0 pkts/0 bytes]
+	33	UDP 172.16.81.1:53 -> 172.16.102.166:47650 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
+	34	UDP 172.16.81.25:53 -> 172.16.102.166:36561 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
+	35	UDP 172.16.102.166:36561 -> 172.16.81.25:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
+	36	UDP 172.16.102.166:47650 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes][Host: salt]
+	37	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][2 pkts/260 bytes -> 0 pkts/0 bytes][fe80:0:0:0:37ef:eda7:a733:8030%enp0s3.local]
+	38	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][4 pkts/256 bytes -> 0 pkts/0 bytes]
+	39	UDP 172.16.81.1:53 -> 172.16.102.43:34807 [VLAN: 202][proto: 5/DNS][cat: Network/14][2 pkts/243 bytes -> 0 pkts/0 bytes][Host: sourcerep1.vastech.co.za]
+	40	UDP 172.16.123.168:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/240 bytes -> 0 pkts/0 bytes]
+	41	UDP 172.16.62.75:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/238 bytes -> 0 pkts/0 bytes]
+	42	UDP 172.16.64.38:17500 -> 172.16.255.255:17500 [VLAN: 202][proto: 121/Dropbox][cat: Cloud/13][1 pkts/227 bytes -> 0 pkts/0 bytes]
+	43	TCP 172.16.62.63:56513 -> 13.92.27.116:443 [VLAN: 1010][proto: 91.125/SSL.Skype][cat: VoIP/10][2 pkts/207 bytes -> 0 pkts/0 bytes]
+	44	TCP 104.154.164.197:443 -> 172.16.63.210:53807 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][2 pkts/206 bytes -> 0 pkts/0 bytes]
+	45	UDP 172.25.0.102:161 -> 172.16.62.63:51567 [VLAN: 202][proto: 223/RX][cat: RPC/16][2 pkts/206 bytes -> 0 pkts/0 bytes]
+	46	UDP 172.25.0.102:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 223/RX][cat: RPC/16][2 pkts/206 bytes -> 0 pkts/0 bytes]
+	47	UDP 172.16.62.63:51567 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
+	48	UDP 172.16.63.138:54901 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
+	49	UDP 172.16.102.63:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 146/Radius][cat: Network/14][2 pkts/180 bytes -> 0 pkts/0 bytes]
+	50	UDP 172.16.62.77:49805 -> 239.255.255.250:1900 [VLAN: 202][proto: 12/SSDP][cat: System/18][1 pkts/179 bytes -> 0 pkts/0 bytes]
+	51	UDP 172.16.102.43:34807 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][2 pkts/176 bytes -> 0 pkts/0 bytes][Host: sourcerep1.vastech.co.za]
+	52	UDP 172.16.62.67:52224 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/174 bytes -> 0 pkts/0 bytes][Host: printer-opbc-2f-hallway]
+	53	UDP 172.16.62.67:60242 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/174 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance2]
+	54	UDP 172.16.62.67:60263 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/174 bytes -> 0 pkts/0 bytes][Host: printer-opbc-2f-hallway]
+	55	UDP 172.16.62.67:63241 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/174 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance2]
+	56	UDP 172.16.62.67:60362 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	57	UDP 172.16.62.67:60625 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	58	UDP 172.16.62.74:50868 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	59	UDP 172.16.62.74:59127 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	60	UDP 172.16.64.115:54592 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	61	UDP 172.16.64.115:63799 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	62	UDP 172.16.54.7:62344 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/158 bytes -> 0 pkts/0 bytes][Host: testcuffdbserve]
+	63	UDP 172.16.62.77:65517 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/154 bytes -> 0 pkts/0 bytes][Host: bqipshdutsszd]
+	64	UDP 172.16.123.170:56566 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes][Host: keysersoze]
+	65	UDP 172.16.62.77:60744 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/146 bytes -> 0 pkts/0 bytes][Host: snqybkgin]
+	66	UDP 172.16.62.77:63969 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/146 bytes -> 0 pkts/0 bytes][Host: llodpltpq]
+	67	UDP 172.16.81.25:53487 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/140 bytes -> 0 pkts/0 bytes][Host: isatap]
+	68	TCP 13.92.27.116:443 -> 172.16.62.63:56513 [VLAN: 202][proto: 91.125/SSL.Skype][cat: VoIP/10][1 pkts/127 bytes -> 0 pkts/0 bytes]
+	69	UDP 172.16.81.1:53 -> 172.16.102.88:58253 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
+	70	UDP 172.16.81.1:53 -> 172.16.102.90:41783 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
+	71	TCP 108.177.15.189:443 -> 172.16.62.63:56826 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/119 bytes -> 0 pkts/0 bytes]
+	72	TCP 108.177.15.189:443 -> 172.16.64.114:54011 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/118 bytes -> 0 pkts/0 bytes]
+	73	UDP 172.25.0.101:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 223/RX][cat: RPC/16][1 pkts/103 bytes -> 0 pkts/0 bytes]
+	74	UDP 172.25.0.100:161 -> 172.16.62.63:59995 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/99 bytes -> 0 pkts/0 bytes]
+	75	UDP 172.25.0.100:161 -> 172.16.62.63:60003 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/99 bytes -> 0 pkts/0 bytes]
+	76	UDP 172.16.62.46:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
+	77	UDP 172.16.62.75:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
+	78	UDP 172.16.62.94:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
+	79	UDP 172.16.63.228:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][1 pkts/96 bytes -> 0 pkts/0 bytes]
+	80	UDP 172.16.62.63:59995 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
+	81	UDP 172.16.62.63:60003 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
+	82	UDP 172.16.63.138:54901 -> 172.25.0.101:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
+	83	UDP 172.16.63.17:123 -> 172.16.102.76:123 [VLAN: 202][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
+	84	UDP 172.16.63.17:123 -> 172.16.102.110:56742 [VLAN: 202][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
+	85	UDP 172.16.102.76:123 -> 172.16.63.17:123 [VLAN: 1010][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
+	86	UDP 172.16.102.110:56742 -> 172.16.63.17:123 [VLAN: 1010][proto: 9/NTP][cat: System/18][1 pkts/94 bytes -> 0 pkts/0 bytes]
+	87	UDP 172.16.102.88:58253 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
+	88	UDP 172.16.102.90:41783 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes][Host: 17.63.16.172.in-addr.arpa]
+	89	UDP 172.16.41.2:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/88 bytes -> 0 pkts/0 bytes][dipdev-1.local]
+	90	UDP 172.16.41.1:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][dipdev.local]
+	91	UDP 172.16.62.47:49664 -> 255.255.255.255:1947 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
+	92	UDP 172.16.62.74:51914 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	93	UDP 172.16.62.74:62821 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes][Host: printer-e23-2f-finance]
+	94	TCP 52.114.128.10:443 -> 172.16.62.63:56982 [VLAN: 202][proto: 91/SSL][cat: Web/5][1 pkts/70 bytes -> 0 pkts/0 bytes]
+	95	IGMP 172.16.2.101:0 -> 229.111.112.12:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	96	IGMP 172.16.23.150:0 -> 239.192.82.134:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	97	IGMP 172.16.54.102:0 -> 239.192.177.102:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	98	IGMP 172.16.62.59:0 -> 239.255.255.250:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	99	IGMP 172.16.62.75:0 -> 239.77.124.213:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	100	IGMP 172.16.62.91:0 -> 239.192.0.0:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	101	IGMP 172.16.62.97:0 -> 224.0.0.252:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	102	IGMP 172.16.63.39:0 -> 224.0.0.251:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	103	IGMP 172.16.64.1:0 -> 230.230.230.230:0 [VLAN: 1010][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	104	IGMP 172.16.68.9:0 -> 224.0.0.1:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	105	IGMP 172.16.73.253:0 -> 239.192.48.84:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	106	IGMP 172.16.80.10:0 -> 224.0.0.251:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	107	IGMP 172.16.89.55:0 -> 239.192.2.195:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	108	IGMP 172.16.89.202:0 -> 239.255.255.253:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	109	IGMP 172.16.102.63:0 -> 224.0.1.129:0 [VLAN: 1010][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	110	IGMP 172.16.102.84:0 -> 239.192.215.140:0 [VLAN: 1010][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	111	IGMP 192.168.45.170:0 -> 224.0.5.128:0 [VLAN: 202][proto: 82/IGMP][cat: Network/14][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	112	TCP 172.16.62.63:54765 -> 74.125.206.188:5228 [VLAN: 1010][proto: 126/Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	113	TCP 172.16.62.63:56826 -> 108.177.15.189:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	114	TCP 172.16.62.63:56982 -> 52.114.128.10:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	115	TCP 172.16.63.210:53807 -> 104.154.164.197:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	116	TCP 172.16.63.210:65230 -> 172.16.81.13:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	117	TCP 172.16.63.210:65233 -> 172.16.81.13:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	118	TCP 172.16.64.114:54011 -> 108.177.15.189:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
 
 
 Undetected flows:
-	1	UDP 172.16.102.85:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][22 pkts/26772 bytes -> 0 pkts/0 bytes]
-	2	UDP 172.16.54.102:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][19 pkts/19282 bytes -> 0 pkts/0 bytes]
-	3	UDP 172.16.54.101:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][28 pkts/18808 bytes -> 0 pkts/0 bytes]
-	4	UDP 172.16.23.100:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][29 pkts/18302 bytes -> 0 pkts/0 bytes]
-	5	UDP 172.16.89.52:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][13 pkts/15086 bytes -> 0 pkts/0 bytes]
-	6	UDP 172.16.89.55:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][12 pkts/12472 bytes -> 0 pkts/0 bytes]
-	7	TCP 172.16.63.210:54707 -> 172.16.81.7:2222 [VLAN: 1010][proto: 0/Unknown][30 pkts/6088 bytes -> 0 pkts/0 bytes]
-	8	TCP 172.16.81.7:2222 -> 172.16.63.210:54707 [VLAN: 202][proto: 0/Unknown][28 pkts/5819 bytes -> 0 pkts/0 bytes]
-	9	UDP 172.16.89.51:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][7 pkts/4202 bytes -> 0 pkts/0 bytes]
-	10	TCP 172.16.58.2:8081 -> 172.16.102.43:36316 [VLAN: 202][proto: 0/Unknown][3 pkts/3760 bytes -> 0 pkts/0 bytes]
-	11	UDP 172.16.89.50:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][12 pkts/3096 bytes -> 0 pkts/0 bytes]
-	12	UDP 172.16.63.68:56550 -> 239.255.255.250:3702 [VLAN: 202][proto: 0/Unknown][4 pkts/2808 bytes -> 0 pkts/0 bytes]
-	13	UDP 172.16.23.150:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
+	1	UDP 172.16.54.103:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][24 pkts/22992 bytes -> 0 pkts/0 bytes]
+	2	UDP 172.16.54.102:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][19 pkts/19266 bytes -> 0 pkts/0 bytes]
+	3	UDP 172.16.54.101:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][28 pkts/18888 bytes -> 0 pkts/0 bytes]
+	4	UDP 172.16.23.100:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][29 pkts/18286 bytes -> 0 pkts/0 bytes]
+	5	UDP 172.16.89.55:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][9 pkts/9910 bytes -> 0 pkts/0 bytes]
+	6	UDP 172.16.98.181:5404 -> 239.192.49.170:5405 [VLAN: 202][proto: 0/Unknown][15 pkts/6698 bytes -> 0 pkts/0 bytes]
+	7	UDP 172.16.89.51:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][7 pkts/4202 bytes -> 0 pkts/0 bytes]
+	8	UDP 172.16.89.50:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][17 pkts/4006 bytes -> 0 pkts/0 bytes]
+	9	UDP 172.16.102.20:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][13 pkts/3278 bytes -> 0 pkts/0 bytes]
+	10	UDP 172.16.98.182:5404 -> 239.192.49.170:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1656 bytes -> 0 pkts/0 bytes]
+	11	UDP 172.16.102.85:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][4 pkts/1656 bytes -> 0 pkts/0 bytes]
+	12	UDP 172.16.23.150:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
+	13	UDP 172.16.89.53:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
 	14	UDP 172.16.89.54:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
 	15	UDP 172.16.89.56:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	16	UDP 172.16.102.20:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][9 pkts/1638 bytes -> 0 pkts/0 bytes]
-	17	UDP 172.16.102.49:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][3 pkts/1074 bytes -> 0 pkts/0 bytes]
-	18	TCP 172.16.102.43:36316 -> 172.16.58.2:8081 [VLAN: 1010][proto: 0/Unknown][4 pkts/969 bytes -> 0 pkts/0 bytes]
-	19	UDP 172.16.102.167:320 -> 224.0.1.129:320 [VLAN: 1010][proto: 0/Unknown][9 pkts/890 bytes -> 0 pkts/0 bytes]
-	20	UDP 172.16.68.39:5404 -> 239.192.2.225:5405 [VLAN: 202][proto: 0/Unknown][3 pkts/546 bytes -> 0 pkts/0 bytes]
-	21	UDP 192.168.45.121:49154 -> 192.168.45.255:1947 [VLAN: 202][proto: 0/Unknown][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	22	UDP 172.16.2.94:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.2.95:49667 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	24	UDP 172.16.2.96:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	25	UDP 172.16.2.97:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	26	UDP 172.16.2.98:49239 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	27	UDP 172.16.2.99:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	28	UDP 172.16.41.82:49209 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	29	UDP 172.16.89.197:64330 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	16	UDP 172.16.102.49:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
+	17	UDP 172.16.102.84:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][3 pkts/1522 bytes -> 0 pkts/0 bytes]
+	18	UDP 172.16.89.52:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][3 pkts/1506 bytes -> 0 pkts/0 bytes]
+	19	UDP 172.16.102.167:320 -> 224.0.1.129:320 [VLAN: 1010][proto: 0/Unknown][8 pkts/780 bytes -> 0 pkts/0 bytes]
+	20	UDP 172.16.68.39:5404 -> 239.192.2.225:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/728 bytes -> 0 pkts/0 bytes]
+	21	UDP 172.16.102.167:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 0/Unknown][4 pkts/360 bytes -> 0 pkts/0 bytes]
+	22	UDP 172.16.63.157:50836 -> 230.230.230.230:8976 [VLAN: 202][proto: 0/Unknown][1 pkts/174 bytes -> 0 pkts/0 bytes]
+	23	UDP 172.16.63.157:50836 -> 230.230.230.230:8977 [VLAN: 202][proto: 0/Unknown][1 pkts/174 bytes -> 0 pkts/0 bytes]
+	24	UDP 172.16.63.157:50836 -> 230.230.230.230:8978 [VLAN: 202][proto: 0/Unknown][1 pkts/174 bytes -> 0 pkts/0 bytes]
+	25	UDP 172.16.63.157:50836 -> 230.230.230.230:8979 [VLAN: 202][proto: 0/Unknown][1 pkts/174 bytes -> 0 pkts/0 bytes]
+	26	UDP 172.16.2.95:49667 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	27	UDP 172.16.2.97:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	28	UDP 172.16.2.99:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
+	29	UDP 172.16.2.101:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
 	30	UDP 172.16.89.198:58910 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
 	31	UDP 172.16.100.10:56344 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
 	32	UDP 172.16.123.221:62288 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-Unknown	655	391224	84
-DNS	68	5279	27
-HTTP	1	64	1
-MDNS	24	3684	15
+Unknown	222	125078	32
+DNS	24	1929	10
+HTTP	45	28062	6
+MDNS	14	2197	6
 NTP	4	376	4
-NetBIOS	73	8639	19
-SSDP	2	440	2
-SNMP	31	3157	22
-DHCP	3	1038	3
-SMBv23	79	17958	4
-ICMP	1	68	1
-SSL	14	1428	11
-SSH	8768	41080395	12
-Dropbox	10	2621	6
-Skype	6	716	4
-Google	226	49950	38
-Radius	3	270	1
-UPnP	20	4346	8
-LLMNR	48	3960	31
-OpenVPN	2	382	2
-UbuntuONE	2	188	2
-RX	3	309	2
-
-	1	TCP 172.16.102.24:22 -> 172.16.62.118:56774 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][3097 pkts/19232134 bytes -> 0 pkts/0 bytes]
-	2	TCP 172.16.62.118:56774 -> 172.16.102.24:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][1026 pkts/94260 bytes -> 0 pkts/0 bytes]
-	3	TCP 216.58.223.14:443 -> 172.16.62.63:56631 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][15 pkts/5922 bytes -> 0 pkts/0 bytes]
-	4	TCP 216.58.223.14:443 -> 172.16.62.63:56630 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][12 pkts/5115 bytes -> 0 pkts/0 bytes]
-	5	TCP 216.58.223.5:443 -> 172.16.64.114:52486 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][10 pkts/4086 bytes -> 0 pkts/0 bytes]
-	6	TCP 172.16.62.63:56631 -> 216.58.223.14:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][12 pkts/3375 bytes -> 0 pkts/0 bytes]
-	7	TCP 216.58.223.46:443 -> 172.16.62.63:56628 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][17 pkts/3256 bytes -> 0 pkts/0 bytes]
-	8	TCP 172.16.62.63:56628 -> 216.58.223.46:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][12 pkts/2427 bytes -> 0 pkts/0 bytes]
-	9	TCP 172.16.62.63:56630 -> 216.58.223.14:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][11 pkts/1884 bytes -> 0 pkts/0 bytes]
-	10	UDP 172.16.103.100:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][5 pkts/1446 bytes -> 0 pkts/0 bytes]
-	11	TCP 172.16.64.114:52600 -> 172.16.64.52:5357 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][5 pkts/1272 bytes -> 0 pkts/0 bytes]
-	12	TCP 172.16.64.114:52486 -> 216.58.223.5:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][7 pkts/1060 bytes -> 0 pkts/0 bytes]
-	13	TCP 172.16.102.43:36326 -> 172.16.58.2:8081 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][4 pkts/969 bytes -> 0 pkts/0 bytes]
-	14	UDP 172.16.62.72:50099 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][4 pkts/876 bytes -> 0 pkts/0 bytes]
-	15	TCP 74.125.206.189:443 -> 172.16.64.114:52513 [VLAN: 202][proto: 91.126/SSL.Google][cat: Web/5][6 pkts/871 bytes -> 0 pkts/0 bytes]
-	16	TCP 172.16.102.43:60238 -> 104.199.65.73:4070 [VLAN: 1010][proto: 126/Google][cat: Web/5][4 pkts/736 bytes -> 0 pkts/0 bytes]
-	17	TCP 104.199.65.73:4070 -> 172.16.102.43:60238 [VLAN: 202][proto: 126/Google][cat: Web/5][2 pkts/714 bytes -> 0 pkts/0 bytes]
-	18	UDP 172.16.64.67:57635 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][3 pkts/657 bytes -> 0 pkts/0 bytes]
-	19	TCP 172.16.64.114:52513 -> 74.125.206.189:443 [VLAN: 1010][proto: 91.126/SSL.Google][cat: Web/5][4 pkts/539 bytes -> 0 pkts/0 bytes]
-	20	TCP 74.125.206.188:5228 -> 172.16.62.63:54765 [VLAN: 202][proto: 126/Google][cat: Web/5][1 pkts/484 bytes -> 0 pkts/0 bytes]
-	21	UDP 172.16.62.97:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
-	22	UDP 172.16.63.4:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][5 pkts/480 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.62.43:138 -> 172.16.255.255:138 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][2 pkts/440 bytes -> 0 pkts/0 bytes]
-	24	UDP 172.16.63.157:17500 -> 255.255.255.255:17500 [VLAN: 202][proto: 121/Dropbox][cat: Cloud/13][2 pkts/406 bytes -> 0 pkts/0 bytes]
-	25	UDP 172.16.102.167:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 10/NetBIOS][cat: System/18][4 pkts/360 bytes -> 0 pkts/0 bytes]
-	26	UDP 0.0.0.0:68 -> 255.255.255.255:67 [VLAN: 202][proto: 18/DHCP][cat: Network/14][1 pkts/346 bytes -> 0 pkts/0 bytes]
-	27	UDP 172.16.123.170:137 -> 172.16.255.255:137 [VLAN: 202][proto: 10/NetBIOS][cat: System/18][3 pkts/288 bytes -> 0 pkts/0 bytes]
-	28	UDP 172.16.81.1:53 -> 172.16.102.121:40529 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	29	UDP 172.16.81.25:53 -> 172.16.102.121:57716 [VLAN: 202][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	30	UDP 172.16.102.121:40529 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	31	UDP 172.16.102.121:57716 -> 172.16.81.25:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][4 pkts/272 bytes -> 0 pkts/0 bytes]
-	32	UDP 172.16.102.63:319 -> 224.0.1.129:319 [VLAN: 1010][proto: 10/NetBIOS][cat: System/18][3 pkts/270 bytes -> 0 pkts/0 bytes]
-	33	UDP 172.16.62.75:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][2 pkts/260 bytes -> 0 pkts/0 bytes]
-	34	TCP 172.16.62.63:55468 -> 13.69.158.96:443 [VLAN: 1010][proto: 91.125/SSL.Skype][cat: VoIP/10][2 pkts/223 bytes -> 0 pkts/0 bytes]
-	35	UDP 172.16.62.86:64108 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][1 pkts/219 bytes -> 0 pkts/0 bytes]
-	36	UDP 172.25.0.101:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 14/SNMP][cat: Network/14][2 pkts/206 bytes -> 0 pkts/0 bytes]
-	37	UDP 172.25.0.102:161 -> 172.16.63.138:54901 [VLAN: 202][proto: 14/SNMP][cat: Network/14][2 pkts/206 bytes -> 0 pkts/0 bytes]
-	38	UDP 172.16.63.157:17500 -> 172.16.255.255:17500 [VLAN: 202][proto: 121/Dropbox][cat: Cloud/13][1 pkts/203 bytes -> 0 pkts/0 bytes]
-	39	UDP 172.16.64.67:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][3 pkts/192 bytes -> 0 pkts/0 bytes]
-	40	UDP 172.16.63.138:54901 -> 172.25.0.101:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
-	41	UDP 172.16.63.138:54901 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][2 pkts/190 bytes -> 0 pkts/0 bytes]
-	42	UDP 172.16.64.52:49557 -> 239.255.255.250:1900 [VLAN: 202][proto: 153/UPnP][cat: Network/14][1 pkts/183 bytes -> 0 pkts/0 bytes]
-	43	UDP 172.16.63.42:17500 -> 172.16.255.255:17500 [VLAN: 202][proto: 121/Dropbox][cat: Cloud/13][1 pkts/179 bytes -> 0 pkts/0 bytes]
-	44	UDP 172.16.62.74:54739 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	45	UDP 172.16.62.74:55969 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	46	UDP 172.16.62.74:62326 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	47	UDP 172.16.62.74:64123 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/172 bytes -> 0 pkts/0 bytes]
-	48	TCP 172.16.64.114:60004 -> 169.55.69.157:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][2 pkts/160 bytes -> 0 pkts/0 bytes]
-	49	TCP 13.69.158.96:443 -> 172.16.62.63:55468 [VLAN: 202][proto: 91.125/SSL.Skype][cat: VoIP/10][1 pkts/159 bytes -> 0 pkts/0 bytes]
-	50	UDP 172.16.54.5:55470 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/158 bytes -> 0 pkts/0 bytes]
-	51	UDP 172.16.54.7:58807 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/158 bytes -> 0 pkts/0 bytes]
-	52	UDP 172.16.123.170:50578 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][2 pkts/148 bytes -> 0 pkts/0 bytes]
-	53	TCP 172.16.58.2:8081 -> 172.16.102.43:36316 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][2 pkts/140 bytes -> 0 pkts/0 bytes]
-	54	UDP 172.16.81.1:53 -> 172.16.111.222:53508 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/140 bytes -> 0 pkts/0 bytes]
-	55	UDP 172.16.81.1:53 -> 172.16.102.88:34749 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/122 bytes -> 0 pkts/0 bytes]
-	56	TCP 169.55.69.157:443 -> 172.16.64.114:60004 [VLAN: 202][proto: 91/SSL][cat: Web/5][1 pkts/103 bytes -> 0 pkts/0 bytes]
-	57	UDP 172.25.0.102:161 -> 172.16.62.63:51567 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/103 bytes -> 0 pkts/0 bytes]
-	58	UDP 172.25.0.100:161 -> 172.16.62.63:61211 [VLAN: 202][proto: 14/SNMP][cat: Network/14][1 pkts/99 bytes -> 0 pkts/0 bytes]
-	59	UDP 172.16.62.63:51567 -> 172.25.0.102:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	60	UDP 172.16.62.63:61211 -> 172.25.0.100:161 [VLAN: 1010][proto: 14/SNMP][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	61	UDP 172.16.81.1:53 -> 172.16.62.63:61205 [VLAN: 202][proto: 5/DNS][cat: Network/14][1 pkts/95 bytes -> 0 pkts/0 bytes]
-	62	UDP 172.16.102.167:5353 -> 224.0.0.251:5353 [VLAN: 1010][proto: 8/MDNS][cat: Network/14][1 pkts/94 bytes -> 0 pkts/0 bytes]
-	63	UDP 172.16.41.162:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/93 bytes -> 0 pkts/0 bytes]
-	64	UDP 172.16.102.88:34749 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/89 bytes -> 0 pkts/0 bytes]
-	65	UDP 172.16.41.2:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/88 bytes -> 0 pkts/0 bytes]
-	66	UDP 172.16.41.1:5353 -> 224.0.0.251:5353 [VLAN: 202][proto: 8/MDNS][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	67	UDP 172.16.62.74:57863 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	68	UDP 172.16.62.74:58954 -> 224.0.0.252:5355 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	69	UDP 172.16.123.221:54772 -> 172.16.255.255:1947 [VLAN: 202][proto: 154/LLMNR][cat: Network/14][1 pkts/86 bytes -> 0 pkts/0 bytes]
-	70	UDP 172.16.62.63:61205 -> 172.16.81.1:53 [VLAN: 1010][proto: 5/DNS][cat: Network/14][1 pkts/79 bytes -> 0 pkts/0 bytes]
-	71	TCP 172.16.63.94:54269 -> 172.16.64.114:22 [VLAN: 202][proto: 92/SSH][cat: RemoteAccess/12][1 pkts/78 bytes -> 0 pkts/0 bytes]
-	72	TCP 172.16.102.43:36316 -> 172.16.58.2:8081 [VLAN: 1010][proto: 92/SSH][cat: RemoteAccess/12][1 pkts/70 bytes -> 0 pkts/0 bytes]
-	73	TCP 172.16.102.43:37680 -> 82.208.41.65:443 [VLAN: 1010][proto: 91/SSL][cat: Web/5][1 pkts/70 bytes -> 0 pkts/0 bytes]
-	74	TCP 172.16.62.63:54765 -> 74.125.206.188:5228 [VLAN: 1010][proto: 126/Google][cat: Web/5][1 pkts/64 bytes -> 0 pkts/0 bytes]
-
-
-Undetected flows:
-	1	UDP 172.16.89.50:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][35 pkts/29474 bytes -> 0 pkts/0 bytes]
-	2	UDP 172.16.89.54:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][21 pkts/19966 bytes -> 0 pkts/0 bytes]
-	3	UDP 172.16.89.58:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][18 pkts/16572 bytes -> 0 pkts/0 bytes]
-	4	UDP 172.16.89.56:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][17 pkts/15126 bytes -> 0 pkts/0 bytes]
-	5	UDP 172.16.102.49:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][17 pkts/14838 bytes -> 0 pkts/0 bytes]
-	6	UDP 172.16.64.52:58400 -> 239.255.255.250:3702 [VLAN: 202][proto: 0/Unknown][4 pkts/4504 bytes -> 0 pkts/0 bytes]
-	7	TCP 172.16.58.2:8081 -> 172.16.102.43:36326 [VLAN: 202][proto: 0/Unknown][3 pkts/3760 bytes -> 0 pkts/0 bytes]
-	8	UDP 172.16.102.85:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][7 pkts/3706 bytes -> 0 pkts/0 bytes]
-	9	UDP 172.16.54.101:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][15 pkts/3690 bytes -> 0 pkts/0 bytes]
-	10	UDP 172.16.23.100:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][14 pkts/3460 bytes -> 0 pkts/0 bytes]
-	11	UDP 172.16.102.20:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][13 pkts/3278 bytes -> 0 pkts/0 bytes]
-	12	TCP 172.16.64.52:5357 -> 172.16.64.114:52600 [VLAN: 202][proto: 0/Unknown][3 pkts/2540 bytes -> 0 pkts/0 bytes]
-	13	UDP 172.16.64.52:54369 -> 239.255.255.250:3702 [VLAN: 202][proto: 0/Unknown][3 pkts/2010 bytes -> 0 pkts/0 bytes]
-	14	UDP 172.16.23.150:5404 -> 239.192.82.134:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	15	UDP 172.16.54.102:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	16	UDP 172.16.54.103:5404 -> 239.192.177.102:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	17	UDP 172.16.89.55:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	18	UDP 172.16.89.57:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][4 pkts/1640 bytes -> 0 pkts/0 bytes]
-	19	UDP 172.16.102.84:5404 -> 239.192.215.140:5405 [VLAN: 1010][proto: 0/Unknown][3 pkts/1522 bytes -> 0 pkts/0 bytes]
-	20	UDP 172.16.89.52:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][3 pkts/1506 bytes -> 0 pkts/0 bytes]
-	21	UDP 172.16.89.53:5404 -> 239.192.2.195:5405 [VLAN: 202][proto: 0/Unknown][3 pkts/1506 bytes -> 0 pkts/0 bytes]
-	22	UDP 172.16.68.39:5404 -> 239.192.2.225:5405 [VLAN: 202][proto: 0/Unknown][7 pkts/1130 bytes -> 0 pkts/0 bytes]
-	23	UDP 172.16.102.167:320 -> 224.0.1.129:320 [VLAN: 1010][proto: 0/Unknown][9 pkts/880 bytes -> 0 pkts/0 bytes]
-	24	UDP 172.16.2.95:49667 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	25	UDP 172.16.2.96:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	26	UDP 172.16.2.97:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	27	UDP 172.16.2.100:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	28	UDP 172.16.2.101:49249 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	29	UDP 172.16.64.114:61854 -> 172.16.255.255:1534 [VLAN: 1010][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	30	UDP 172.16.89.197:64330 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	31	UDP 172.16.89.198:58910 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	32	UDP 172.16.89.251:61614 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	33	UDP 172.16.100.10:56344 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-	34	UDP 172.16.123.221:62288 -> 229.111.112.12:3071 [VLAN: 202][proto: 0/Unknown][1 pkts/64 bytes -> 0 pkts/0 bytes]
-Unknown	655	391224	84
-DNS	68	5279	27
-HTTP	1	64	1
-MDNS	24	3684	15
-NTP	4	376	4
-NetBIOS	73	8639	19
-SSDP	2	440	2
-SNMP	31	3157	22
-DHCP	3	1038	3
-SMBv23	79	17958	4
-ICMP	1	68	1
-SSL	14	1428	11
-SSH	8768	41080395	12
-Dropbox	10	2621	6
-Skype	6	716	4
-Google	226	49950	38
-Radius	3	270	1
-UPnP	20	4346	8
-LLMNR	48	3960	31
-OpenVPN	2	382	2
-UbuntuONE	2	188	2
-RX	3	309	2
+NetBIOS	40	4498	13
+SSDP	9	1931	4
+SNMP	9	863	7
+DHCP	3	1281	3
+ICMP	10	780	2
+IGMP	17	1088	17
+SSL	8	866	6
+SSH	2664	11301760	2
+Dropbox	1	227	1
+Skype	3	334	2
+Google	27	4010	11
+Radius	2	180	1
+LLMNR	34	2792	18
+OpenVPN	19	5133	2
+RX	5	515	3
 
 
 

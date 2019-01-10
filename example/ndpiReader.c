@@ -1940,17 +1940,17 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
   long long unsigned int breed_stats[NUM_BREEDS] = { 0 };
 
   memset(&cumulative_stats, 0, sizeof(cumulative_stats));
-
-//#ifdef USE_DPDK
-  for(thread_id = 0; thread_id < num_threads; thread_id++) {
-//#else 
+  printf("in print results\n");
+// #ifdef USE_DPDK
+//   for(thread_id = 0; thread_id < num_threads; thread_id++) {
+// #else 
 //  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-//#endif
-  //for(thread_id = 0; thread_id < num_threads; thread_id++) {
+// #endif
+  for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("in print results222 %d\n", thread_id);
     if((ndpi_thread_info[thread_id].workflow->stats.total_wire_bytes == 0)
        && (ndpi_thread_info[thread_id].workflow->stats.raw_packet_count == 0))
       continue;
-
     for(i=0; i<NUM_ROOTS; i++) {
       ndpi_twalk(ndpi_thread_info[thread_id].workflow->ndpi_flows_root[i],
 		 node_proto_guess_walker, &thread_id);
@@ -2938,8 +2938,9 @@ static int hashedDistributionValue(struct ndpi_workflow * workflow,
  * @brief Call pcap_loop() to process packets from a live capture or savefile
  */
 static void runPcapLoop(u_int16_t thread_id) {
+  printf("inpcaploop\n");
   if((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)) {
-
+    printf("inpcaploop2\n");
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
@@ -3175,20 +3176,55 @@ void test_lib() {
   if(trace) fprintf(trace, "Num threads: %d\n", num_threads);
 #endif
 
-  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-    pcap_t *cap;
+//   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+//     printf("THE NUMBER OF PCAP FILES IS: %d\n", num_pcap_files);
+//     pcap_t *cap;
 
-#ifdef DEBUG_TRACE
-    if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
-#endif
+// #ifdef DEBUG_TRACE
+//     if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
+// #endif
 
-     cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+//      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+// //     for (int i = 0; i < num_threads; i++) {
+// //       printf("setting up detection for thread %d\n", i);
+// //       setupDetection(i, cap);
+// //     }
+//      setupDetection(thread_id, cap);
+//   }
+
+#ifdef USE_DPDK
+  pcap_t *cap;
+  cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+  for(thread_id = 0; thread_id < num_threads; thread_id++) {
+  
+  #ifdef DEBUG_TRACE
+      if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
+  #endif
+
+    //  cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
 //     for (int i = 0; i < num_threads; i++) {
 //       printf("setting up detection for thread %d\n", i);
 //       setupDetection(i, cap);
 //     }
      setupDetection(thread_id, cap);
   }
+#else
+//   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+//     pcap_t *cap;
+
+//   #ifdef DEBUG_TRACE
+//       if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
+//   #endif
+
+//      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+// //     for (int i = 0; i < num_threads; i++) {
+// //       printf("setting up detection for thread %d\n", i);
+// //       setupDetection(i, cap);
+// //     }
+//      setupDetection(thread_id, cap);
+//   }
+#endif
+
 
   gettimeofday(&begin, NULL);
   
@@ -3855,9 +3891,7 @@ void * thread_waiting_loop(void *_thread_id) {
   struct Node *front;
   int pcount = 0;
   struct pcap_pkthdr *header;
-  printf("before whilw\n");
   while(keepThreadsRunning) {
-    //printf("here %ld\n", thread_id);
     if (!busyDistributing) {
       //pthread_mutex_lock(&lock);
       rear = threadQueueRears[thread_id]; 
@@ -3865,7 +3899,7 @@ void * thread_waiting_loop(void *_thread_id) {
       if (!isEmpty(&front, &rear)) {
         //pthread_mutex_lock(&lock);
         struct Node* temp = dequeue(&front, &rear);
-        printf("I am dequeueud something %s\n", temp->data);
+        //printf("I am dequeueud something %s\n", temp->data);
           
         u_char* packet = temp->data;
         struct pcap_pkthdr *header = temp->header;
@@ -3879,8 +3913,8 @@ void * thread_waiting_loop(void *_thread_id) {
         // TODO check why this must be equal to 0 to work..????
         //printf("%s %d %ld\n", packet, pcount, thread_id);
 
-        long thread_id_workflow = 0;
-        ndpi_process_packet((u_char*)&thread_id_workflow, header, (const u_char *)packet);
+        //long thread_id_workflow = 0;
+        ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
         //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
 
         free(packet);
@@ -3903,14 +3937,48 @@ void * distributePacketsThread(void *_thread_id) {
   // next line is temporary
   thread_id = 0;
   processing_thread((void *)thread_id);
-  printf("and here\n");
   keepThreadsRunning = 0;
   return NULL;
 #else
+/////////////// new code
   long thread_id = (long) _thread_id;
-  for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-      processing_thread((void *)file_id);
+  int setUpDone = 0;
+  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+    printf("Number pcap files: %d\n", num_pcap_files);
+    printf("thread_id: %ld\n", thread_id);
+    pcap_t *cap;
+
+    #ifdef DEBUG_TRACE
+        if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
+    #endif
+
+    cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+    if (setUpDone == 0) {
+      for (int thread = 0; thread < num_threads; thread++) {
+        printf("setting up  PCAP detection for thread %d(((((((((((((((((\n", thread);
+        setupDetection(thread, cap);
+      }
+      setUpDone = 1;
+    } else {
+      for (int thread = 0; thread < num_threads; thread++) {
+        printf("resetting  PCAP detection for thread %d))))))))))))))))))\n", thread);
+        ndpi_thread_info[thread].workflow->pcap_handle = cap;
+      }
+      //workflow->pcap_handle = cap;
+    }
+    printf("beforeing\n");
+
+    // TEMPORARY CHANGE
+    long thread_id_workflow = 0;
+    processing_thread((void *)thread_id_workflow);
+    printf("aftering\n");
+    //setupDetection(thread_id, cap);
   }
+////////////////////
+  // long thread_id = (long) _thread_id;
+  // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
+  //     processing_thread((void *)file_id);
+  // }
   printf("and here\n");
   keepThreadsRunning = 0;
   return NULL;
@@ -4006,19 +4074,12 @@ int orginal_main(int argc, char **argv) {
     parseOptions(argc, argv);
     
     /* Create an array within which to put the queues for each thread */
-    // packetDistributionArraypacketDistributionArray = malloc(sizeof(int*) * num_threads);
     threadQueueRears = malloc(sizeof(*threadQueueRears) * num_threads);
     threadQueueFronts = malloc(sizeof(*threadQueueFronts) * num_threads);
     for (int i = 0; i < num_threads; i++) {
       threadQueueRears[i] = NULL;
       threadQueueFronts[i] = NULL;
-      // packetDistributionArray[i] = NULL;
     }
-
-    // if (!packetDistributionArray) {
-    //     /* handle malloc failure here */
-    //     printf("Count not allocate space for packet work distribution array\n");
-    // }
 
     if(bpf_filter_flag) {
 #ifdef HAVE_JSON_C
@@ -4040,9 +4101,7 @@ int orginal_main(int argc, char **argv) {
 
     signal(SIGINT, sigproc);
     
-    //for(i=0; i<num_loops; i++) {
     test_lib();
-    //}
     
     if(results_path)  free(results_path);
     if(results_file)  fclose(results_file);
