@@ -1484,13 +1484,15 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   printf("setting up workflow for thread %d\n", thread_id);
   // for (int i = 0; i < num_threads; i++) {
 
-    pthread_t *pthreadCopy = ndpi_thread_info[thread_id].pthread;
+    // i added next line
+    pthread_t pthreadCopy = ndpi_thread_info[thread_id].pthread;
+
     memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
+
+    // i added next line
     ndpi_thread_info[thread_id].pthread = pthreadCopy;
+
     ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
-  //   printf("EXITING HERE\n");
-  // }
-  // ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
   
   /* Preferences */
   ndpi_set_detection_preferences(ndpi_thread_info[thread_id].workflow->ndpi_struct,
@@ -3275,17 +3277,20 @@ void test_lib() {
 #endif
   }
   
+
+  pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
 #ifdef USE_DPDK
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
 #else 
-  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
+  for(thread_id = 0; thread_id < num_threads; thread_id++) {
 #endif 
   //for(thread_id = 0; thread_id < num_threads; thread_id++) {
+    printf("this is it\n");
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
-      pcap_close(ndpi_thread_info[thread_id].workflow->pcap_handle);
+      // pcap_close(ndpi_thread_info[thread_id].workflow->pcap_handle);
     
     // for (int i = 0; i < num_threads; i++) {
-       printf("terminating %ld\n", thread_id);
+      printf("terminating %ld\n", thread_id);
       terminateDetection(thread_id);
     // }
   }
@@ -3950,16 +3955,19 @@ void * distributePacketsThread(void *_thread_id) {
         if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
     #endif
    
-    cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+    
     
     if (setUpDone == 0) {
+      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
       for (int thread = 0; thread < num_threads; thread++) {
         printf("setting up  PCAP detection for thread %d(((((((((((((((((\n", thread);
         setupDetection(thread, cap);
       }
       setUpDone = 1;
     } else {
-      for (int thread = 0; thread < num_threads; thread++) {
+      pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
+      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+      for (int thread = 0; thread < num_threads; thread++) {  
         printf("resetting  PCAP detection for thread %d))))))))))))))))))\n", thread);
         ndpi_thread_info[thread].workflow->pcap_handle = cap;
       }
@@ -4116,14 +4124,20 @@ int orginal_main(int argc, char **argv) {
 
     signal(SIGINT, sigproc);
     
+     printf("1=============================================================\n");
     test_lib();
-    
+    printf("2=============================================================\n");
     if(results_path)  free(results_path);
+     printf("3=============================================================\n");
     if(results_file)  fclose(results_file);
+     printf("4=============================================================\n");
     if(extcap_dumper) pcap_dump_close(extcap_dumper);
+     printf("5=============================================================\n");
     if(ndpi_info_mod) ndpi_exit_detection_module(ndpi_info_mod);
+     printf("6=============================================================\n");
 
     pthread_mutex_destroy(&lock);
+     printf("7=============================================================\n");
     return 0;
   }
 
