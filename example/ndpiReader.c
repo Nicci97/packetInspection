@@ -78,8 +78,8 @@ pthread_mutex_t lock;
 
 struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
-static int keepThreadsRunning = 1;
-static int busyDistributing = 1;
+static volatile int keepThreadsRunning = 1;
+static volatile int busyDistributing = 1;
 static int mbufInit = 1;
 static int pauseDur = 3;
 static int queueLength = 1000;
@@ -3855,10 +3855,10 @@ void * thread_waiting_loop(void *_thread_id) {
   struct Node *front;
   int pcount = 0;
   struct pcap_pkthdr *header;
+  printf("before whilw\n");
   while(keepThreadsRunning) {
-    printf("entering here at least\n");
+    //printf("here %ld\n", thread_id);
     if (!busyDistributing) {
-      //printf("here %ld\n", thread_id);
       //pthread_mutex_lock(&lock);
       rear = threadQueueRears[thread_id]; 
       front = threadQueueFronts[thread_id];
