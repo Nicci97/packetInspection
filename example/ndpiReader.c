@@ -197,7 +197,6 @@ struct receiver {
 
 struct receiver *receivers = NULL, *topReceivers = NULL;
 
-
 struct ndpi_packet_trailer {
   u_int32_t magic; /* 0x19682017 */
   u_int16_t master_protocol /* e.g. HTTP */, app_protocol /* e.g. FaceBook */;
@@ -320,7 +319,6 @@ static void help(u_int long_help) {
   }
   exit(!long_help);
 }
-
 
 static struct option longopts[] = {
   /* mandatory extcap options */
@@ -1480,19 +1478,11 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   prefs.max_ndpi_flows = MAX_NDPI_FLOWS;
   prefs.quiet_mode = quiet_mode;
 
-  // memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
   printf("setting up workflow for thread %d\n", thread_id);
-  // for (int i = 0; i < num_threads; i++) {
-
-    // i added next line
-    pthread_t pthreadCopy = ndpi_thread_info[thread_id].pthread;
-
-    memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
-
-    // i added next line
-    ndpi_thread_info[thread_id].pthread = pthreadCopy;
-
-    ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
+  pthread_t pthreadCopy = ndpi_thread_info[thread_id].pthread;
+  memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
+  ndpi_thread_info[thread_id].pthread = pthreadCopy;
+  ndpi_thread_info[thread_id].workflow = ndpi_workflow_init(&prefs, pcap_handle);
   
   /* Preferences */
   ndpi_set_detection_preferences(ndpi_thread_info[thread_id].workflow->ndpi_struct,
@@ -1542,8 +1532,6 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
 
 	  if(category) {
 	    int fields[4];
-
-	    // printf("Loading %s\t%s\n", name, category);
 
 	    if(sscanf(name, "%d.%d.%d.%d", &fields[0], &fields[1], &fields[2], &fields[3]) == 4)
 	      ndpi_load_ip_category(ndpi_thread_info[thread_id].workflow->ndpi_struct,
@@ -1959,7 +1947,6 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
       if(verbose == 3 || stats_flag) ndpi_twalk(ndpi_thread_info[thread_id].workflow->ndpi_flows_root[i],
 						port_stats_walker, &thread_id);
     }
-    
     /* Stats aggregation */
     cumulative_stats.guessed_flow_protocols += ndpi_thread_info[thread_id].workflow->stats.guessed_flow_protocols;
     cumulative_stats.raw_packet_count += ndpi_thread_info[thread_id].workflow->stats.raw_packet_count;
@@ -2288,6 +2275,7 @@ free_stats:
     deletePortsStats(dstStats);
     dstStats = NULL;
   }
+
 }
 
 /**
@@ -2955,16 +2943,14 @@ static void runPcapLoop(u_int16_t thread_id) {
       //element = "hello";
       //sprintf(element, "%s %d", element, tempCount);
       //hashedDistributionValue(thread_id, handler, header, packet);
-
+      pthread_mutex_lock(&lock);
       struct Node *rear = threadQueueRears[count]; 
       struct Node *front = threadQueueFronts[count];
-      //printf("this is the count: %d %d\n", count, tempCount);
+      printf("enqueueing the following to thread %s %d\n", element, count);
       enqueue(&element, &header, &front, &rear);
-      
-      //struct Node* temp2 = dequeue(&front, &rear);
-      //ndpi_process_packet((u_char*)&thread_id, temp2->header, (const u_char *)temp2->data);
       threadQueueRears[count] = rear;
       threadQueueFronts[count] = front;
+      pthread_mutex_unlock(&lock);
       count++;
       if (count == num_threads) {
         count = 0;
@@ -3048,7 +3034,8 @@ void * processing_thread(void *_thread_id) {
   thread_id = 0;
   //
   gettimeofday(&startSlice, NULL);
-  printf("*****The start time is: %ld\n", startSlice.tv_sec);
+  printf("The start time is: %ld\n", startSlice.tv_sec);
+  int count = 0;
   while(dpdk_run_capture) {
     busyDistributing = 1;
     struct rte_mbuf *bufs[BURST_SIZE];
@@ -3076,22 +3063,25 @@ void * processing_thread(void *_thread_id) {
       
       gettimeofday(&h.ts, NULL);
       struct pcap_pkthdr* header = &h;
-      //liso
       // my test code
 
-      //pthread_mutex_lock(&lock);
-      struct Node *rear = threadQueueRears[0]; 
-      struct Node *front = threadQueueFronts[0];
+      pthread_mutex_lock(&lock);
+      struct Node *rear = threadQueueRears[count]; 
+      struct Node *front = threadQueueFronts[count];
       //printf("this is the count: %d %d\n", count, tempCount);
       
-      //printf("I am enqueuing something\n");
+      printf("I am enqueuing this to thread this: %s %d\n", element, count);
       enqueue(&element, &header, &front, &rear);
       
     
-      threadQueueRears[0] = rear;
-      threadQueueFronts[0] = front;
-      //pthread_mutex_unlock(&lock);
+      threadQueueRears[count] = rear;
+      threadQueueFronts[count] = front;
+      pthread_mutex_unlock(&lock);
 
+      count++;
+      if (count == num_threads) {
+        count = 0;
+      }
       /////////////
       //printf("toprocesspacket\n");
       //ndpi_process_packet((u_char*)&thread_id, &h, (const u_char *)data);
@@ -3136,6 +3126,7 @@ void * processing_thread(void *_thread_id) {
       }
       
       printResults(processing_time_usec, setup_time_usec);
+
       ndpi_workflow_reset(ndpi_thread_info[thread_id].workflow);
     }
   }
@@ -3276,23 +3267,15 @@ void test_lib() {
     json_close_stats_file();
 #endif
   }
-  
 
-  pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
 #ifdef USE_DPDK
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
 #else 
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-#endif 
-  //for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    printf("this is it\n");
+#endif
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
-      // pcap_close(ndpi_thread_info[thread_id].workflow->pcap_handle);
-    
-    // for (int i = 0; i < num_threads; i++) {
-      printf("terminating %ld\n", thread_id);
+      printf("terminating workflow %ld\n", thread_id);
       terminateDetection(thread_id);
-    // }
   }
 }
 
@@ -3896,11 +3879,10 @@ void * thread_waiting_loop(void *_thread_id) {
   struct pcap_pkthdr *header;
   while(keepThreadsRunning) {
     if (!busyDistributing) {
-      //pthread_mutex_lock(&lock);
+      pthread_mutex_lock(&lock);
       rear = threadQueueRears[thread_id]; 
       front = threadQueueFronts[thread_id];
       if (!isEmpty(&front, &rear)) {
-        //pthread_mutex_lock(&lock);
         struct Node* temp = dequeue(&front, &rear);
         //printf("I am dequeueud something %s\n", temp->data);
           
@@ -3912,19 +3894,16 @@ void * thread_waiting_loop(void *_thread_id) {
         } else {
           threadQueueFronts[thread_id] = front;
         }
-        //pthread_mutex_unlock(&lock);
-        // TODO check why this must be equal to 0 to work..????
-        //printf("%s %d %ld\n", packet, pcount, thread_id);
-
-        //long thread_id_workflow = 0;
+        pthread_mutex_unlock(&lock);
+        printf("%s %d %ld\n", packet, pcount, thread_id);
         ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
-        //ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
 
         free(packet);
         free(header);
         pcount++;
+      } else {
+        pthread_mutex_unlock(&lock);
       }
-      //pthread_mutex_unlock(&lock);
     }
   }
   return NULL;
@@ -3983,6 +3962,7 @@ void * distributePacketsThread(void *_thread_id) {
     printf("aftering\n");
     //setupDetection(thread_id, cap);
   }
+  pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
 ////////////////////
   // long thread_id = (long) _thread_id;
   // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
@@ -4021,26 +4001,12 @@ void start_threads() {
     fprintf(stderr, "error on create %ld thread\n", thread_id);
     exit(-1);
   }
-
-  printf("ENTERING START THREADS ------------------------------------\n");
-  if (ndpi_thread_info[1].workflow == NULL) {
-      printf("thread 1 not here3333333333333333333333333333333333333\n");
-    } else {
-      printf("thread 1 is here44444444444444444444444444444444444444\n");
-  }
   
   /* Waiting for completion of processing threads*/
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    printf("thread id is this now: %ld\n", thread_id);
-    if (ndpi_thread_info[1].workflow == NULL) {
-      printf("thread 1 not here3333333333333333333333333333333333333\n");
-    } else {
-      printf("thread 1 is here44444444444444444444444444444444444444\n");
-  }
     status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
     /* check pthreade_join return value */
     if(status != 0) {
-      fprintf(stderr, "error on join %ld thread\n", thread_id);
       printf("return value of %d\n", status);
       exit(-1);
     }
@@ -4123,21 +4089,14 @@ int orginal_main(int argc, char **argv) {
     }
 
     signal(SIGINT, sigproc);
-    
-     printf("1=============================================================\n");
+     
     test_lib();
-    printf("2=============================================================\n");
     if(results_path)  free(results_path);
-     printf("3=============================================================\n");
     if(results_file)  fclose(results_file);
-     printf("4=============================================================\n");
     if(extcap_dumper) pcap_dump_close(extcap_dumper);
-     printf("5=============================================================\n");
     if(ndpi_info_mod) ndpi_exit_detection_module(ndpi_info_mod);
-     printf("6=============================================================\n");
 
     pthread_mutex_destroy(&lock);
-     printf("7=============================================================\n");
     return 0;
   }
 
