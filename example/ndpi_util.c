@@ -346,7 +346,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
   struct ndpi_flow_info flow;
   void *ret;
   const u_int8_t *l3, *l4;
-
+  
   /*
     Note: to keep things simple (ndpiReader is just a demo app)
     we handle IPv6 a-la-IPv4.
@@ -384,6 +384,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
   *proto = iph->protocol;
   l4 = ((const u_int8_t *) l3 + l4_offset);
+  //printf("l4 issss : %d\n", l4_offset);
 
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
     u_int tcp_len;
@@ -412,8 +413,17 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
   flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
   flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
   flow.hashval = hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
+  // //printf("HASH VALUE: %d\n", hashval);
+  // u_int32_t temp = -1023445797;
+  // u_int32_t temp2 = -1023464260;
+  // if ((hashval != temp)) {
+  //   printf("not equal\n");
+  //   printf("HASH VALUE: %d\n", hashval);
+  // }
   idx = hashval % workflow->prefs.num_roots;
+  //printf("index VALUE: %d\n", idx);
   ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
+  //printf("returned VALUE %p\n", ret);
 
 
   /* to avoid two nodes in one binary tree for a flow */
@@ -549,7 +559,6 @@ static struct ndpi_flow_info *get_ndpi_flow_info6(struct ndpi_workflow * workflo
 
     iph.protocol = options[0];
   }
-
   return(get_ndpi_flow_info(workflow, 6, vlan_id, &iph, iph6, ip_offset,
 			    sizeof(struct ndpi_ipv6hdr),
 			    ntohs(iph6->ip6_hdr.ip6_un1_plen),
@@ -645,19 +654,19 @@ static struct ndpi_proto packet_processing(struct ndpi_workflow * workflow,
   u_int8_t src_to_dst_direction = 1;
   struct ndpi_proto nproto = { NDPI_PROTOCOL_UNKNOWN, NDPI_PROTOCOL_UNKNOWN };
 
-  if(iph)
+  if(iph) {
     flow = get_ndpi_flow_info(workflow, IPVERSION, vlan_id, iph, NULL,
 			      ip_offset, ipsize,
 			      ntohs(iph->tot_len) - (iph->ihl * 4),
 			      &tcph, &udph, &sport, &dport,
 			      &src, &dst, &proto,
 			      &payload, &payload_len, &src_to_dst_direction);
-  else
+  } else {
     flow = get_ndpi_flow_info6(workflow, vlan_id, iph6, ip_offset,
 			       &tcph, &udph, &sport, &dport,
 			       &src, &dst, &proto,
 			       &payload, &payload_len, &src_to_dst_direction);
-
+  }
   if(flow != NULL) {
     workflow->stats.ip_packet_count++;
     workflow->stats.total_wire_bytes += rawsize + 24 /* CRC etc */,
@@ -954,7 +963,7 @@ iph_check:
       }
     }
   }
-
+  
   if(iph->version == IPVERSION) {
     ip_len = ((u_int16_t)iph->ihl * 4);
     iph6 = NULL;
@@ -1068,6 +1077,7 @@ iph_check:
       }
     }
   }
+  
   
   /* process the packet */
   return(packet_processing(workflow, time, vlan_id, iph, iph6,

@@ -2601,7 +2601,7 @@ static void process_allocation(u_int16_t thread_id) {
 static int hashedDistributionValue(
 						const struct pcap_pkthdr *header,
 						const u_char *packet, pcap_t * handler, u_int8_t decode_tunnels) {
-    
+  //printf("entering hash function\n");
   /*
    * Declare pointers to packet headers
    */
@@ -2629,8 +2629,6 @@ static int hashedDistributionValue(
   struct ndpi_iphdr *iph;
   /** --- IPv6 header --- **/
   struct ndpi_ipv6hdr *iph6;
-
-  struct ndpi_proto nproto = { NDPI_PROTOCOL_UNKNOWN, NDPI_PROTOCOL_UNKNOWN };
 
   /* lengths and offsets */
   u_int16_t eth_offset = 0;
@@ -2829,7 +2827,7 @@ iph_check:
       }
     }
   }
-
+  
   if(iph->version == IPVERSION) {
     ip_len = ((u_int16_t)iph->ihl * 4);
     iph6 = NULL;
@@ -2879,7 +2877,7 @@ iph_check:
     //workflow->stats.total_discarded_bytes +=  header->len;
     //return(nproto);
   }
-
+  
   if(decode_tunnels && (proto == IPPROTO_UDP)) {
     struct ndpi_udphdr *udp = (struct ndpi_udphdr *)&packet[ip_offset+ip_len];
     u_int16_t sport = ntohs(udp->source), dport = ntohs(udp->dest);
@@ -2950,32 +2948,51 @@ iph_check:
   /* process the packet */
   // return(packet_processing(workflow, time, vlan_id, iph, iph6,
 	// 		   ip_offset, header->caplen - ip_offset, header->caplen));
-
-  u_int32_t hashval;
+  
   u_int8_t protocol = iph->protocol;
-  u_int32_t src_ip = iph->saddr;
-  u_int32_t dst_ip = iph->daddr;
-  u_int16_t src_port;
-  u_int16_t dst_port;
-  const u_int8_t *l3, *l4;
+  u_int16_t src_port, dst_port, l4_packet_len, *sport, *dport;
+  u_int32_t hashval, src_ip = iph->saddr, dst_ip = iph->daddr, l4_offset;
   struct ndpi_tcphdr *tcph = NULL;
   struct ndpi_udphdr *udph = NULL;
+  const u_int8_t *l3, *l4;
   
-  u_int16_t l4_packet_len;
-  l4_packet_len = ntohs(iph6->ip6_hdr.ip6_un1_plen);
+  /*
+    Note: to keep things simple (ndpiReader is just a demo app)
+    we handle IPv6 a-la-IPv4.
+  */
+  const u_int8_t version = IPVERSION;
+  u_int16_t ipsize = header->caplen - ip_offset;
+  if(version == IPVERSION) {
+    if(ipsize < 20)
+    printf("IP size is less than 20, error");
+      // return NULL;
 
-  //l4 = ((const u_int8_t *) l3 + l4_offset);
-  u_int16_t *sport, *dport;
+    if((iph->ihl * 4) > ipsize || ipsize < ntohs(iph->tot_len)
+       /* || (iph->frag_off & htons(0x1FFF)) != 0 */)
+      printf("IP size is less than 20, error");
+      //return NULL;
+
+    l4_offset = iph->ihl * 4;
+    l3 = (const u_int8_t*)iph;
+  } else {
+    l4_offset = sizeof(struct ndpi_ipv6hdr);
+    l3 = (const u_int8_t*)iph6;
+  }
   
+  l4_packet_len = ntohs(iph->tot_len) - (iph->ihl * 4);
+  
+  l4 = ((const u_int8_t *) l3 + l4_offset);
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
     u_int tcp_len;
     // tcp
-    //*tcph = (struct ndpi_tcphdr *)l4;
-    //*sport = ntohs((*tcph)->source), *dport = ntohs((*tcph)->dest);
+    struct ndpi_tcphdr **tcphReference = &tcph;
+    *tcphReference = (struct ndpi_tcphdr *)l4;
+    *sport = ntohs(tcph->source), *dport = ntohs(tcph->dest);
   } else if(iph->protocol == IPPROTO_UDP && l4_packet_len >= 8) {
     // udp
-    //*udph = (struct ndpi_udphdr *)l4;
-    //*sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
+    struct ndpi_udphdr **udpReference = &udph;
+    *udpReference = (struct ndpi_udphdr *)l4;
+    *sport = ntohs(udph->source), *dport = ntohs(udph->dest);
   } else {
     // non tcp/udp protocols
     *sport = *dport = 0;
@@ -2983,19 +3000,30 @@ iph_check:
 
   src_port = htons(*sport);
   dst_port = htons(*dport);
-
   
-
-
   //flow.protocol = iph->protocol, flow.vlan_id = vlan_id;
   //flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
   //flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
   //hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
   hashval = protocol + vlan_id + src_ip + dst_ip + src_port + dst_port;
+  //hashval = protocol + vlan_id + src_ip + dst_ip;
   // idx = hashval % workflow->prefs.num_roots;
+  
   u_int32_t idx = hashval % num_threads;
+  
+  return idx;
+  
+  //printf("HASH VALUE: %d\n", hashval);
+  // u_int32_t temp = -1023445797;
+  // u_int32_t temp2 = -1023464260;
+  // if ((hashval != temp) && (hashval != temp2)) {
+  //   printf("not equal\n");
+  //   printf("HASH VALUE: %d\n", hashval);
+  // }
   // ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
-  printf("calculated it: %d\n", ip_offset);
+  //printf("exiting hash function\n");
+  // printf("num_threads %d\nhashval is %d\n", num_threads, hashval);
+  // printf("calculated it: %d\n", idx);
 }
 
 /**
@@ -3006,29 +3034,33 @@ static void runPcapLoop(u_int16_t thread_id) {
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
-    int count = 0;
-    int tempCount = 0;
+    //int count = 0;
+    //int tempCount = 0;
     busyDistributing = 1;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
-      tempCount++;
+      //tempCount++;
       u_char *element;
       element = (u_char*)packet;
 
       //element = "hello";
       //sprintf(element, "%s %d", element, tempCount);
-      hashedDistributionValue(header, packet, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      int hashValue = hashedDistributionValue(header, packet, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      // if (hashValue == 0) {
+      //   printf("index is %d\n", hashValue);
+      // }
+      
       pthread_mutex_lock(&lock);
-      struct Node *rear = threadQueueRears[count]; 
-      struct Node *front = threadQueueFronts[count];
-      printf("enqueueing the following to thread %s %d\n", element, count);
+      struct Node *rear = threadQueueRears[hashValue]; 
+      struct Node *front = threadQueueFronts[hashValue];
+      //printf("enqueueing the following to thread %s %d\n", element, count);
       enqueue(&element, &header, &front, &rear);
-      threadQueueRears[count] = rear;
-      threadQueueFronts[count] = front;
+      threadQueueRears[hashValue] = rear;
+      threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(&lock);
-      count++;
-      if (count == num_threads) {
-        count = 0;
-      }
+      // count++;
+      // if (count == num_threads) {
+      //   count = 0;
+      // }
       
     }
     busyDistributing = 0;
@@ -3969,7 +4001,7 @@ void * thread_waiting_loop(void *_thread_id) {
           threadQueueFronts[thread_id] = front;
         }
         pthread_mutex_unlock(&lock);
-        printf("%s %d %ld\n", packet, pcount, thread_id);
+        //printf("%s %d %ld\n", packet, pcount, thread_id);
         ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
 
         free(packet);
