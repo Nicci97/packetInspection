@@ -99,7 +99,7 @@ pthread_mutex_t** locks;
 struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
 static volatile int keepThreadsRunning = 1;
-static volatile int busyDistributing = 1;
+//static volatile int busyDistributing = 1;
 static int mbufInit = 1;
 static int pauseDur = 3;
 static int queueLength = 1000;
@@ -3015,7 +3015,7 @@ static void runPcapLoop(u_int16_t thread_id) {
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
-    busyDistributing = 1;
+    //busyDistributing = 1;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
       u_char *element;
       element = (u_char*)packet;
@@ -3030,14 +3030,14 @@ static void runPcapLoop(u_int16_t thread_id) {
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
-      //printf("enqueueing the following to thread %s %d\n", element, count);
+      printf("enqueueing the following to thread %s %d\n", element, hashValue);
       enqueue(&element, &header, &front, &rear);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(lock);
       
     }
-    busyDistributing = 0;
+    //busyDistributing = 0;
 
     int queuesNotEmpty = 1;
     int queuesEmpty[num_threads];
@@ -3117,7 +3117,7 @@ void * processing_thread(void *_thread_id) {
   printf("The start time is: %ld\n", startSlice.tv_sec);
   int count = 0;
   while(dpdk_run_capture) {
-    busyDistributing = 1;
+    //busyDistributing = 1;
     struct rte_mbuf *bufs[BURST_SIZE];
     u_int16_t num = rte_eth_rx_burst(dpdk_port_id, 0, bufs, BURST_SIZE);
     u_int i;
@@ -3175,7 +3175,7 @@ void * processing_thread(void *_thread_id) {
     gettimeofday(&endSlice, NULL);
     //printf("*****The end time is: %ld\n", endSlice.tv_sec);
     if ((endSlice.tv_sec - startSlice.tv_sec) > pauseDur) {
-      busyDistributing = 0;
+      //busyDistributing = 0;
       startSlice.tv_sec = endSlice.tv_sec;
       
       
@@ -3961,14 +3961,14 @@ void * thread_waiting_loop(void *_thread_id) {
   int pcount = 0;
   struct pcap_pkthdr *header;
   while(keepThreadsRunning) {
-    if (!busyDistributing) {
+   // if (!busyDistributing) {
       pthread_mutex_t *lock = locks[thread_id];
       pthread_mutex_lock(lock);
       rear = threadQueueRears[thread_id]; 
       front = threadQueueFronts[thread_id];
       if (!isEmpty(&front, &rear)) {
         struct Node* temp = dequeue(&front, &rear);
-        //printf("I am dequeueud something %s\n", temp->data);
+        printf("I am dequeueud something %s\n", temp->data);
           
         u_char* packet = temp->data;
         struct pcap_pkthdr *header = temp->header;
@@ -3988,7 +3988,7 @@ void * thread_waiting_loop(void *_thread_id) {
       } else {
         pthread_mutex_unlock(lock);
       }
-    }
+   // }
   }
   return NULL;
 }
