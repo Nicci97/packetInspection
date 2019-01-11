@@ -384,7 +384,6 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
   *proto = iph->protocol;
   l4 = ((const u_int8_t *) l3 + l4_offset);
-  //printf("l4 issss : %d\n", l4_offset);
 
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
     u_int tcp_len;
@@ -392,6 +391,8 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     // tcp
     workflow->stats.tcp_count++;
     *tcph = (struct ndpi_tcphdr *)l4;
+    // printf("I entered the first section\n");
+    // printf("printing this: %d\n", (*tcph)->dest);
     *sport = ntohs((*tcph)->source), *dport = ntohs((*tcph)->dest);
     tcp_len = ndpi_min(4*(*tcph)->doff, l4_packet_len);
     *payload = (u_int8_t*)&l4[tcp_len];
@@ -401,6 +402,9 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
     workflow->stats.udp_count++;
     *udph = (struct ndpi_udphdr *)l4;
+    // printf("I entered the second section\n");
+    // printf("printing this: %d\n", (*udph)->source);
+    // printf("printing this: %d\n", (*udph)->dest);
     *sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
     *payload = (u_int8_t*)&l4[sizeof(struct ndpi_udphdr)];
     *payload_len = (l4_packet_len > sizeof(struct ndpi_udphdr)) ? l4_packet_len-sizeof(struct ndpi_udphdr) : 0;
@@ -413,19 +417,9 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
   flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
   flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
   flow.hashval = hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
-  // //printf("HASH VALUE: %d\n", hashval);
-  // u_int32_t temp = -1023445797;
-  // u_int32_t temp2 = -1023464260;
-  // if ((hashval != temp)) {
-  //   printf("not equal\n");
-  //   printf("HASH VALUE: %d\n", hashval);
-  // }
   idx = hashval % workflow->prefs.num_roots;
-  //printf("index VALUE: %d\n", idx);
   ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
-  //printf("returned VALUE %p\n", ret);
-
-
+  
   /* to avoid two nodes in one binary tree for a flow */
   int is_changed = 0;
   if(ret == NULL) {

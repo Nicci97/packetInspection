@@ -92,9 +92,10 @@
 #define TZSP_PORT                      37008
 
 /** Client parameters **/
-pthread_mutex_t lock;
+//  pthread_mutex_t lock;
 //static int** packetDistributionArray;
 
+pthread_mutex_t** locks;
 struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
 static volatile int keepThreadsRunning = 1;
@@ -2474,9 +2475,7 @@ static void ndpi_process_packet(u_char *args,
   uint8_t *packet_checked = malloc(header->caplen);
   memcpy(packet_checked, packet, header->caplen);
 
-  pthread_mutex_lock(&lock);
   p = ndpi_workflow_process_packet(ndpi_thread_info[thread_id].workflow, header, packet_checked);
-  pthread_mutex_unlock(&lock);
 
   if((capture_until != 0) && (header->ts.tv_sec >= capture_until)) {
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
@@ -2601,6 +2600,7 @@ static void process_allocation(u_int16_t thread_id) {
 static int hashedDistributionValue(
 						const struct pcap_pkthdr *header,
 						const u_char *packet, pcap_t * handler, u_int8_t decode_tunnels) {
+              
   //printf("entering hash function\n");
   /*
    * Declare pointers to packet headers
@@ -2945,10 +2945,6 @@ iph_check:
     }
   }
   
-  /* process the packet */
-  // return(packet_processing(workflow, time, vlan_id, iph, iph6,
-	// 		   ip_offset, header->caplen - ip_offset, header->caplen));
-  
   u_int8_t protocol = iph->protocol;
   u_int16_t src_port, dst_port, l4_packet_len, *sport, *dport;
   u_int32_t hashval, src_ip = iph->saddr, dst_ip = iph->daddr, l4_offset;
@@ -2960,6 +2956,7 @@ iph_check:
     Note: to keep things simple (ndpiReader is just a demo app)
     we handle IPv6 a-la-IPv4.
   */
+ 
   const u_int8_t version = IPVERSION;
   u_int16_t ipsize = header->caplen - ip_offset;
   if(version == IPVERSION) {
@@ -2987,43 +2984,27 @@ iph_check:
     // tcp
     struct ndpi_tcphdr **tcphReference = &tcph;
     *tcphReference = (struct ndpi_tcphdr *)l4;
+    // printf("I entered the second section\n");
+    // printf("printing this: %d\n", (*tcphReference)->source);
+    // printf("printing this: %d\n", (*tcphReference)->dest);
     *sport = ntohs(tcph->source), *dport = ntohs(tcph->dest);
   } else if(iph->protocol == IPPROTO_UDP && l4_packet_len >= 8) {
     // udp
     struct ndpi_udphdr **udpReference = &udph;
     *udpReference = (struct ndpi_udphdr *)l4;
-    *sport = ntohs(udph->source), *dport = ntohs(udph->dest);
+    // printf("I entered the second section\n");
+    // printf("printing this: %d\n", (*udpReference)->source);
+    // printf("printing this: %d\n", (*udpReference)->dest);
+    *sport = ntohs((*udpReference)->source), *dport = ntohs((*udpReference)->dest);
   } else {
     // non tcp/udp protocols
     *sport = *dport = 0;
   }
-
   src_port = htons(*sport);
   dst_port = htons(*dport);
-  
-  //flow.protocol = iph->protocol, flow.vlan_id = vlan_id;
-  //flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
-  //flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
-  //hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
-  hashval = protocol + vlan_id + src_ip + dst_ip + src_port + dst_port;
-  //hashval = protocol + vlan_id + src_ip + dst_ip;
-  // idx = hashval % workflow->prefs.num_roots;
-  
+  hashval = protocol + vlan_id + src_ip + dst_ip + src_port + dst_port; 
   u_int32_t idx = hashval % num_threads;
-  
   return idx;
-  
-  //printf("HASH VALUE: %d\n", hashval);
-  // u_int32_t temp = -1023445797;
-  // u_int32_t temp2 = -1023464260;
-  // if ((hashval != temp) && (hashval != temp2)) {
-  //   printf("not equal\n");
-  //   printf("HASH VALUE: %d\n", hashval);
-  // }
-  // ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
-  //printf("exiting hash function\n");
-  // printf("num_threads %d\nhashval is %d\n", num_threads, hashval);
-  // printf("calculated it: %d\n", idx);
 }
 
 /**
@@ -3034,11 +3015,8 @@ static void runPcapLoop(u_int16_t thread_id) {
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
-    //int count = 0;
-    //int tempCount = 0;
     busyDistributing = 1;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
-      //tempCount++;
       u_char *element;
       element = (u_char*)packet;
 
@@ -3048,19 +3026,15 @@ static void runPcapLoop(u_int16_t thread_id) {
       // if (hashValue == 0) {
       //   printf("index is %d\n", hashValue);
       // }
-      
-      pthread_mutex_lock(&lock);
+      pthread_mutex_t *lock = locks[hashValue];
+      pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
       //printf("enqueueing the following to thread %s %d\n", element, count);
       enqueue(&element, &header, &front, &rear);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
-      pthread_mutex_unlock(&lock);
-      // count++;
-      // if (count == num_threads) {
-      //   count = 0;
-      // }
+      pthread_mutex_unlock(lock);
       
     }
     busyDistributing = 0;
@@ -3171,18 +3145,21 @@ void * processing_thread(void *_thread_id) {
       struct pcap_pkthdr* header = &h;
       // my test code
 
-      pthread_mutex_lock(&lock);
+      //pthread_mutex_lock(&lock);
       struct Node *rear = threadQueueRears[count]; 
       struct Node *front = threadQueueFronts[count];
       //printf("this is the count: %d %d\n", count, tempCount);
+
+      pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
       
       printf("I am enqueuing this to thread this: %s %d\n", element, count);
+      //int hashValue = hashedDistributionValue(header, data, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
       enqueue(&element, &header, &front, &rear);
       
     
       threadQueueRears[count] = rear;
       threadQueueFronts[count] = front;
-      pthread_mutex_unlock(&lock);
+      //pthread_mutex_unlock(&lock);
 
       count++;
       if (count == num_threads) {
@@ -3985,7 +3962,8 @@ void * thread_waiting_loop(void *_thread_id) {
   struct pcap_pkthdr *header;
   while(keepThreadsRunning) {
     if (!busyDistributing) {
-      pthread_mutex_lock(&lock);
+      pthread_mutex_t *lock = locks[thread_id];
+      pthread_mutex_lock(lock);
       rear = threadQueueRears[thread_id]; 
       front = threadQueueFronts[thread_id];
       if (!isEmpty(&front, &rear)) {
@@ -4000,7 +3978,7 @@ void * thread_waiting_loop(void *_thread_id) {
         } else {
           threadQueueFronts[thread_id] = front;
         }
-        pthread_mutex_unlock(&lock);
+        pthread_mutex_unlock(lock);
         //printf("%s %d %ld\n", packet, pcount, thread_id);
         ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
 
@@ -4008,7 +3986,7 @@ void * thread_waiting_loop(void *_thread_id) {
         free(header);
         pcount++;
       } else {
-        pthread_mutex_unlock(&lock);
+        pthread_mutex_unlock(lock);
       }
     }
   }
@@ -4028,7 +4006,6 @@ void * distributePacketsThread(void *_thread_id) {
   keepThreadsRunning = 0;
   return NULL;
 #else
-/////////////// new code
   long thread_id = (long) _thread_id;
   int setUpDone = 0;
   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
@@ -4039,41 +4016,25 @@ void * distributePacketsThread(void *_thread_id) {
     #ifdef DEBUG_TRACE
         if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
     #endif
-   
-    
-    
+
     if (setUpDone == 0) {
       cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
       for (int thread = 0; thread < num_threads; thread++) {
-        printf("setting up  PCAP detection for thread %d(((((((((((((((((\n", thread);
         setupDetection(thread, cap);
       }
       setUpDone = 1;
     } else {
       pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
       cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
-      for (int thread = 0; thread < num_threads; thread++) {  
-        printf("resetting  PCAP detection for thread %d))))))))))))))))))\n", thread);
+      for (int thread = 0; thread < num_threads; thread++) {
         ndpi_thread_info[thread].workflow->pcap_handle = cap;
       }
-      //workflow->pcap_handle = cap;
     }
-     
-    printf("beforeing\n");
-
-    
     // TEMPORARY CHANGE
     long thread_id_workflow = 0;
     processing_thread((void *)thread_id_workflow);
-    printf("aftering\n");
-    //setupDetection(thread_id, cap);
   }
   pcap_close(ndpi_thread_info[0].workflow->pcap_handle);
-////////////////////
-  // long thread_id = (long) _thread_id;
-  // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-  //     processing_thread((void *)file_id);
-  // }
   keepThreadsRunning = 0;
   return NULL;
 #endif
@@ -4151,11 +4112,7 @@ int orginal_main(int argc, char **argv) {
       return(-1);
     }
 
-    if (pthread_mutex_init(&lock, NULL) != 0)
-    {
-        printf("\n mutex init failed\n");
-        return 1;
-    }
+    
 
     automataUnitTest();
 
@@ -4168,7 +4125,7 @@ int orginal_main(int argc, char **argv) {
 
     parseOptions(argc, argv);
     
-    /* Create an array within which to put the queues for each thread */
+    /* Create an array within which to put pointers to the front and rear nodes of the corresponding queues (linked lists) for processing */
     threadQueueRears = malloc(sizeof(*threadQueueRears) * num_threads);
     threadQueueFronts = malloc(sizeof(*threadQueueFronts) * num_threads);
     for (int i = 0; i < num_threads; i++) {
@@ -4176,6 +4133,20 @@ int orginal_main(int argc, char **argv) {
       threadQueueFronts[i] = NULL;
     }
 
+    /* Create an array within which to put the pointers to the locks associated with each processing thread */
+    locks = malloc(sizeof(*locks) * num_threads);
+    for (int i = 0; i < num_threads; i++) {
+      pthread_mutex_t *lock;
+      lock = malloc(sizeof(pthread_mutex_t));
+      if (pthread_mutex_init(lock, NULL) != 0)
+      {
+          printf("\n mutex init failed\n");
+          return 1;
+      }
+      locks[i] = lock;
+    }
+     
+  
     if(bpf_filter_flag) {
 #ifdef HAVE_JSON_C
       produceBpfFilter(_diagnoseFilePath);
@@ -4202,7 +4173,11 @@ int orginal_main(int argc, char **argv) {
     if(extcap_dumper) pcap_dump_close(extcap_dumper);
     if(ndpi_info_mod) ndpi_exit_detection_module(ndpi_info_mod);
 
-    pthread_mutex_destroy(&lock);
+    // pthread_mutex_destroy(&lock);
+    for (int i = 0; i < num_threads; i++) {
+      pthread_mutex_t *lock = locks[i];
+      pthread_mutex_destroy(lock);
+    }
     return 0;
   }
 
