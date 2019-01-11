@@ -361,6 +361,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
     l4_offset = iph->ihl * 4;
     l3 = (const u_int8_t*)iph;
+
   } else {
     l4_offset = sizeof(struct ndpi_ipv6hdr);
     l3 = (const u_int8_t*)iph6;
@@ -402,9 +403,9 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
     workflow->stats.udp_count++;
     *udph = (struct ndpi_udphdr *)l4;
-    // printf("I entered the second section\n");
-    // printf("printing this: %d\n", (*udph)->source);
-    // printf("printing this: %d\n", (*udph)->dest);
+    printf("I entered the second section\n");
+    printf("printing this: %d\n", (*udph)->source);
+    printf("printing this: %d\n", (*udph)->dest);
     *sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
     *payload = (u_int8_t*)&l4[sizeof(struct ndpi_udphdr)];
     *payload_len = (l4_packet_len > sizeof(struct ndpi_udphdr)) ? l4_packet_len-sizeof(struct ndpi_udphdr) : 0;
@@ -419,7 +420,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
   flow.hashval = hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
   idx = hashval % workflow->prefs.num_roots;
   ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
-  
+
   /* to avoid two nodes in one binary tree for a flow */
   int is_changed = 0;
   if(ret == NULL) {

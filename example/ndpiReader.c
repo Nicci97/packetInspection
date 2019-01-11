@@ -2979,23 +2979,29 @@ iph_check:
   l4_packet_len = ntohs(iph->tot_len) - (iph->ihl * 4);
   
   l4 = ((const u_int8_t *) l3 + l4_offset);
+
+  // SEG FAULTS HERE.... :(
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
     u_int tcp_len;
     // tcp
     struct ndpi_tcphdr **tcphReference = &tcph;
     *tcphReference = (struct ndpi_tcphdr *)l4;
-    // printf("I entered the second section\n");
-    // printf("printing this: %d\n", (*tcphReference)->source);
-    // printf("printing this: %d\n", (*tcphReference)->dest);
-    *sport = ntohs(tcph->source), *dport = ntohs(tcph->dest);
+    printf("I entered the first section\n");
+    printf("printing this: %d\n", (*tcphReference)->source);
+    printf("printing this: %d\n", (*tcphReference)->dest);
+    *sport = ntohs((*tcphReference)->source);
+    printf("middle\n");
+    *dport = ntohs((*tcphReference)->dest);
+    printf("end of first section\n");
   } else if(iph->protocol == IPPROTO_UDP && l4_packet_len >= 8) {
     // udp
     struct ndpi_udphdr **udpReference = &udph;
     *udpReference = (struct ndpi_udphdr *)l4;
-    // printf("I entered the second section\n");
-    // printf("printing this: %d\n", (*udpReference)->source);
-    // printf("printing this: %d\n", (*udpReference)->dest);
+    printf("I entered the second section\n");
+    printf("printing this: %d\n", (*udpReference)->source);
+    printf("printing this: %d\n", (*udpReference)->dest);
     *sport = ntohs((*udpReference)->source), *dport = ntohs((*udpReference)->dest);
+    printf("end of second section\n");
   } else {
     // non tcp/udp protocols
     *sport = *dport = 0;
@@ -3145,21 +3151,18 @@ void * processing_thread(void *_thread_id) {
       struct pcap_pkthdr* header = &h;
       // my test code
 
-      //pthread_mutex_lock(&lock);
+      pthread_mutex_t *lock = locks[count];
+      pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+      pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[count]; 
       struct Node *front = threadQueueFronts[count];
       //printf("this is the count: %d %d\n", count, tempCount);
-
-      pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
-      
-      printf("I am enqueuing this to thread this: %s %d\n", element, count);
-      //int hashValue = hashedDistributionValue(header, data, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      //printf("I am enqueuing this to thread this: %s %d\n", element, count);
+      int hashValue = hashedDistributionValue(header, data, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
       enqueue(&element, &header, &front, &rear);
-      
-    
       threadQueueRears[count] = rear;
       threadQueueFronts[count] = front;
-      //pthread_mutex_unlock(&lock);
+      pthread_mutex_unlock(lock);
 
       count++;
       if (count == num_threads) {
@@ -3968,7 +3971,7 @@ void * thread_waiting_loop(void *_thread_id) {
       front = threadQueueFronts[thread_id];
       if (!isEmpty(&front, &rear)) {
         struct Node* temp = dequeue(&front, &rear);
-        printf("I am dequeueud something %s\n", temp->data);
+        //printf("I am dequeueud something %s\n", temp->data);
           
         u_char* packet = temp->data;
         struct pcap_pkthdr *header = temp->header;
