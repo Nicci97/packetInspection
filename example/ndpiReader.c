@@ -2648,19 +2648,6 @@ static int hashedDistributionValue(
   
   /*** check Data Link type ***/
   int datalink_type;
-
-  u_int8_t protocol = iph->protocol;
-  u_int16_t src_port, dst_port, l4_packet_len, sport, dport;
-  u_int32_t hashval, src_ip = iph->saddr, dst_ip = iph->daddr, l4_offset;
-
-  struct ndpi_tcphdr *tcphStruct = NULL;
-  struct ndpi_udphdr *udphStruct = NULL;
-  struct ndpi_tcphdr **tcph;
-  struct ndpi_udphdr **udph;
-  tcph = &tcphStruct;
-  udph = &udphStruct;
-  const u_int8_t *l3, *l4;
-  const u_int8_t version = IPVERSION;
   
 #ifdef USE_DPDK
   datalink_type = DLT_EN10MB;
@@ -2943,6 +2930,25 @@ iph_check:
     }
   }
   
+  u_int8_t protocol = iph->protocol;
+  u_int16_t src_port, dst_port, l4_packet_len, sport, dport;
+  u_int32_t hashval, src_ip = iph->saddr, dst_ip = iph->daddr, l4_offset;
+
+  struct ndpi_tcphdr *tcphStruct = NULL;
+  struct ndpi_udphdr *udphStruct = NULL;
+  struct ndpi_tcphdr **tcph;
+  struct ndpi_udphdr **udph;
+  tcph = &tcphStruct;
+  udph = &udphStruct;
+
+  const u_int8_t *l3, *l4;
+  
+  /*
+    Note: to keep things simple (ndpiReader is just a demo app)
+    we handle IPv6 a-la-IPv4.
+  */
+ 
+  const u_int8_t version = IPVERSION;
   u_int16_t ipsize = header->caplen - ip_offset;
   if(version == IPVERSION) {
     if(ipsize < 20)
@@ -2970,9 +2976,10 @@ iph_check:
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
     // tcp
     *tcph = (struct ndpi_tcphdr *)l4;
-    sport = ntohs((*tcph)->source), dport = ntohs((*tcph)->dest);
+    sport = ntohs((*tcph)->source);
+    dport = ntohs((*tcph)->dest);
   } else if(iph->protocol == IPPROTO_UDP && l4_packet_len >= 8) {
-    // udp  
+    // udp
     *udph = (struct ndpi_udphdr *)l4;
     sport = ntohs((*udph)->source), dport = ntohs((*udph)->dest);
   } else {
@@ -3064,9 +3071,7 @@ void * processing_thread(void *_thread_id) {
     
 
 #ifdef USE_DPDK
-  printf("Entering USE_DPDK option\n");
   gettimeofday(&startSlice, NULL);
-  // int count = 0;
   while(dpdk_run_capture) {
     struct rte_mbuf *bufs[BURST_SIZE];
     u_int16_t num = rte_eth_rx_burst(dpdk_port_id, 0, bufs, BURST_SIZE);
@@ -3087,7 +3092,6 @@ void * processing_thread(void *_thread_id) {
       
       int len = rte_pktmbuf_pkt_len(bufs[i]);
       struct pcap_pkthdr h;
-
       
       h.len = h.caplen = len;
       
@@ -3095,26 +3099,16 @@ void * processing_thread(void *_thread_id) {
       struct pcap_pkthdr* header = &h;
       
       pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
-
-      // uint8_t *packet_checked = malloc(header->caplen);
-      // memcpy(packet_checked, element, header->caplen); 
       int hashValue = hashedDistributionValue(header, element, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
-      printf("hashvalue: %d\n", hashValue);
-
       pthread_mutex_t *lock = locks[hashValue];
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
-      
       enqueue(&element, &header, &front, &rear);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(lock);
 
-      // count++;
-      // if (count == num_threads) {
-      //   count = 0;
-      // }
       rte_pktmbuf_free(bufs[i]);
     }
 
