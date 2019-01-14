@@ -99,7 +99,6 @@ pthread_mutex_t** locks;
 struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
 static volatile int keepThreadsRunning = 1;
-//static volatile int busyDistributing = 1;
 static int mbufInit = 1;
 static int pauseDur = 3;
 static int queueLength = 1000;
@@ -1498,7 +1497,6 @@ static void setupDetection(u_int16_t thread_id, pcap_t * pcap_handle) {
   prefs.max_ndpi_flows = MAX_NDPI_FLOWS;
   prefs.quiet_mode = quiet_mode;
 
-  printf("setting up workflow for thread %d\n", thread_id);
   pthread_t pthreadCopy = ndpi_thread_info[thread_id].pthread;
   memset(&ndpi_thread_info[thread_id], 0, sizeof(ndpi_thread_info[thread_id]));
   ndpi_thread_info[thread_id].pthread = pthreadCopy;
@@ -1951,12 +1949,6 @@ static void printResults(u_int64_t processing_time_usec, u_int64_t setup_time_us
   long long unsigned int breed_stats[NUM_BREEDS] = { 0 };
 
   memset(&cumulative_stats, 0, sizeof(cumulative_stats));
-  printf("in print results\n");
-// #ifdef USE_DPDK
-//   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-// #else 
-//  for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-// #endif
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
     if((ndpi_thread_info[thread_id].workflow->stats.total_wire_bytes == 0)
        && (ndpi_thread_info[thread_id].workflow->stats.raw_packet_count == 0))
@@ -3010,12 +3002,10 @@ static void runPcapLoop(u_int16_t thread_id) {
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
-      printf("enqueueing the following to thread %s %d\n", element, hashValue);
       enqueue(&element, &header, &front, &rear);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(lock);
-      
     }
 
     int queuesNotEmpty = 1;
@@ -3066,11 +3056,6 @@ void * processing_thread(void *_thread_id) {
 #endif
 
 #ifdef USE_DPDK
-  if((!json_flag) && (!quiet_mode)) printf("Running thread %ld...\n", thread_id);
-#endif
-    
-
-#ifdef USE_DPDK
   gettimeofday(&startSlice, NULL);
   while(dpdk_run_capture) {
     struct rte_mbuf *bufs[BURST_SIZE];
@@ -3092,7 +3077,7 @@ void * processing_thread(void *_thread_id) {
       
       int len = rte_pktmbuf_pkt_len(bufs[i]);
       struct pcap_pkthdr h;
-      
+
       h.len = h.caplen = len;
       
       gettimeofday(&h.ts, NULL);
@@ -3197,10 +3182,8 @@ void test_lib() {
   }
 #endif
 
-
   gettimeofday(&begin, NULL);
   
-  printf("should start threads\n");
   start_threads();
 
   gettimeofday(&end, NULL);
@@ -3222,7 +3205,6 @@ void test_lib() {
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
 #endif
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
-      printf("terminating workflow %ld\n", thread_id);
       terminateDetection(thread_id);
   }
 }
@@ -3868,8 +3850,6 @@ void * distributePacketsThread(void *_thread_id) {
   long thread_id = (long) _thread_id;
   int setUpDone = 0;
   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-    printf("Number pcap files: %d\n", num_pcap_files);
-    printf("thread_id: %ld\n", thread_id);
     pcap_t *cap;
 
     #ifdef DEBUG_TRACE
@@ -3907,11 +3887,9 @@ void start_threads() {
   int status;
   void * thd_res;
   /* Running processing threads */
-  printf("#####: Number of threads to run on is: %d\n", num_threads);
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
-    printf("##### Creating thread with id: %ld\n", thread_id);
     status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, thread_waiting_loop, (void *) thread_id);
-    printf("Processing THREAD %ld is running\n", thread_id);
+    printf("Processing thread %ld is running\n", thread_id);
     /* check pthreade_create return value */
     if(status != 0) {
       fprintf(stderr, "error on create %ld thread\n", thread_id);
@@ -3921,7 +3899,7 @@ void start_threads() {
   /* Running thread responsible for distribution of packets */
   thread_id = num_threads;
   status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, distributePacketsThread, (void *) thread_id);
-  printf("Distributing THREAD %ld is running\n", thread_id);
+  printf("Distributing thread %ld is running\n", thread_id);
   /* check pthreade_create return value */
   if(status != 0) {
     fprintf(stderr, "error on create %ld thread\n", thread_id);
