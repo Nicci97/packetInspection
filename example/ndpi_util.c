@@ -352,12 +352,14 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     we handle IPv6 a-la-IPv4.
   */
   if(version == IPVERSION) {
-    if(ipsize < 20)
+    if(ipsize < 20) {
       return NULL;
+    }
 
     if((iph->ihl * 4) > ipsize || ipsize < ntohs(iph->tot_len)
-       /* || (iph->frag_off & htons(0x1FFF)) != 0 */)
+       /* || (iph->frag_off & htons(0x1FFF)) != 0 */) {
       return NULL;
+    }
 
     l4_offset = iph->ihl * 4;
     l3 = (const u_int8_t*)iph;
@@ -392,8 +394,6 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     // tcp
     workflow->stats.tcp_count++;
     *tcph = (struct ndpi_tcphdr *)l4;
-    // printf("I entered the first section\n");
-    // printf("printing this: %d\n", (*tcph)->dest);
     *sport = ntohs((*tcph)->source), *dport = ntohs((*tcph)->dest);
     tcp_len = ndpi_min(4*(*tcph)->doff, l4_packet_len);
     *payload = (u_int8_t*)&l4[tcp_len];
@@ -403,9 +403,6 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 
     workflow->stats.udp_count++;
     *udph = (struct ndpi_udphdr *)l4;
-    printf("I entered the second section\n");
-    printf("printing this: %d\n", (*udph)->source);
-    printf("printing this: %d\n", (*udph)->dest);
     *sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
     *payload = (u_int8_t*)&l4[sizeof(struct ndpi_udphdr)];
     *payload_len = (l4_packet_len > sizeof(struct ndpi_udphdr)) ? l4_packet_len-sizeof(struct ndpi_udphdr) : 0;
@@ -941,6 +938,7 @@ datalink_check:
 
 iph_check:
   /* Check and set IP header size and total packet length */
+  
   iph = (struct ndpi_iphdr *) &packet[ip_offset];
 
   /* just work on Ethernet packets that contain IP */
@@ -1072,7 +1070,6 @@ iph_check:
       }
     }
   }
-  
   
   /* process the packet */
   return(packet_processing(workflow, time, vlan_id, iph, iph6,

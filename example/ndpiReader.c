@@ -2645,21 +2645,6 @@ static int hashedDistributionValue(
   u_int32_t label;
   /* counters */
   u_int8_t vlan_packet = 0;
-  // if (workflow == NULL) {
-  //   printf("workflow is null in hash function method\n");
-  // }
-  /* Increment raw packet counter */
-  // workflow->stats.raw_packet_count++;
-  /* setting time */
-  // time = ((uint64_t) header->ts.tv_sec) * TICK_RESOLUTION + header->ts.tv_usec / (1000000 / TICK_RESOLUTION);
-
-  // /* safety check */
-  // if(workflow->last_time > time) {
-  //   /* printf("\nWARNING: timestamp bug in the pcap file (ts delta: %llu, repairing)\n", ndpi_thread_info[thread_id].last_time - time); */
-  //   time = workflow->last_time;
-  // }
-  /* update last time value */
-  // workflow->last_time = time;
   
   /*** check Data Link type ***/
   int datalink_type;
@@ -2946,10 +2931,16 @@ iph_check:
   }
   
   u_int8_t protocol = iph->protocol;
-  u_int16_t src_port, dst_port, l4_packet_len, *sport, *dport;
+  u_int16_t src_port, dst_port, l4_packet_len, sport, dport;
   u_int32_t hashval, src_ip = iph->saddr, dst_ip = iph->daddr, l4_offset;
-  struct ndpi_tcphdr *tcph = NULL;
-  struct ndpi_udphdr *udph = NULL;
+
+  struct ndpi_tcphdr *tcphStruct = NULL;
+  struct ndpi_udphdr *udphStruct = NULL;
+  struct ndpi_tcphdr **tcph;
+  struct ndpi_udphdr **udph;
+  tcph = &tcphStruct;
+  udph = &udphStruct;
+
   const u_int8_t *l3, *l4;
   
   /*
@@ -2971,6 +2962,7 @@ iph_check:
 
     l4_offset = iph->ihl * 4;
     l3 = (const u_int8_t*)iph;
+  
   } else {
     l4_offset = sizeof(struct ndpi_ipv6hdr);
     l3 = (const u_int8_t*)iph6;
@@ -2982,32 +2974,19 @@ iph_check:
 
   // SEG FAULTS HERE.... :(
   if(iph->protocol == IPPROTO_TCP && l4_packet_len >= 20) {
-    u_int tcp_len;
     // tcp
-    struct ndpi_tcphdr **tcphReference = &tcph;
-    *tcphReference = (struct ndpi_tcphdr *)l4;
-    printf("I entered the first section\n");
-    printf("printing this: %d\n", (*tcphReference)->source);
-    printf("printing this: %d\n", (*tcphReference)->dest);
-    *sport = ntohs((*tcphReference)->source);
-    printf("middle\n");
-    *dport = ntohs((*tcphReference)->dest);
-    printf("end of first section\n");
+    *tcph = (struct ndpi_tcphdr *)l4;
+    sport = ntohs((*tcph)->source), dport = ntohs((*tcph)->dest);
   } else if(iph->protocol == IPPROTO_UDP && l4_packet_len >= 8) {
-    // udp
-    struct ndpi_udphdr **udpReference = &udph;
-    *udpReference = (struct ndpi_udphdr *)l4;
-    printf("I entered the second section\n");
-    printf("printing this: %d\n", (*udpReference)->source);
-    printf("printing this: %d\n", (*udpReference)->dest);
-    *sport = ntohs((*udpReference)->source), *dport = ntohs((*udpReference)->dest);
-    printf("end of second section\n");
+    // udp  
+    *udph = (struct ndpi_udphdr *)l4;
+    sport = ntohs((*udph)->source), dport = ntohs((*udph)->dest);
   } else {
     // non tcp/udp protocols
-    *sport = *dport = 0;
+    sport = dport = 0;
   }
-  src_port = htons(*sport);
-  dst_port = htons(*dport);
+  src_port = htons(sport);
+  dst_port = htons(dport);
   hashval = protocol + vlan_id + src_ip + dst_ip + src_port + dst_port; 
   u_int32_t idx = hashval % num_threads;
   return idx;
@@ -3021,17 +3000,11 @@ static void runPcapLoop(u_int16_t thread_id) {
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
-    //busyDistributing = 1;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
       u_char *element;
       element = (u_char*)packet;
 
-      //element = "hello";
-      //sprintf(element, "%s %d", element, tempCount);
       int hashValue = hashedDistributionValue(header, packet, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
-      // if (hashValue == 0) {
-      //   printf("index is %d\n", hashValue);
-      // }
       pthread_mutex_t *lock = locks[hashValue];
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
@@ -3043,7 +3016,6 @@ static void runPcapLoop(u_int16_t thread_id) {
       pthread_mutex_unlock(lock);
       
     }
-    //busyDistributing = 0;
 
     int queuesNotEmpty = 1;
     int queuesEmpty[num_threads];
@@ -3066,25 +3038,8 @@ static void runPcapLoop(u_int16_t thread_id) {
         }
       }
     }
-    //pcap_loop(ndpi_thread_info[thread_id].workflow->pcap_handle, -1, &ndpi_process_packet, (u_char*)&thread_id);
   }
 }
-
-// /**
-//  * @brief Call pcap_loop() to process packets
-//  */
-// static void runPcapLoop(u_int16_t thread_id) {
-//   if ((!shutdown_app) && (ndpi_thread_info[thread_id].workflow->dagfd >= 0)) {
-//     while (!done) {
-//       len = get_new_frame(&frame, &timestamp); //<== new function to get packets
-//       if (len < 0) {
-//         done = 1;
-//       } else if (len > 0) {
-//         process_input_pcacket(thread_id, timestamp, (const u_char *)frame, len);
-//       }
-//     }
-//   }
-// }
 
 
 /**
@@ -3116,14 +3071,9 @@ void * processing_thread(void *_thread_id) {
 
 #ifdef USE_DPDK
   printf("Entering USE_DPDK option\n");
-  // next line is temporary
-  //thread_id = 0;
-  //
   gettimeofday(&startSlice, NULL);
-  printf("The start time is: %ld\n", startSlice.tv_sec);
   int count = 0;
   while(dpdk_run_capture) {
-    //busyDistributing = 1;
     struct rte_mbuf *bufs[BURST_SIZE];
     u_int16_t num = rte_eth_rx_burst(dpdk_port_id, 0, bufs, BURST_SIZE);
     u_int i;
@@ -3149,16 +3099,18 @@ void * processing_thread(void *_thread_id) {
       
       gettimeofday(&h.ts, NULL);
       struct pcap_pkthdr* header = &h;
-      // my test code
-
       pthread_mutex_t *lock = locks[count];
       pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[count]; 
       struct Node *front = threadQueueFronts[count];
       //printf("this is the count: %d %d\n", count, tempCount);
-      //printf("I am enqueuing this to thread this: %s %d\n", element, count);
-      int hashValue = hashedDistributionValue(header, data, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      printf("I am enqueuing this to thread this: %s %d\n", element, count);
+
+      uint8_t *packet_checked = malloc(header->caplen);
+      memcpy(packet_checked, element, header->caplen);
+      
+      int hashValue = hashedDistributionValue(header, packet_checked, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
       enqueue(&element, &header, &front, &rear);
       threadQueueRears[count] = rear;
       threadQueueFronts[count] = front;
@@ -3168,26 +3120,17 @@ void * processing_thread(void *_thread_id) {
       if (count == num_threads) {
         count = 0;
       }
-      /////////////
-      //printf("toprocesspacket\n");
-      //ndpi_process_packet((u_char*)&thread_id, &h, (const u_char *)data);
-
       rte_pktmbuf_free(bufs[i]);
     }
 
     gettimeofday(&endSlice, NULL);
-    //printf("*****The end time is: %ld\n", endSlice.tv_sec);
     if ((endSlice.tv_sec - startSlice.tv_sec) > pauseDur) {
-      //busyDistributing = 0;
       startSlice.tv_sec = endSlice.tv_sec;
       
       
       u_int64_t processing_time_usec, setup_time_usec;
       processing_time_usec = endSlice.tv_sec*1000000 + endSlice.tv_usec - (startSlice.tv_sec*1000000 + startSlice.tv_usec);
       setup_time_usec = startSlice.tv_sec*1000000 + startSlice.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
-      // printResults(processing_time_usec, setup_time_usec);
-
-      printf("New start time is: %ld\n", startSlice.tv_sec);
 
       int queuesNotEmpty = 1;
       int queuesEmpty[num_threads];
@@ -3253,22 +3196,6 @@ void test_lib() {
   if(trace) fprintf(trace, "Num threads: %d\n", num_threads);
 #endif
 
-//   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-//     printf("THE NUMBER OF PCAP FILES IS: %d\n", num_pcap_files);
-//     pcap_t *cap;
-
-// #ifdef DEBUG_TRACE
-//     if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
-// #endif
-
-//      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
-// //     for (int i = 0; i < num_threads; i++) {
-// //       printf("setting up detection for thread %d\n", i);
-// //       setupDetection(i, cap);
-// //     }
-//      setupDetection(thread_id, cap);
-//   }
-
 #ifdef USE_DPDK
   pcap_t *cap;
   cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
@@ -3277,29 +3204,8 @@ void test_lib() {
   #ifdef DEBUG_TRACE
       if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
   #endif
-
-    //  cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
-//     for (int i = 0; i < num_threads; i++) {
-//       printf("setting up detection for thread %d\n", i);
-//       setupDetection(i, cap);
-//     }
      setupDetection(thread_id, cap);
   }
-#else
-//   for(thread_id = 0; thread_id < num_pcap_files; thread_id++) {
-//     pcap_t *cap;
-
-//   #ifdef DEBUG_TRACE
-//       if(trace) fprintf(trace, "Opening %s\n", (const u_char*)_pcap_file[thread_id]);
-//   #endif
-
-//      cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
-// //     for (int i = 0; i < num_threads; i++) {
-// //       printf("setting up detection for thread %d\n", i);
-// //       setupDetection(i, cap);
-// //     }
-//      setupDetection(thread_id, cap);
-//   }
 #endif
 
 
@@ -3307,45 +3213,12 @@ void test_lib() {
   
   printf("should start threads\n");
   start_threads();
-  // // MY STUFF
-  // int status;
-  // void * thd_res;
-  // for(long file_id = 0; file_id < num_pcap_files; file_id++) {
-  //   processing_thread((void *)file_id);
-  // }
 
-  
-  // /* Running processing threads */
-  // printf("#####: Number of threads to run on is: %d\n", num_threads);
-  // for(thread_id = 0; thread_id < num_threads; thread_id++) {
-  //   printf("##### Running process of thread with id: %ld\n", thread_id);
-  //   status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, processing_thread, (void *) thread_id);
-  //   /* check pthreade_create return value */
-  //   if(status != 0) {
-  //     fprintf(stderr, "error on create %ld thread\n", thread_id);
-  //     exit(-1);
-  //   }
-  // }
-  // /* Waiting for completion */
-  // for(thread_id = 0; thread_id < num_threads; thread_id++) {
-  //   status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
-  //   /* check pthreade_join return value */
-  //   if(status != 0) {
-  //     fprintf(stderr, "error on join %ld thread\n", thread_id);
-  //     exit(-1);
-  //   }
-  //   if(thd_res != NULL) {
-  //     fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
-  //     exit(-1);
-  //   }
-  // }
   gettimeofday(&end, NULL);
   processing_time_usec = end.tv_sec*1000000 + end.tv_usec - (begin.tv_sec*1000000 + begin.tv_usec);
   setup_time_usec = begin.tv_sec*1000000 + begin.tv_usec - (startup_time.tv_sec*1000000 + startup_time.tv_usec);
 
   /* Printing cumulative results */
-  //printf("\n\nTHE RESULTS GO HERE \n\n");
-
   printResults(processing_time_usec, setup_time_usec);
 
   if(stats_flag) {
@@ -3950,9 +3823,6 @@ static void produceBpfFilter(char *filePath) {
 }
 #endif
 
-
-/* *********************************************** */
-
 /**
  * Processes all packets assigned to it's buffer
  */
@@ -3964,34 +3834,31 @@ void * thread_waiting_loop(void *_thread_id) {
   int pcount = 0;
   struct pcap_pkthdr *header;
   while(keepThreadsRunning) {
-   // if (!busyDistributing) {
-      pthread_mutex_t *lock = locks[thread_id];
-      pthread_mutex_lock(lock);
-      rear = threadQueueRears[thread_id]; 
-      front = threadQueueFronts[thread_id];
-      if (!isEmpty(&front, &rear)) {
-        struct Node* temp = dequeue(&front, &rear);
-        //printf("I am dequeueud something %s\n", temp->data);
-          
-        u_char* packet = temp->data;
-        struct pcap_pkthdr *header = temp->header;
-        if (front == NULL) {
+    pthread_mutex_t *lock = locks[thread_id];
+    pthread_mutex_lock(lock);
+    rear = threadQueueRears[thread_id]; 
+    front = threadQueueFronts[thread_id];
+    if (!isEmpty(&front, &rear)) {
+      struct Node* temp = dequeue(&front, &rear);
+      //printf("I am dequeueud something %s\n", temp->data);
+      u_char* packet = temp->data;
+      struct pcap_pkthdr *header = temp->header;
+      if (front == NULL) {
           threadQueueRears[thread_id] = rear;
-          threadQueueFronts[thread_id] = front;
-        } else {
-          threadQueueFronts[thread_id] = front;
-        }
-        pthread_mutex_unlock(lock);
-        //printf("%s %d %ld\n", packet, pcount, thread_id);
-        ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
-
-        free(packet);
-        free(header);
-        pcount++;
+        threadQueueFronts[thread_id] = front;
       } else {
-        pthread_mutex_unlock(lock);
+        threadQueueFronts[thread_id] = front;
       }
-   // }
+      pthread_mutex_unlock(lock);
+      //printf("%s %d %ld\n", packet, pcount, thread_id);
+      ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
+
+      free(packet);
+      free(header);
+      pcount++;
+    } else {
+      pthread_mutex_unlock(lock);
+    }
   }
   return NULL;
 }
@@ -4080,7 +3947,6 @@ void start_threads() {
       printf("return value of %d\n", status);
       exit(-1);
     }
-    //lauren
     if(thd_res != NULL) {
       fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
       exit(-1);
@@ -4114,8 +3980,6 @@ int orginal_main(int argc, char **argv) {
       printf("nDPI Library version mismatch: please make sure this code and the nDPI library are in sync\n");
       return(-1);
     }
-
-    
 
     automataUnitTest();
 
