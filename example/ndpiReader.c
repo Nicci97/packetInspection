@@ -2465,13 +2465,23 @@ static void ndpi_process_packet(u_char *args,
   struct pcap_pkthdr *header = malloc(sizeof(struct pcap_pkthdr));
   header = node->header;
 
+  u_int8_t protocol_hash = node->protocol;
+  u_int16_t vlan_id_hash = node->vlan_id;
+  u_int32_t src_ip_hash = node->src_ip;
+  u_int32_t dst_ip_hash = node->dst_ip;
+  u_int16_t src_port_hash = node->src_port;
+  u_int16_t dst_port_hash = node->dst_port;  
+
+  free(node);
+
   //printf("This is the data: %s\n", packet);
 
   /* allocate an exact size buffer to check overflows */
   uint8_t *packet_checked = malloc(header->caplen);
   memcpy(packet_checked, packet, header->caplen);
 
-  p = ndpi_workflow_process_packet(ndpi_thread_info[thread_id].workflow, header, packet_checked);
+  p = ndpi_workflow_process_packet(ndpi_thread_info[thread_id].workflow, header, packet_checked, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+           &src_port_hash, &dst_port_hash);
 
   if((capture_until != 0) && (header->ts.tv_sec >= capture_until)) {
     if(ndpi_thread_info[thread_id].workflow->pcap_handle != NULL)
