@@ -2456,10 +2456,14 @@ static pcap_t * openPcapFileOrDevice(u_int16_t thread_id, const u_char * pcap_fi
  * @brief Check pcap packet
  */
 static void ndpi_process_packet(u_char *args,
-				const struct pcap_pkthdr *header,
-				const u_char *packet) {
+				struct Node* node) {
   struct ndpi_proto p;
   u_int16_t thread_id = *((u_int16_t*)args);
+
+  const u_char *packet = malloc(sizeof(u_char));
+  packet = (const u_char *)node->data;
+  struct pcap_pkthdr *header = malloc(sizeof(struct pcap_pkthdr));
+  header = node->header;
 
   //printf("This is the data: %s\n", packet);
 
@@ -3833,10 +3837,12 @@ void * thread_waiting_loop(void *_thread_id) {
     front = threadQueueFronts[thread_id];
     if (!isEmpty(&front, &rear)) {
       count++;
-      struct Node* temp = dequeue(&front, &rear);
+      struct Node* node = dequeue(&front, &rear);
       //printf("I am dequeueud something %s\n", temp->data);
-      u_char* packet = temp->data;
-      struct pcap_pkthdr *header = temp->header;
+      // const u_char *packet = malloc(sizeof(u_char));
+      // packet = (const u_char *)temp->data;
+      // struct pcap_pkthdr *header = malloc(sizeof(struct pcap_pkthdr));
+      // header = temp->header;
       if (front == NULL) {
           threadQueueRears[thread_id] = rear;
         threadQueueFronts[thread_id] = front;
@@ -3845,10 +3851,11 @@ void * thread_waiting_loop(void *_thread_id) {
       }
       pthread_mutex_unlock(lock);
       //printf("%s %d %ld\n", packet, pcount, thread_id);
-      ndpi_process_packet((u_char*)&thread_id, header, (const u_char *)packet);
+      ndpi_process_packet((u_char*)&thread_id, node);
 
-      free(packet);
-      free(header);
+      // free(packet);
+      // free(header);
+      // free(temp);
       pcount++;
     } else {
       pthread_mutex_unlock(lock);
