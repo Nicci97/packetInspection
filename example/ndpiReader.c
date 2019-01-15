@@ -100,7 +100,7 @@ struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
 static volatile int keepThreadsRunning = 1;
 static int mbufInit = 1;
-static int pauseDur = 3;
+static int pauseDur = 10;
 static int queueLength = 1000;
 static struct rte_mempool *mbuf_pool;
 static char *_pcap_file[MAX_NUM_READER_THREADS]; /**< Ingress pcap file/interfaces */
@@ -2589,8 +2589,8 @@ static void process_allocation(u_int16_t thread_id) {
 /**
  * @brief Returns thread for which the packet has been hashed to
  */
-static int hashedDistributionValue(
-						const struct pcap_pkthdr *header,
+static int hashedDistributionValue(u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
+            u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash, const struct pcap_pkthdr *header,
 						const u_char *packet, pcap_t * handler, u_int8_t decode_tunnels) {
               
   //printf("entering hash function\n");
@@ -2981,6 +2981,15 @@ iph_check:
   src_port = htons(sport);
   dst_port = htons(dport);
   hashval = protocol + vlan_id + src_ip + dst_ip + src_port + dst_port; 
+
+   *protocol_hash = protocol;
+   *vlan_id_hash = vlan_id;
+   *src_ip_hash = src_ip;
+   *dst_ip_hash = dst_ip;
+   *src_port_hash = src_port;
+   *dst_port_hash = dst_port;
+
+  
   u_int32_t idx = hashval % num_threads;
   return idx;
 }
@@ -2997,12 +3006,27 @@ static void runPcapLoop(u_int16_t thread_id) {
       u_char *element;
       element = (u_char*)packet;
 
-      int hashValue = hashedDistributionValue(header, packet, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      u_int8_t protocol_hash;
+      u_int16_t vlan_id_hash;
+      u_int32_t src_ip_hash;
+      u_int32_t dst_ip_hash;
+      u_int16_t src_port_hash;
+      u_int16_t dst_port_hash;
+
+      int hashValue = hashedDistributionValue(&protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+           &src_port_hash, &dst_port_hash, header, packet, handler,
+           ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+
+      // u_int32_t hashval = protocol_hash + vlan_id_hash + src_ip_hash + dst_ip_hash + src_port_hash + dst_port_hash; 
+      // u_int32_t idx = hashval % num_threads;
+      // printf("this is the my hashvalue: %d\n", idx);
+
       pthread_mutex_t *lock = locks[hashValue];
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
-      enqueue(&element, &header, &front, &rear);
+      enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+           &src_port_hash, &dst_port_hash);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(lock);
@@ -3031,7 +3055,6 @@ static void runPcapLoop(u_int16_t thread_id) {
     }
   }
 }
-
 
 /**
  * @brief Process a running thread
@@ -3084,15 +3107,15 @@ void * processing_thread(void *_thread_id) {
       struct pcap_pkthdr* header = &h;
       
       pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
-      int hashValue = hashedDistributionValue(header, element, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
-      pthread_mutex_t *lock = locks[hashValue];
-      pthread_mutex_lock(lock);
-      struct Node *rear = threadQueueRears[hashValue]; 
-      struct Node *front = threadQueueFronts[hashValue];
-      enqueue(&element, &header, &front, &rear);
-      threadQueueRears[hashValue] = rear;
-      threadQueueFronts[hashValue] = front;
-      pthread_mutex_unlock(lock);
+      //int hashValue = hashedDistributionValue(header, element, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+      // pthread_mutex_t *lock = locks[hashValue];
+      // pthread_mutex_lock(lock);
+      // struct Node *rear = threadQueueRears[hashValue]; 
+      // struct Node *front = threadQueueFronts[hashValue];
+      // enqueue(&element, &header, &front, &rear);
+      // threadQueueRears[hashValue] = rear;
+      // threadQueueFronts[hashValue] = front;
+      // pthread_mutex_unlock(lock);
 
       rte_pktmbuf_free(bufs[i]);
     }
@@ -3135,7 +3158,6 @@ void * processing_thread(void *_thread_id) {
   }
   
 #else
-  //printf("Entering runPcapLoop option\n");
 pcap_loop:
   runPcapLoop(thread_id);
   if(playlist_fp[thread_id] != NULL) { /* playlist: read next file */
@@ -3810,6 +3832,7 @@ void * thread_waiting_loop(void *_thread_id) {
     rear = threadQueueRears[thread_id]; 
     front = threadQueueFronts[thread_id];
     if (!isEmpty(&front, &rear)) {
+      count++;
       struct Node* temp = dequeue(&front, &rear);
       //printf("I am dequeueud something %s\n", temp->data);
       u_char* packet = temp->data;
@@ -3838,7 +3861,7 @@ void * thread_waiting_loop(void *_thread_id) {
  * starts functionality of distribution of packets to different threads according to their hash value
  */
 void * distributePacketsThread(void *_thread_id) {
-  //sim
+  printf("distributePacketsThread\n");
 #ifdef USE_DPDK
   long thread_id = (long) _thread_id;
   // next line is temporary
@@ -3858,6 +3881,7 @@ void * distributePacketsThread(void *_thread_id) {
 
     if (setUpDone == 0) {
       cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
+      printf("seetupdone\n");
       for (int thread = 0; thread < num_threads; thread++) {
         setupDetection(thread, cap);
       }
@@ -3886,6 +3910,7 @@ void start_threads() {
   long thread_id;
   int status;
   void * thd_res;
+  
   /* Running processing threads */
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
     status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, thread_waiting_loop, (void *) thread_id);
@@ -3905,7 +3930,6 @@ void start_threads() {
     fprintf(stderr, "error on create %ld thread\n", thread_id);
     exit(-1);
   }
-  
   /* Waiting for completion of processing threads*/
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
     status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);

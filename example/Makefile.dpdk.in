@@ -19,7 +19,7 @@ LIBNDPI = $(PWD)/../src/lib/libndpi.a
 
 SRCS-y := ndpi_util.c ndpiReader.c queue.c
 
-CFLAGS += -g
+CFLAGS += -g -pg
 CFLAGS += -Wno-strict-prototypes -Wno-missing-prototypes -Wno-missing-declarations -Wno-unused-parameter -I $(PWD)/../src/include @CFLAGS@ -DUSE_DPDK
 LDLIBS = $(LIBNDPI) @PCAP_LIB@ -lpthread @LDFLAGS@
 

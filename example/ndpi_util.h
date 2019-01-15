@@ -120,7 +120,6 @@ typedef struct ndpi_stats {
   u_int16_t max_packet_len;
 } ndpi_stats_t;
 
-
 // flow preferences
 typedef struct ndpi_workflow_prefs {
   u_int8_t decode_tunnels;

@@ -8,7 +8,8 @@
 #include "pcap.h"
 
 // Utility function to allocate the new queue node
-struct Node* newNode(u_char* item, struct pcap_pkthdr *h)
+struct Node* newNode(u_char* item, struct pcap_pkthdr *h, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
+            u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash)
 {
 	// Allocate the new node in the heap
 	struct Node* node = (struct Node*)malloc(sizeof(struct Node));
@@ -21,6 +22,12 @@ struct Node* newNode(u_char* item, struct pcap_pkthdr *h)
 		node->data = item;
 		node->header = h;
 		node->next = NULL;
+		node->protocol = *protocol_hash;
+		node->vlan_id = *vlan_id_hash;
+		node->src_ip = *src_ip_hash;
+		node->dst_ip = *dst_ip_hash;
+		node->src_port = *src_port_hash;
+		node->dst_port = *dst_port_hash;
 		return node;
 	}
 	else
@@ -59,7 +66,8 @@ struct Node* dequeue(struct Node **front, struct Node **rear) // delete at the b
 }
 
 // Utility function to add an item in the queue
-void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Node **rear) // insertion at the end
+void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Node **rear, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
+            u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash) // insertion at the end
 {
 	// Create a deep copy of the header in memory
 	// copy header struct
@@ -75,7 +83,8 @@ void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Nod
 	memcpy(itemCopy, item, header->caplen);
 	
 	// create new node to put in linked list
-	struct Node* node = newNode(itemCopy, headerCopy);
+	struct Node* node = newNode(itemCopy, headerCopy, protocol_hash, vlan_id_hash, src_ip_hash, dst_ip_hash, 
+           src_port_hash, dst_port_hash);
 
 	// special case: queue was empty
 	if (*front == NULL) 

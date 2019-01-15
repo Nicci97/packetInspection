@@ -240,8 +240,6 @@ void ndpi_workflow_reset(struct ndpi_workflow * workflow) {
 #endif
 
   workflow->ndpi_flows_root = ndpi_calloc(workflow->prefs.num_roots, sizeof(void *));
-
-  //return workflow;
 }
 
 
