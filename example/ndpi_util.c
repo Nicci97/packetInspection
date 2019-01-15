@@ -339,12 +339,16 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
 						 u_int8_t *proto,
 						 u_int8_t **payload,
 						 u_int16_t *payload_len,
-						 u_int8_t *src_to_dst_direction) {
+						 u_int8_t *src_to_dst_direction,
+             u_int8_t protocol_hash,
+             u_int32_t src_ip_hash, 
+             u_int32_t dst_ip_hash, 
+             u_int16_t src_port_hash, 
+             u_int16_t dst_port_hash) {
   u_int32_t idx, l4_offset, hashval;
   struct ndpi_flow_info flow;
   void *ret;
   const u_int8_t *l3, *l4;
-  
   /*
     Note: to keep things simple (ndpiReader is just a demo app)
     we handle IPv6 a-la-IPv4.
@@ -409,10 +413,16 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     *sport = *dport = 0;
   }
 
-  flow.protocol = iph->protocol, flow.vlan_id = vlan_id;
-  flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
-  flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
+  // flow.protocol = iph->protocol, flow.vlan_id = vlan_id;
+  // flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
+  // flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
+  flow.protocol = protocol_hash, flow.vlan_id = vlan_id;
+  flow.src_ip = src_ip_hash, flow.dst_ip = dst_ip_hash;
+  flow.src_port = src_port_hash, flow.dst_port = dst_port_hash;
+
   flow.hashval = hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
+
+  //hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
   idx = hashval % workflow->prefs.num_roots;
   ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
 
@@ -549,12 +559,12 @@ static struct ndpi_flow_info *get_ndpi_flow_info6(struct ndpi_workflow * workflo
 
     iph.protocol = options[0];
   }
-  return(get_ndpi_flow_info(workflow, 6, vlan_id, &iph, iph6, ip_offset,
-			    sizeof(struct ndpi_ipv6hdr),
-			    ntohs(iph6->ip6_hdr.ip6_un1_plen),
-			    tcph, udph, sport, dport,
-			    src, dst, proto, payload,
-			    payload_len, src_to_dst_direction));
+  // return(get_ndpi_flow_info(workflow, 6, vlan_id, &iph, iph6, ip_offset,
+	// 		    sizeof(struct ndpi_ipv6hdr),
+	// 		    ntohs(iph6->ip6_hdr.ip6_un1_plen),
+	// 		    tcph, udph, sport, dport,
+	// 		    src, dst, proto, payload,
+	// 		    payload_len, src_to_dst_direction));
 }
 
 /* ****************************************************** */
@@ -632,7 +642,8 @@ static struct ndpi_proto packet_processing(struct ndpi_workflow * workflow,
 					   const struct ndpi_iphdr *iph,
 					   struct ndpi_ipv6hdr *iph6,
 					   u_int16_t ip_offset,
-					   u_int16_t ipsize, u_int16_t rawsize) {
+					   u_int16_t ipsize, u_int16_t rawsize, u_int8_t protocol_hash, u_int32_t src_ip_hash, 
+            u_int32_t dst_ip_hash, u_int16_t src_port_hash, u_int16_t dst_port_hash) {
   struct ndpi_id_struct *src, *dst;
   struct ndpi_flow_info *flow = NULL;
   struct ndpi_flow_struct *ndpi_flow = NULL;
@@ -650,7 +661,8 @@ static struct ndpi_proto packet_processing(struct ndpi_workflow * workflow,
 			      ntohs(iph->tot_len) - (iph->ihl * 4),
 			      &tcph, &udph, &sport, &dport,
 			      &src, &dst, &proto,
-			      &payload, &payload_len, &src_to_dst_direction);
+			      &payload, &payload_len, &src_to_dst_direction, protocol_hash, src_ip_hash, 
+            dst_ip_hash, src_port_hash, dst_port_hash);
   } else {
     flow = get_ndpi_flow_info6(workflow, vlan_id, iph6, ip_offset,
 			       &tcph, &udph, &sport, &dport,
@@ -769,7 +781,8 @@ struct ndpi_proto ndpi_workflow_process_packet (struct ndpi_workflow * workflow,
   int check;
   u_int64_t time;
   u_int16_t ip_offset = 0, ip_len;
-  u_int16_t frag_off = 0, vlan_id = 0;
+   u_int16_t frag_off = 0;
+  // u_int16_t frag_off = 0, vlan_id = 0;
   u_int8_t proto = 0;
   u_int32_t label;
   /* counters */
@@ -900,13 +913,13 @@ datalink_check:
   /* check ether type */
   switch(type) {
   case VLAN:
-    vlan_id = ((packet[ip_offset] << 8) + packet[ip_offset+1]) & 0xFFF;
+    //vlan_id = ((packet[ip_offset] << 8) + packet[ip_offset+1]) & 0xFFF;
     type = (packet[ip_offset+2] << 8) + packet[ip_offset+3];
     ip_offset += 4;
     vlan_packet = 1;
     // double tagging for 802.1Q
     if(type == 0x8100) {
-      vlan_id = ((packet[ip_offset] << 8) + packet[ip_offset+1]) & 0xFFF;
+      //vlan_id = ((packet[ip_offset] << 8) + packet[ip_offset+1]) & 0xFFF;
       type = (packet[ip_offset+2] << 8) + packet[ip_offset+3];
       ip_offset += 4;
     }
@@ -1071,8 +1084,9 @@ iph_check:
   }
   
   /* process the packet */
-  return(packet_processing(workflow, time, vlan_id, iph, iph6,
-			   ip_offset, header->caplen - ip_offset, header->caplen));
+  return(packet_processing(workflow, time, *vlan_id_hash, iph, iph6,
+			   ip_offset, header->caplen - ip_offset, header->caplen, *protocol_hash, *src_ip_hash, 
+            *dst_ip_hash, *src_port_hash, *dst_port_hash));
 }
 
 /* ********************************************************** */
