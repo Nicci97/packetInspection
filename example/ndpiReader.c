@@ -3121,15 +3121,30 @@ void * processing_thread(void *_thread_id) {
       struct pcap_pkthdr* header = &h;
       
       pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
+
+      u_int8_t protocol_hash;
+      u_int16_t vlan_id_hash;
+      u_int32_t src_ip_hash;
+      u_int32_t dst_ip_hash;
+      u_int16_t src_port_hash;
+      u_int16_t dst_port_hash;
+
+      int hashValue = hashedDistributionValue(&protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+           &src_port_hash, &dst_port_hash, header, element, handler,
+           ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
+
       //int hashValue = hashedDistributionValue(header, element, handler, ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
-      // pthread_mutex_t *lock = locks[hashValue];
-      // pthread_mutex_lock(lock);
-      // struct Node *rear = threadQueueRears[hashValue]; 
-      // struct Node *front = threadQueueFronts[hashValue];
-      // enqueue(&element, &header, &front, &rear);
-      // threadQueueRears[hashValue] = rear;
-      // threadQueueFronts[hashValue] = front;
-      // pthread_mutex_unlock(lock);
+      pthread_mutex_t *lock = locks[hashValue];
+      pthread_mutex_lock(lock);
+      struct Node *rear = threadQueueRears[hashValue]; 
+      struct Node *front = threadQueueFronts[hashValue];
+
+      enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+           &src_port_hash, &dst_port_hash);
+      //enqueue(&element, &header, &front, &rear);
+      threadQueueRears[hashValue] = rear;
+      threadQueueFronts[hashValue] = front;
+      pthread_mutex_unlock(lock);
 
       rte_pktmbuf_free(bufs[i]);
     }

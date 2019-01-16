@@ -396,7 +396,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     // tcp
     workflow->stats.tcp_count++;
     *tcph = (struct ndpi_tcphdr *)l4;
-    *sport = ntohs((*tcph)->source), *dport = ntohs((*tcph)->dest);
+    // *sport = ntohs((*tcph)->source), *dport = ntohs((*tcph)->dest);
     tcp_len = ndpi_min(4*(*tcph)->doff, l4_packet_len);
     *payload = (u_int8_t*)&l4[tcp_len];
     *payload_len = ndpi_max(0, l4_packet_len-4*(*tcph)->doff);
@@ -404,8 +404,8 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
     // udp
 
     workflow->stats.udp_count++;
-    *udph = (struct ndpi_udphdr *)l4;
-    *sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
+    // *udph = (struct ndpi_udphdr *)l4;
+    // *sport = ntohs((*udph)->source), *dport = ntohs((*udph)->dest);
     *payload = (u_int8_t*)&l4[sizeof(struct ndpi_udphdr)];
     *payload_len = (l4_packet_len > sizeof(struct ndpi_udphdr)) ? l4_packet_len-sizeof(struct ndpi_udphdr) : 0;
   } else {
@@ -463,7 +463,8 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
       newflow->hashval = hashval;
       newflow->protocol = iph->protocol, newflow->vlan_id = vlan_id;
       newflow->src_ip = iph->saddr, newflow->dst_ip = iph->daddr;
-      newflow->src_port = htons(*sport), newflow->dst_port = htons(*dport);
+      // newflow->src_port = htons(*sport), newflow->dst_port = htons(*dport);
+      newflow->src_port = src_port_hash, newflow->dst_port = dst_port_hash;
       newflow->ip_version = version;
 
       if(version == IPVERSION) {
