@@ -95,6 +95,7 @@
 //  pthread_mutex_t lock;
 //static int** packetDistributionArray;
 
+static struct timeval startProg, endProg;
 pthread_mutex_t** locks;
 struct Node** threadQueueRears;
 struct Node** threadQueueFronts;
@@ -3913,7 +3914,6 @@ void * distributePacketsThread(void *_thread_id) {
 
     if (setUpDone == 0) {
       cap = openPcapFileOrDevice(thread_id, (const u_char*)_pcap_file[thread_id]);
-      printf("seetupdone\n");
       for (int thread = 0; thread < num_threads; thread++) {
         setupDetection(thread, cap);
       }
@@ -4004,6 +4004,8 @@ int orginal_main(int argc, char **argv) {
       return(-1);
     }
 
+    gettimeofday(&startProg, NULL);
+
     automataUnitTest();
 
     gettimeofday(&startup_time, NULL);
@@ -4068,7 +4070,9 @@ int orginal_main(int argc, char **argv) {
       pthread_mutex_t *lock = locks[i];
       pthread_mutex_destroy(lock);
     }
-    return 0;
+
+    gettimeofday(&endProg, NULL);
+    printf("Time taken to run program: %ld\n", endProg.tv_sec - startProg.tv_sec);
   }
 
 #ifdef WIN32
