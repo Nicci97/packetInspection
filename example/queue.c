@@ -66,7 +66,7 @@ struct Node* dequeue(struct Node **front, struct Node **rear) // delete at the b
 }
 
 // Utility function to add an item in the queue
-void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Node **rear, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
+void enqueue(u_char* i, struct pcap_pkthdr **h, struct Node **front, struct Node **rear, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
             u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash) // insertion at the end
 {
 	// Create a deep copy of the header in memory
@@ -77,10 +77,11 @@ void enqueue(u_char** i, struct pcap_pkthdr **h, struct Node **front, struct Nod
 	memcpy(headerCopy, header, sizeof(struct pcap_pkthdr));
 	
 	// copy packet data
-	u_char* item = *i;
+	u_char* item = i;
 	u_char* itemCopy;
 	itemCopy = malloc(header->caplen);
 	memcpy(itemCopy, item, header->caplen);
+
 	
 	// create new node to put in linked list
 	struct Node* node = newNode(itemCopy, headerCopy, protocol_hash, vlan_id_hash, src_ip_hash, dst_ip_hash, 

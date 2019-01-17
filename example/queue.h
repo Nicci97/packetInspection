@@ -25,7 +25,7 @@ struct Node
 struct Node* newNode(u_char* item, struct pcap_pkthdr *h, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
             u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash);
 struct Node* dequeue(struct Node **front, struct Node **rear);
-void enqueue(u_char** item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
+void enqueue(u_char* item, struct pcap_pkthdr **header, struct Node **front, struct Node **rear, u_int8_t* protocol_hash, u_int16_t* vlan_id_hash, u_int32_t* src_ip_hash, 
             u_int32_t* dst_ip_hash, u_int16_t* src_port_hash, u_int16_t* dst_port_hash);
 u_char* peek(struct Node *front);
 int isEmpty(struct Node **front, struct Node **rear);

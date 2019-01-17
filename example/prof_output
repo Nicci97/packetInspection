@@ -3,34 +3,46 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 73.86      0.65     0.65                             thread_waiting_loop
- 26.14      0.88     0.23 294959195     0.00     0.00  isEmpty
-  0.00      0.88     0.00   182153     0.00     0.00  malloc_wrapper
-  0.00      0.88     0.00    37265     0.00     0.00  free_wrapper
-  0.00      0.88     0.00    16648     0.00     0.00  ndpi_workflow_node_cmp
-  0.00      0.88     0.00    12251     0.00     0.00  enqueue
-  0.00      0.88     0.00    12251     0.00     0.00  newNode
-  0.00      0.88     0.00    10906     0.00     0.00  dequeue
-  0.00      0.88     0.00    10906     0.00     0.00  get_ndpi_flow_info.constprop.3
-  0.00      0.88     0.00    10906     0.00     0.00  ndpi_workflow_process_packet
-  0.00      0.88     0.00     1763     0.00     0.00  node_print_known_proto_walker
-  0.00      0.88     0.00     1763     0.00     0.00  node_print_unknown_proto_walker
-  0.00      0.88     0.00     1763     0.00     0.00  node_proto_guess_walker
-  0.00      0.88     0.00     1301     0.00     0.00  process_ndpi_collected_info
-  0.00      0.88     0.00     1027     0.00     0.00  ipProto2Name
-  0.00      0.88     0.00     1027     0.00     0.00  printFlow
-  0.00      0.88     0.00      271     0.00     0.00  ndpi_free_flow_info_half
-  0.00      0.88     0.00      223     0.00     0.00  on_protocol_discovered
-  0.00      0.88     0.00       12     0.00     0.00  formatBytes
-  0.00      0.88     0.00        8     0.00     0.00  formatPackets
-  0.00      0.88     0.00        8     0.00     0.00  formatTraffic
-  0.00      0.88     0.00        4     0.00     0.00  printResults
-  0.00      0.88     0.00        3     0.00     0.00  ndpi_workflow_reset
-  0.00      0.88     0.00        2     0.00     0.00  ndpi_workflow_init
-  0.00      0.88     0.00        2     0.00     0.00  setupDetection
-  0.00      0.88     0.00        1     0.00     0.00  dpdk_port_init
-  0.00      0.88     0.00        1     0.00     2.99  processing_thread
-  0.00      0.88     0.00        1     0.00     0.00  start_threads
+ 26.67      0.16     0.16        1   160.00   234.33  runPcapLoop
+ 15.00      0.25     0.09   924986     0.00     0.00  dequeue
+ 13.33      0.33     0.08   879915     0.00     0.00  get_ndpi_flow_info
+ 10.00      0.39     0.06   930105     0.00     0.00  ndpi_process_packet
+  8.33      0.44     0.05   918703     0.00     0.00  hashedDistributionValue
+  6.67      0.48     0.04   898665     0.00     0.00  ndpi_workflow_process_packet
+  5.00      0.51     0.03                             thread_waiting_loop
+  1.67      0.52     0.01  1700186     0.00     0.00  ndpi_workflow_node_cmp
+  1.67      0.53     0.01   958759     0.00     0.00  newNode
+  1.67      0.54     0.01   918173     0.00     0.00  enqueue
+  1.67      0.55     0.01                             NDPI_BITMASK_COMPARE
+  1.67      0.56     0.01                             ndpi_connection_tracking
+  1.67      0.57     0.01                             ndpi_match_prefix
+  1.67      0.58     0.01                             ndpi_search_ftp_control
+  1.67      0.59     0.01                             ndpi_strnstr
+  0.83      0.60     0.01  8428737     0.00     0.00  isEmpty
+  0.83      0.60     0.01                             peek
+  0.00      0.60     0.00   882278     0.00     0.00  packet_processing
+  0.00      0.60     0.00   102995     0.00     0.00  free_wrapper
+  0.00      0.60     0.00    48322     0.00     0.00  malloc_wrapper
+  0.00      0.60     0.00    15323     0.00     0.00  node_proto_guess_walker
+  0.00      0.60     0.00    11463     0.00     0.00  process_ndpi_collected_info
+  0.00      0.60     0.00    11409     0.00     0.00  ndpi_free_flow_info_half
+  0.00      0.60     0.00     6409     0.00     0.00  ndpi_flow_info_freer
+  0.00      0.60     0.00     4813     0.00     0.00  on_protocol_discovered
+  0.00      0.60     0.00        4     0.00     0.00  formatBytes
+  0.00      0.60     0.00        2     0.00     0.00  formatPackets
+  0.00      0.60     0.00        2     0.00     0.00  formatTraffic
+  0.00      0.60     0.00        1     0.00     0.00  automataUnitTest
+  0.00      0.60     0.00        1     0.00     0.00  ndpi_workflow_free
+  0.00      0.60     0.00        1     0.00     0.00  ndpi_workflow_init
+  0.00      0.60     0.00        1     0.00     0.00  ndpi_workflow_set_flow_detected_callback
+  0.00      0.60     0.00        1     0.00     0.00  openPcapFileOrDevice
+  0.00      0.60     0.00        1     0.00     0.00  parseOptions
+  0.00      0.60     0.00        1     0.00     0.00  printResults
+  0.00      0.60     0.00        1     0.00   234.33  processing_thread
+  0.00      0.60     0.00        1     0.00     0.00  setupDetection
+  0.00      0.60     0.00        1     0.00     0.00  start_threads
+  0.00      0.60     0.00        1     0.00     0.00  terminateDetection
+  0.00      0.60     0.00        1     0.00     0.00  test_lib
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -68,148 +80,202 @@ notice and this notice are preserved.
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 1.14% of 0.88 seconds
+granularity: each sample hit covers 2 byte(s) for 1.67% of 0.60 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     99.7    0.65    0.23                 thread_waiting_loop [1]
-                0.23    0.00 291123911/294959195     isEmpty [2]
-                0.00    0.00   10906/10906       dequeue [10]
-                0.00    0.00   10906/10906       ndpi_workflow_process_packet [12]
+[1]     50.1    0.03    0.27                 thread_waiting_loop [1]
+                0.06    0.12  930105/930105      ndpi_process_packet [5]
+                0.09    0.00  924986/924986      dequeue [7]
+                0.00    0.00 1129261/8428737     isEmpty [20]
 -----------------------------------------------
-                0.00    0.00 3835284/294959195     processing_thread [3]
-                0.23    0.00 291123911/294959195     thread_waiting_loop [1]
-[2]     26.1    0.23    0.00 294959195         isEmpty [2]
+                0.00    0.23       1/1           distributePacketsThread [4]
+[2]     39.1    0.00    0.23       1         processing_thread [2]
+                0.16    0.07       1/1           runPcapLoop [3]
 -----------------------------------------------
-                0.00    0.00       1/1           distributePacketsThread [4]
-[3]      0.3    0.00    0.00       1         processing_thread [3]
-                0.00    0.00 3835284/294959195     isEmpty [2]
-                0.00    0.00   12251/12251       enqueue [8]
-                0.00    0.00       3/4           printResults [24]
-                0.00    0.00       3/3           ndpi_workflow_reset [25]
+                0.16    0.07       1/1           processing_thread [2]
+[3]     39.1    0.16    0.07       1         runPcapLoop [3]
+                0.05    0.00  918703/918703      hashedDistributionValue [10]
+                0.01    0.01  918173/918173      enqueue [11]
+                0.00    0.00 7299476/8428737     isEmpty [20]
 -----------------------------------------------
                                                  <spontaneous>
-[4]      0.3    0.00    0.00                 distributePacketsThread [4]
-                0.00    0.00       1/1           processing_thread [3]
+[4]     39.1    0.00    0.23                 distributePacketsThread [4]
+                0.00    0.23       1/1           processing_thread [2]
+                0.00    0.00       1/1           openPcapFileOrDevice [37]
+                0.00    0.00       1/1           setupDetection [40]
 -----------------------------------------------
-                0.00    0.00       4/182153      ac_automata_finalize [38]
-                0.00    0.00       5/182153      ndpi_init_detection_module [5396]
-                0.00    0.00      13/182153      check_content_type_and_change_protocol [753]
-                0.00    0.00      60/182153      ac_automata_init [39]
-                0.00    0.00     440/182153      ndpi_realloc [5454]
-                0.00    0.00     800/182153      addDefaultPort.constprop.19 [54]
-                0.00    0.00    1215/182153      ndpi_strdup [5619]
-                0.00    0.00    1222/182153      ndpi_tsearch [5628]
-                0.00    0.00    1282/182153      get_ndpi_flow_info.constprop.3 [11]
-                0.00    0.00   20375/182153      node_create [5939]
-                0.00    0.00   40750/182153      node_init [5946]
-                0.00    0.00  115987/182153      ndpi_calloc [5336]
-[5]      0.0    0.00    0.00  182153         malloc_wrapper [5]
+                0.06    0.12  930105/930105      thread_waiting_loop [1]
+[5]     30.0    0.06    0.12  930105         ndpi_process_packet [5]
+                0.04    0.08  898665/898665      ndpi_workflow_process_packet [6]
 -----------------------------------------------
-                0.00    0.00       3/37265       ndpi_Destroy_Patricia [5319]
-                0.00    0.00       4/37265       ndpi_match_string_subprotocol [5429]
-                0.00    0.00       5/37265       addDefaultPort.constprop.19 [54]
-                0.00    0.00       9/37265       ndpi_free_flow [5370]
-                0.00    0.00     251/37265       ndpi_exit_detection_module [5360]
-                0.00    0.00     316/37265       ndpi_tdestroy_recurse [5625]
-                0.00    0.00     440/37265       ndpi_realloc [5454]
-                0.00    0.00     813/37265       ndpi_free_flow_info_half [19]
-                0.00    0.00    4081/37265       ac_automata_release [41]
-                0.00    0.00    8150/37265       node_release [5949]
-                0.00    0.00   23193/37265       ndpi_Clear_Patricia [5316]
-[6]      0.0    0.00    0.00   37265         free_wrapper [6]
+                0.04    0.08  898665/898665      ndpi_process_packet [5]
+[6]     20.0    0.04    0.08  898665         ndpi_workflow_process_packet [6]
+                0.00    0.08  882278/882278      packet_processing [8]
 -----------------------------------------------
-                0.00    0.00     461/16648       ndpi_tsearch [5628]
-                0.00    0.00   16187/16648       ndpi_tfind [5626]
-[7]      0.0    0.00    0.00   16648         ndpi_workflow_node_cmp [7]
+                0.09    0.00  924986/924986      thread_waiting_loop [1]
+[7]     15.0    0.09    0.00  924986         dequeue [7]
 -----------------------------------------------
-                0.00    0.00   12251/12251       processing_thread [3]
-[8]      0.0    0.00    0.00   12251         enqueue [8]
-                0.00    0.00   12251/12251       newNode [9]
+                0.00    0.08  882278/882278      ndpi_workflow_process_packet [6]
+[8]     13.3    0.00    0.08  882278         packet_processing [8]
+                0.08    0.00  879915/879915      get_ndpi_flow_info [9]
+                0.00    0.00    5054/11463       process_ndpi_collected_info [26]
 -----------------------------------------------
-                0.00    0.00   12251/12251       enqueue [8]
-[9]      0.0    0.00    0.00   12251         newNode [9]
+                0.08    0.00  879915/879915      packet_processing [8]
+[9]     13.3    0.08    0.00  879915         get_ndpi_flow_info [9]
+                0.00    0.00   17431/48322       malloc_wrapper [24]
 -----------------------------------------------
-                0.00    0.00   10906/10906       thread_waiting_loop [1]
-[10]     0.0    0.00    0.00   10906         dequeue [10]
+                0.05    0.00  918703/918703      runPcapLoop [3]
+[10]     8.3    0.05    0.00  918703         hashedDistributionValue [10]
 -----------------------------------------------
-                0.00    0.00   10906/10906       ndpi_workflow_process_packet [12]
-[11]     0.0    0.00    0.00   10906         get_ndpi_flow_info.constprop.3 [11]
-                0.00    0.00    1282/182153      malloc_wrapper [5]
+                0.01    0.01  918173/918173      runPcapLoop [3]
+[11]     3.3    0.01    0.01  918173         enqueue [11]
+                0.01    0.00  958759/958759      newNode [13]
 -----------------------------------------------
-                0.00    0.00   10906/10906       thread_waiting_loop [1]
-[12]     0.0    0.00    0.00   10906         ndpi_workflow_process_packet [12]
-                0.00    0.00   10906/10906       get_ndpi_flow_info.constprop.3 [11]
-                0.00    0.00     274/1301        process_ndpi_collected_info [16]
-                0.00    0.00     271/271         ndpi_free_flow_info_half [19]
+                0.00    0.00   35663/1700186     ndpi_tsearch [22]
+                0.01    0.00 1664523/1700186     ndpi_tfind [19]
+[12]     1.7    0.01    0.00 1700186         ndpi_workflow_node_cmp [12]
 -----------------------------------------------
-                0.00    0.00     564/1763        printResults [24]
-                0.00    0.00    1199/1763        ndpi_trecurse [5627]
-[13]     0.0    0.00    0.00    1763         node_print_known_proto_walker [13]
+                0.01    0.00  958759/958759      enqueue [11]
+[13]     1.7    0.01    0.00  958759         newNode [13]
 -----------------------------------------------
-                0.00    0.00     564/1763        printResults [24]
-                0.00    0.00    1199/1763        ndpi_trecurse [5627]
-[14]     0.0    0.00    0.00    1763         node_print_unknown_proto_walker [14]
+                                                 <spontaneous>
+[14]     1.7    0.01    0.00                 NDPI_BITMASK_COMPARE [14]
 -----------------------------------------------
-                0.00    0.00     564/1763        printResults [24]
-                0.00    0.00    1199/1763        ndpi_trecurse [5627]
-[15]     0.0    0.00    0.00    1763         node_proto_guess_walker [15]
-                0.00    0.00    1027/1301        process_ndpi_collected_info [16]
+                                                 <spontaneous>
+[15]     1.7    0.01    0.00                 ndpi_connection_tracking [15]
 -----------------------------------------------
-                0.00    0.00     274/1301        ndpi_workflow_process_packet [12]
-                0.00    0.00    1027/1301        node_proto_guess_walker [15]
-[16]     0.0    0.00    0.00    1301         process_ndpi_collected_info [16]
-                0.00    0.00     223/223         on_protocol_discovered [20]
+                                                 <spontaneous>
+[16]     1.7    0.01    0.00                 ndpi_match_prefix [16]
 -----------------------------------------------
-                0.00    0.00    1027/1027        printFlow [18]
-[17]     0.0    0.00    0.00    1027         ipProto2Name [17]
+                                                 <spontaneous>
+[17]     1.7    0.01    0.00                 ndpi_search_ftp_control [17]
 -----------------------------------------------
-                0.00    0.00    1027/1027        printResults [24]
-[18]     0.0    0.00    0.00    1027         printFlow [18]
-                0.00    0.00    1027/1027        ipProto2Name [17]
+                                                 <spontaneous>
+[18]     1.7    0.01    0.00                 ndpi_strnstr [18]
 -----------------------------------------------
-                0.00    0.00     271/271         ndpi_workflow_process_packet [12]
-[19]     0.0    0.00    0.00     271         ndpi_free_flow_info_half [19]
-                0.00    0.00     813/37265       free_wrapper [6]
+                                                 <spontaneous>
+[19]     1.6    0.00    0.01                 ndpi_tfind [19]
+                0.01    0.00 1664523/1700186     ndpi_workflow_node_cmp [12]
 -----------------------------------------------
-                0.00    0.00     223/223         process_ndpi_collected_info [16]
-[20]     0.0    0.00    0.00     223         on_protocol_discovered [20]
+                0.00    0.00 1129261/8428737     thread_waiting_loop [1]
+                0.00    0.00 7299476/8428737     runPcapLoop [3]
+[20]     0.8    0.01    0.00 8428737         isEmpty [20]
 -----------------------------------------------
-                0.00    0.00      12/12          printResults [24]
-[21]     0.0    0.00    0.00      12         formatBytes [21]
+                                                 <spontaneous>
+[21]     0.8    0.01    0.00                 peek [21]
 -----------------------------------------------
-                0.00    0.00       8/8           printResults [24]
-[22]     0.0    0.00    0.00       8         formatPackets [22]
+                                                 <spontaneous>
+[22]     0.0    0.00    0.00                 ndpi_tsearch [22]
+                0.00    0.00   35663/1700186     ndpi_workflow_node_cmp [12]
+                0.00    0.00    6198/48322       malloc_wrapper [24]
 -----------------------------------------------
-                0.00    0.00       8/8           printResults [24]
-[23]     0.0    0.00    0.00       8         formatTraffic [23]
+                0.00    0.00       1/102995      main [268]
+                0.00    0.00       1/102995      addDefaultPort.constprop.19 [59]
+                0.00    0.00       2/102995      ndpi_match_string_subprotocol [381]
+                0.00    0.00       6/102995      ndpi_Destroy_Patricia [273]
+                0.00    0.00      63/102995      ndpi_realloc [406]
+                0.00    0.00     429/102995      ndpi_free_flow [322]
+                0.00    0.00     481/102995      ndpi_workflow_free [34]
+                0.00    0.00     502/102995      ndpi_exit_detection_module [313]
+                0.00    0.00    6409/102995      ndpi_flow_info_freer [28]
+                0.00    0.00    6561/102995      ndpi_tdestroy_recurse [575]
+                0.00    0.00    8162/102995      ac_automata_release [53]
+                0.00    0.00   16300/102995      node_release [592]
+                0.00    0.00   17692/102995      ndpi_free_flow_info_half [27]
+                0.00    0.00   46386/102995      ndpi_Clear_Patricia [270]
+[23]     0.0    0.00    0.00  102995         free_wrapper [23]
 -----------------------------------------------
-                0.00    0.00       1/4           test_lib [8745]
-                0.00    0.00       3/4           processing_thread [3]
-[24]     0.0    0.00    0.00       4         printResults [24]
-                0.00    0.00    1027/1027        printFlow [18]
-                0.00    0.00     564/1763        node_proto_guess_walker [15]
-                0.00    0.00     564/1763        node_print_known_proto_walker [13]
-                0.00    0.00     564/1763        node_print_unknown_proto_walker [14]
-                0.00    0.00      12/12          formatBytes [21]
-                0.00    0.00       8/8           formatTraffic [23]
-                0.00    0.00       8/8           formatPackets [22]
+                0.00    0.00       1/48322       ndpi_init_detection_module [349]
+                0.00    0.00       2/48322       ac_automata_finalize [50]
+                0.00    0.00       8/48322       ac_automata_init [51]
+                0.00    0.00      71/48322       ndpi_realloc [406]
+                0.00    0.00     119/48322       addDefaultPort.constprop.19 [59]
+                0.00    0.00     207/48322       ndpi_strdup [570]
+                0.00    0.00     364/48322       check_content_type_and_change_protocol [74]
+                0.00    0.00    3054/48322       node_create [580]
+                0.00    0.00    4687/48322       node_init [587]
+                0.00    0.00    6198/48322       ndpi_tsearch [22]
+                0.00    0.00   16180/48322       ndpi_calloc [290]
+                0.00    0.00   17431/48322       get_ndpi_flow_info [9]
+[24]     0.0    0.00    0.00   48322         malloc_wrapper [24]
 -----------------------------------------------
-                0.00    0.00       3/3           processing_thread [3]
-[25]     0.0    0.00    0.00       3         ndpi_workflow_reset [25]
+                0.00    0.00     480/15323       printResults [39]
+                0.00    0.00   14843/15323       ndpi_trecurse [576]
+[25]     0.0    0.00    0.00   15323         node_proto_guess_walker [25]
+                0.00    0.00    6409/11463       process_ndpi_collected_info [26]
 -----------------------------------------------
-                0.00    0.00       2/2           setupDetection [27]
-[26]     0.0    0.00    0.00       2         ndpi_workflow_init [26]
+                0.00    0.00    5054/11463       packet_processing [8]
+                0.00    0.00    6409/11463       node_proto_guess_walker [25]
+[26]     0.0    0.00    0.00   11463         process_ndpi_collected_info [26]
+                0.00    0.00    5000/11409       ndpi_free_flow_info_half [27]
+                0.00    0.00    4813/4813        on_protocol_discovered [29]
 -----------------------------------------------
-                0.00    0.00       2/2           test_lib [8745]
-[27]     0.0    0.00    0.00       2         setupDetection [27]
-                0.00    0.00       2/2           ndpi_workflow_init [26]
+                0.00    0.00    5000/11409       process_ndpi_collected_info [26]
+                0.00    0.00    6409/11409       ndpi_flow_info_freer [28]
+[27]     0.0    0.00    0.00   11409         ndpi_free_flow_info_half [27]
+                0.00    0.00   17692/102995      free_wrapper [23]
 -----------------------------------------------
-                0.00    0.00       1/1           test_lib [8745]
-[28]     0.0    0.00    0.00       1         dpdk_port_init [28]
+                0.00    0.00    6409/6409        ndpi_tdestroy_recurse [575]
+[28]     0.0    0.00    0.00    6409         ndpi_flow_info_freer [28]
+                0.00    0.00    6409/11409       ndpi_free_flow_info_half [27]
+                0.00    0.00    6409/102995      free_wrapper [23]
 -----------------------------------------------
-                0.00    0.00       1/1           test_lib [8745]
-[29]     0.0    0.00    0.00       1         start_threads [29]
+                0.00    0.00    4813/4813        process_ndpi_collected_info [26]
+[29]     0.0    0.00    0.00    4813         on_protocol_discovered [29]
+-----------------------------------------------
+                0.00    0.00       4/4           printResults [39]
+[30]     0.0    0.00    0.00       4         formatBytes [30]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [39]
+[31]     0.0    0.00    0.00       2         formatPackets [31]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [39]
+[32]     0.0    0.00    0.00       2         formatTraffic [32]
+-----------------------------------------------
+                0.00    0.00       1/1           main [268]
+[33]     0.0    0.00    0.00       1         automataUnitTest [33]
+-----------------------------------------------
+                0.00    0.00       1/1           terminateDetection [42]
+[34]     0.0    0.00    0.00       1         ndpi_workflow_free [34]
+                0.00    0.00     481/102995      free_wrapper [23]
+-----------------------------------------------
+                0.00    0.00       1/1           setupDetection [40]
+[35]     0.0    0.00    0.00       1         ndpi_workflow_init [35]
+-----------------------------------------------
+                0.00    0.00       1/1           setupDetection [40]
+[36]     0.0    0.00    0.00       1         ndpi_workflow_set_flow_detected_callback [36]
+-----------------------------------------------
+                0.00    0.00       1/1           distributePacketsThread [4]
+[37]     0.0    0.00    0.00       1         openPcapFileOrDevice [37]
+-----------------------------------------------
+                0.00    0.00       1/1           main [268]
+[38]     0.0    0.00    0.00       1         parseOptions [38]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [43]
+[39]     0.0    0.00    0.00       1         printResults [39]
+                0.00    0.00     480/15323       node_proto_guess_walker [25]
+                0.00    0.00       4/4           formatBytes [30]
+                0.00    0.00       2/2           formatTraffic [32]
+                0.00    0.00       2/2           formatPackets [31]
+-----------------------------------------------
+                0.00    0.00       1/1           distributePacketsThread [4]
+[40]     0.0    0.00    0.00       1         setupDetection [40]
+                0.00    0.00       1/1           ndpi_workflow_init [35]
+                0.00    0.00       1/1           ndpi_workflow_set_flow_detected_callback [36]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [43]
+[41]     0.0    0.00    0.00       1         start_threads [41]
+-----------------------------------------------
+                0.00    0.00       1/1           test_lib [43]
+[42]     0.0    0.00    0.00       1         terminateDetection [42]
+                0.00    0.00       1/1           ndpi_workflow_free [34]
+-----------------------------------------------
+                0.00    0.00       1/1           main [268]
+[43]     0.0    0.00    0.00       1         test_lib [43]
+                0.00    0.00       1/1           start_threads [41]
+                0.00    0.00       1/1           printResults [39]
+                0.00    0.00       1/1           terminateDetection [42]
 -----------------------------------------------
 
  This table describes the call tree of the program, and was sorted by
@@ -302,13 +368,17 @@ notice and this notice are preserved.
 
 Index by function name
 
-  [10] dequeue                 [5] malloc_wrapper (ndpi_util.c) [20] on_protocol_discovered (ndpiReader.c)
-  [28] dpdk_port_init         [19] ndpi_free_flow_info_half [18] printFlow (ndpiReader.c)
-   [8] enqueue                [26] ndpi_workflow_init     [24] printResults (ndpiReader.c)
-  [21] formatBytes             [7] ndpi_workflow_node_cmp [16] process_ndpi_collected_info
-  [22] formatPackets          [12] ndpi_workflow_process_packet [3] processing_thread
-  [23] formatTraffic          [25] ndpi_workflow_reset    [27] setupDetection (ndpiReader.c)
-   [6] free_wrapper (ndpi_util.c) [9] newNode             [29] start_threads
-  [11] get_ndpi_flow_info.constprop.3 (ndpi_util.c) [13] node_print_known_proto_walker (ndpiReader.c) [1] thread_waiting_loop
-  [17] ipProto2Name (ndpiReader.c) [14] node_print_unknown_proto_walker (ndpiReader.c)
-   [2] isEmpty                [15] node_proto_guess_walker (ndpiReader.c)
+  [14] NDPI_BITMASK_COMPARE   [27] ndpi_free_flow_info_half [8] packet_processing (ndpi_util.c)
+  [33] automataUnitTest       [16] ndpi_match_prefix      [38] parseOptions (ndpiReader.c)
+   [7] dequeue                 [5] ndpi_process_packet (ndpiReader.c) [21] peek
+  [11] enqueue                [17] ndpi_search_ftp_control [39] printResults (ndpiReader.c)
+  [30] formatBytes            [18] ndpi_strnstr           [26] process_ndpi_collected_info
+  [31] formatPackets          [34] ndpi_workflow_free      [2] processing_thread
+  [32] formatTraffic          [35] ndpi_workflow_init      [3] runPcapLoop (ndpiReader.c)
+  [23] free_wrapper (ndpi_util.c) [12] ndpi_workflow_node_cmp [40] setupDetection (ndpiReader.c)
+   [9] get_ndpi_flow_info (ndpi_util.c) [6] ndpi_workflow_process_packet [41] start_threads
+  [10] hashedDistributionValue (ndpiReader.c) [36] ndpi_workflow_set_flow_detected_callback (ndpi_util.h) [42] terminateDetection (ndpiReader.c)
+  [20] isEmpty                [13] newNode                [43] test_lib
+  [24] malloc_wrapper (ndpi_util.c) [25] node_proto_guess_walker (ndpiReader.c) [1] thread_waiting_loop
+  [15] ndpi_connection_tracking [29] on_protocol_discovered (ndpiReader.c)
+  [28] ndpi_flow_info_freer   [37] openPcapFileOrDevice (ndpiReader.c)

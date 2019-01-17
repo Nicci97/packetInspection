@@ -1,0 +1,342 @@
+done with 4 test.pcap.pcapng files processed on one thread
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 85.72      2.88     2.88                             start_threads
+  6.85      3.11     0.23 53324622     0.00     0.00  ndpi_detection_get_l4_internal.constprop.17
+  1.19      3.15     0.04   424644     0.00     0.00  packet_processing
+  1.19      3.19     0.04   414517     0.00     0.00  ndpi_process_packet
+  0.89      3.22     0.03  1242593     0.00     0.00  get_ndpi_flow_info
+  0.89      3.25     0.03                             processing_thread
+  0.60      3.27     0.02   392611     0.00     0.00  ndpi_workflow_process_packet
+  0.60      3.29     0.02   369416     0.00     0.00  hashedDistributionValue
+  0.30      3.30     0.01   942361     0.00     0.00  ac_match_handler
+  0.30      3.31     0.01    15323     0.00     0.00  node_proto_guess_walker
+  0.30      3.32     0.01                             check_ndpi_tcp_flow_func
+  0.30      3.33     0.01                             check_ndpi_udp_flow_func
+  0.30      3.34     0.01                             ndpi_build_default_ports
+  0.30      3.35     0.01                             newNode
+  0.30      3.36     0.01                             process_allocation
+  0.00      3.36     0.00   368663     0.00     0.00  ndpi_free
+  0.00      3.36     0.00   260403     0.00     0.00  parse_debug_proto
+  0.00      3.36     0.00     6413     0.00     0.00  patchIPv6Address
+  0.00      3.36     0.00     2158     0.00     0.00  setupDetection
+  0.00      3.36     0.00        6     0.00     0.00  formatPackets
+  0.00      3.36     0.00        4     0.00     0.00  printPortStats
+  0.00      3.36     0.00        3     0.00     0.00  ndpi_workflow_node_cmp
+  0.00      3.36     0.00        2     0.00     0.00  port_stats_sort
+  0.00      3.36     0.00        1     0.00     0.00  bpf_filter_host_array_add
+  0.00      3.36     0.00        1     0.00     0.31  bpf_filter_port_array_add
+  0.00      3.36     0.00        1     0.00     0.00  main
+  0.00      3.36     0.00        1     0.00     0.00  parseOptions
+  0.00      3.36     0.00        1     0.00     0.31  printResults
+  0.00      3.36     0.00        1     0.00    20.00  runPcapLoop
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.30% of 3.36 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     94.8    2.88    0.31                 start_threads [1]
+                0.23    0.01 53324621/53324622     ndpi_detection_get_l4_internal.constprop.17 [2]
+                0.04    0.02  414517/414517      ndpi_process_packet [3]
+                0.01    0.00  518151/942361      ac_match_handler [13]
+                0.00    0.00       1/2158        setupDetection [27]
+-----------------------------------------------
+                0.00    0.00       1/53324622     test_lib [23]
+                0.23    0.01 53324621/53324622     start_threads [1]
+[2]      7.1    0.23    0.01 53324622         ndpi_detection_get_l4_internal.constprop.17 [2]
+                0.01    0.00   14843/15323       node_proto_guess_walker [14]
+                0.00    0.00  368663/368663      ndpi_free [24]
+-----------------------------------------------
+                0.04    0.02  414517/414517      start_threads [1]
+[3]      1.8    0.04    0.02  414517         ndpi_process_packet [3]
+                0.02    0.00  392611/392611      ndpi_workflow_process_packet [9]
+-----------------------------------------------
+                                                 <spontaneous>
+[4]      1.7    0.01    0.05                 newNode [4]
+                0.04    0.01  415942/424644      packet_processing [5]
+-----------------------------------------------
+                0.00    0.00    2293/424644      ndpi_workflow_process_packet [9]
+                0.00    0.00    6409/424644      updateScanners [18]
+                0.04    0.01  415942/424644      newNode [4]
+[5]      1.5    0.04    0.01  424644         packet_processing [5]
+                0.01    0.00  398162/1242593     get_ndpi_flow_info [7]
+                0.00    0.00    2671/260403      parse_debug_proto [25]
+                0.00    0.00    2157/2158        setupDetection [27]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]      1.0    0.03    0.00                 processing_thread [6]
+                0.00    0.00  424210/942361      ac_match_handler [13]
+-----------------------------------------------
+                0.00    0.00   20679/1242593     ndpi_set_proto_defaults [19]
+                0.01    0.00  398162/1242593     packet_processing [5]
+                0.02    0.00  823752/1242593     ndpi_build_default_ports [8]
+[7]      0.9    0.03    0.00 1242593         get_ndpi_flow_info [7]
+                0.00    0.00    5303/260403      parse_debug_proto [25]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      0.9    0.01    0.02                 ndpi_build_default_ports [8]
+                0.02    0.00  823752/1242593     get_ndpi_flow_info [7]
+-----------------------------------------------
+                0.02    0.00  392611/392611      ndpi_process_packet [3]
+[9]      0.6    0.02    0.00  392611         ndpi_workflow_process_packet [9]
+                0.00    0.00    2293/424644      packet_processing [5]
+-----------------------------------------------
+                0.02    0.00  369416/369416      runPcapLoop [11]
+[10]     0.6    0.02    0.00  369416         hashedDistributionValue [10]
+-----------------------------------------------
+                0.00    0.02       1/1           automataUnitTest [12]
+[11]     0.6    0.00    0.02       1         runPcapLoop [11]
+                0.02    0.00  369416/369416      hashedDistributionValue [10]
+-----------------------------------------------
+                                                 <spontaneous>
+[12]     0.6    0.00    0.02                 automataUnitTest [12]
+                0.00    0.02       1/1           runPcapLoop [11]
+-----------------------------------------------
+                0.00    0.00  424210/942361      processing_thread [6]
+                0.01    0.00  518151/942361      start_threads [1]
+[13]     0.3    0.01    0.00  942361         ac_match_handler [13]
+-----------------------------------------------
+                0.00    0.00     480/15323       printResults [21]
+                0.01    0.00   14843/15323       ndpi_detection_get_l4_internal.constprop.17 [2]
+[14]     0.3    0.01    0.00   15323         node_proto_guess_walker [14]
+-----------------------------------------------
+                                                 <spontaneous>
+[15]     0.3    0.01    0.00                 check_ndpi_tcp_flow_func [15]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     0.3    0.01    0.00                 check_ndpi_udp_flow_func [16]
+-----------------------------------------------
+                                                 <spontaneous>
+[17]     0.3    0.01    0.00                 process_allocation [17]
+-----------------------------------------------
+                                                 <spontaneous>
+[18]     0.0    0.00    0.00                 updateScanners [18]
+                0.00    0.00    6409/424644      packet_processing [5]
+-----------------------------------------------
+                                                 <spontaneous>
+[19]     0.0    0.00    0.00                 ndpi_set_proto_defaults [19]
+                0.00    0.00   20679/1242593     get_ndpi_flow_info [7]
+                0.00    0.00    3994/260403      parse_debug_proto [25]
+-----------------------------------------------
+                0.00    0.00       1/1           ndpi_free_flow_info_half [22]
+[20]     0.0    0.00    0.00       1         bpf_filter_port_array_add [20]
+                0.00    0.00       1/1           printResults [21]
+                0.00    0.00       4/6           formatPackets [28]
+-----------------------------------------------
+                0.00    0.00       1/1           bpf_filter_port_array_add [20]
+[21]     0.0    0.00    0.00       1         printResults [21]
+                0.00    0.00     480/15323       node_proto_guess_walker [14]
+                0.00    0.00       4/4           printPortStats [29]
+                0.00    0.00       2/6           formatPackets [28]
+                0.00    0.00       2/2           port_stats_sort [31]
+-----------------------------------------------
+                                                 <spontaneous>
+[22]     0.0    0.00    0.00                 ndpi_free_flow_info_half [22]
+                0.00    0.00       1/1           bpf_filter_port_array_add [20]
+-----------------------------------------------
+                                                 <spontaneous>
+[23]     0.0    0.00    0.00                 test_lib [23]
+                0.00    0.00       1/53324622     ndpi_detection_get_l4_internal.constprop.17 [2]
+-----------------------------------------------
+                0.00    0.00  368663/368663      ndpi_detection_get_l4_internal.constprop.17 [2]
+[24]     0.0    0.00    0.00  368663         ndpi_free [24]
+-----------------------------------------------
+                               11205             parse_debug_proto [25]
+                0.00    0.00       3/260403      ndpi_init_detection_module [340]
+                0.00    0.00       3/260403      ac_automata_display [41]
+                0.00    0.00      15/260403      ndpi_get_proto_by_name [329]
+                0.00    0.00      15/260403      ndpi_patricia_search_best2 [388]
+                0.00    0.00      17/260403      ht_newpair [99]
+                0.00    0.00      25/260403      ndpi_handle_rule [338]
+                0.00    0.00     193/260403      check_content_type_and_change_protocol [62]
+                0.00    0.00     408/260403      check_ndpi_other_flow_func [63]
+                0.00    0.00     620/260403      ndpi_init_protocol_match [342]
+                0.00    0.00    1215/260403      ndpi_get_num_supported_protocols [325]
+                0.00    0.00    2667/260403      get_ndpi_flow_info6 [93]
+                0.00    0.00    2671/260403      packet_processing [5]
+                0.00    0.00    3994/260403      ndpi_set_proto_defaults [19]
+                0.00    0.00    5196/260403      _fini [630]
+                0.00    0.00    5303/260403      get_ndpi_flow_info [7]
+                0.00    0.00    7509/260403      ndpi_string_to_automa.constprop.18 [563]
+                0.00    0.00   13302/260403      patchIPv6Address [26]
+                0.00    0.00   20405/260403      ht_set [100]
+                0.00    0.00   29769/260403      ndpi_add_content_subprotocol [270]
+                0.00    0.00   51108/260403      sort [611]
+                0.00    0.00  115965/260403      ndpi_patricia_search_exact [389]
+[25]     0.0    0.00    0.00  260403+11205   parse_debug_proto [25]
+                               11205             parse_debug_proto [25]
+-----------------------------------------------
+                0.00    0.00       4/6413        formatPackets [28]
+                0.00    0.00    6409/6413        ndpi_string_to_automa.constprop.18 [563]
+[26]     0.0    0.00    0.00    6413         patchIPv6Address [26]
+                0.00    0.00   13302/260403      parse_debug_proto [25]
+-----------------------------------------------
+                0.00    0.00       1/2158        start_threads [1]
+                0.00    0.00    2157/2158        packet_processing [5]
+[27]     0.0    0.00    0.00    2158         setupDetection [27]
+                0.00    0.00       3/3           ndpi_workflow_node_cmp [30]
+-----------------------------------------------
+                0.00    0.00       2/6           printResults [21]
+                0.00    0.00       4/6           bpf_filter_port_array_add [20]
+[28]     0.0    0.00    0.00       6         formatPackets [28]
+                0.00    0.00       4/6413        patchIPv6Address [26]
+-----------------------------------------------
+                0.00    0.00       4/4           printResults [21]
+[29]     0.0    0.00    0.00       4         printPortStats [29]
+-----------------------------------------------
+                0.00    0.00       3/3           setupDetection [27]
+[30]     0.0    0.00    0.00       3         ndpi_workflow_node_cmp [30]
+-----------------------------------------------
+                0.00    0.00       2/2           printResults [21]
+[31]     0.0    0.00    0.00       2         port_stats_sort [31]
+-----------------------------------------------
+                0.00    0.00       1/1           ndpi_get_proto_id [332]
+[32]     0.0    0.00    0.00       1         bpf_filter_host_array_add [32]
+                0.00    0.00       1/1           main [33]
+-----------------------------------------------
+                0.00    0.00       1/1           bpf_filter_host_array_add [32]
+[33]     0.0    0.00    0.00       1         main [33]
+-----------------------------------------------
+                0.00    0.00       1/1           malloc_wrapper [260]
+[34]     0.0    0.00    0.00       1         parseOptions [34]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [13] ac_match_handler (ndpi_main.c) [2] ndpi_detection_get_l4_internal.constprop.17 (ndpi_main.c) [26] patchIPv6Address (ndpi_util.c)
+  [32] bpf_filter_host_array_add [24] ndpi_free           [31] port_stats_sort (ndpiReader.c)
+  [20] bpf_filter_port_array_add [3] ndpi_process_packet (ndpiReader.c) [29] printPortStats
+  [15] check_ndpi_tcp_flow_func [30] ndpi_workflow_node_cmp [21] printResults (ndpiReader.c)
+  [16] check_ndpi_udp_flow_func [9] ndpi_workflow_process_packet [17] process_allocation (ndpiReader.c)
+  [28] formatPackets           [4] newNode                 [6] processing_thread
+   [7] get_ndpi_flow_info (ndpi_util.c) [14] node_proto_guess_walker (ndpiReader.c) [11] runPcapLoop (ndpiReader.c)
+  [10] hashedDistributionValue (ndpiReader.c) [5] packet_processing (ndpi_util.c) [27] setupDetection (ndpiReader.c)
+  [33] main                   [34] parseOptions (ndpiReader.c) [1] start_threads
+   [8] ndpi_build_default_ports [25] parse_debug_proto (ndpi_util.c)

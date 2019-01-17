@@ -94,7 +94,7 @@
 /** Client parameters **/
 //  pthread_mutex_t lock;
 //static int** packetDistributionArray;
-
+u_char* sentPacketTemp;
 static struct timeval startProg, endProg;
 pthread_mutex_t** locks;
 struct Node** threadQueueRears;
@@ -3017,9 +3017,16 @@ static void runPcapLoop(u_int16_t thread_id) {
     pcap_t * handler = ndpi_thread_info[thread_id].workflow->pcap_handle;
     struct pcap_pkthdr *header;
     const u_char *packet;
+     int count = 0;
     while (pcap_next_ex(handler, &header, &packet) >= 0) {
       u_char *element;
       element = (u_char*)packet;
+
+      if (count == 0) {
+        sentPacketTemp = element;
+      } else {
+        count = 1;
+      }
 
       u_int8_t protocol_hash;
       u_int16_t vlan_id_hash;
@@ -3032,19 +3039,32 @@ static void runPcapLoop(u_int16_t thread_id) {
            &src_port_hash, &dst_port_hash, header, packet, handler,
            ndpi_thread_info[thread_id].workflow->prefs.decode_tunnels);
 
-      // u_int32_t hashval = protocol_hash + vlan_id_hash + src_ip_hash + dst_ip_hash + src_port_hash + dst_port_hash; 
-      // u_int32_t idx = hashval % num_threads;
-      // printf("this is the my hashvalue: %d\n", idx);
-
       pthread_mutex_t *lock = locks[hashValue];
+      //printf("lock: %p\n", lock);
       pthread_mutex_lock(lock);
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
-      enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+
+      enqueue(element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
            &src_port_hash, &dst_port_hash);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
       pthread_mutex_unlock(lock);
+
+      // pthread_mutex_t *lock = locks[count];
+      // pthread_mutex_lock(lock);
+      // struct Node *rear = threadQueueRears[count]; 
+      // struct Node *front = threadQueueFronts[count];
+      // enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+      //      &src_port_hash, &dst_port_hash);
+      // threadQueueRears[count] = rear;
+      // threadQueueFronts[count] = front;
+      // pthread_mutex_unlock(lock);
+
+      // count++;
+      // if (count == num_threads) {
+      //   count = 0;
+      // }
     }
 
     int queuesNotEmpty = 1;
@@ -3140,8 +3160,8 @@ void * processing_thread(void *_thread_id) {
       struct Node *rear = threadQueueRears[hashValue]; 
       struct Node *front = threadQueueFronts[hashValue];
 
-      enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
-           &src_port_hash, &dst_port_hash);
+      // enqueue(&element, &header, &front, &rear, &protocol_hash, &vlan_id_hash, &src_ip_hash, &dst_ip_hash, 
+      //      &src_port_hash, &dst_port_hash);
       //enqueue(&element, &header, &front, &rear);
       threadQueueRears[hashValue] = rear;
       threadQueueFronts[hashValue] = front;
@@ -3850,25 +3870,18 @@ static void produceBpfFilter(char *filePath) {
  * Processes all packets assigned to it's buffer
  */
 void * thread_waiting_loop(void *_thread_id) {
-  int count = 0;
   long thread_id = (long) _thread_id;
   struct Node *rear; 
   struct Node *front;
-  int pcount = 0;
-  struct pcap_pkthdr *header;
   while(keepThreadsRunning) {
     pthread_mutex_t *lock = locks[thread_id];
     pthread_mutex_lock(lock);
     rear = threadQueueRears[thread_id]; 
     front = threadQueueFronts[thread_id];
     if (!isEmpty(&front, &rear)) {
-      count++;
       struct Node* node = dequeue(&front, &rear);
-      //printf("I am dequeueud something %s\n", temp->data);
-      // const u_char *packet = malloc(sizeof(u_char));
-      // packet = (const u_char *)temp->data;
-      // struct pcap_pkthdr *header = malloc(sizeof(struct pcap_pkthdr));
-      // header = temp->header;
+      // printf("dequing from thread: %ld\n", thread_id);
+      // printf("lock id: %p\n", lock);
       if (front == NULL) {
           threadQueueRears[thread_id] = rear;
         threadQueueFronts[thread_id] = front;
@@ -3876,13 +3889,7 @@ void * thread_waiting_loop(void *_thread_id) {
         threadQueueFronts[thread_id] = front;
       }
       pthread_mutex_unlock(lock);
-      //printf("%s %d %ld\n", packet, pcount, thread_id);
       ndpi_process_packet((u_char*)&thread_id, node);
-
-      // free(packet);
-      // free(header);
-      // free(temp);
-      pcount++;
     } else {
       pthread_mutex_unlock(lock);
     }
@@ -3953,15 +3960,8 @@ void start_threads() {
       exit(-1);
     }
   }
-  /* Running thread responsible for distribution of packets */
-  thread_id = num_threads;
-  status = pthread_create(&ndpi_thread_info[thread_id].pthread, NULL, distributePacketsThread, (void *) thread_id);
-  printf("Distributing thread %ld is running\n", thread_id);
-  /* check pthreade_create return value */
-  if(status != 0) {
-    fprintf(stderr, "error on create %ld thread\n", thread_id);
-    exit(-1);
-  }
+  distributePacketsThread((void *) thread_id);
+
   /* Waiting for completion of processing threads*/
   for(thread_id = 0; thread_id < num_threads; thread_id++) {
     status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
@@ -3975,19 +3975,6 @@ void start_threads() {
       exit(-1);
     }
   }
-  /* waiting for completion of thread responsible for distribution of packets */
-  thread_id = num_threads;
-  status = pthread_join(ndpi_thread_info[thread_id].pthread, &thd_res);
-    /* check pthreade_join return value */
-    if(status != 0) {
-      fprintf(stderr, "error on join %ld thread\n", thread_id);
-      exit(-1);
-    }
-    if(thd_res != NULL) {
-      fprintf(stderr, "error on returned value of %ld joined thread\n", thread_id);
-      exit(-1);
-    }
-    
 }
 
 /**

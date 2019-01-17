@@ -1,0 +1,11078 @@
+# callgrind format
+version: 1
+creator: callgrind-3.13.0
+pid: 28969
+cmd:  ./ndpiReader -i ../tests/pcap/test.pcap.pcapng -n 4
+part: 1
+thread: 6
+
+
+desc: I1 cache: 
+desc: D1 cache: 
+desc: LL cache: 
+
+desc: Timerange: Basic block 0 - 77790488779
+desc: Trigger: Program termination
+
+positions: line
+events: Ir
+summary: 605305020
+
+
+ob=(5) /home/vastech/packetInspection/example/ndpiReader
+fl=(256) /home/vastech/packetInspection/src/lib/protocols/smb.c
+fn=(1512) init_smb_dissector
+58 4
++1 4
+-1 4
++1 36
+cfi=(134) /home/vastech/packetInspection/src/lib/ndpi_main.c
+cfn=(1412) ndpi_set_bitmask_protocol_detection
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(319) /home/vastech/packetInspection/src/lib/protocols/corba.c
+fn=(1638) init_corba_dissector
+52 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(260) /home/vastech/packetInspection/src/lib/protocols/nfs.c
+fn=(1520) init_nfs_dissector
+91 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(279) /home/vastech/packetInspection/src/lib/protocols/ldap.c
+fn=(1558) init_ldap_dissector
+94 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(323) /home/vastech/packetInspection/src/lib/protocols/pando.c
+fn=(1646) init_pando_dissector
+158 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(205) /home/vastech/packetInspection/example/ndpi_util.c
+fn=(1400) free_wrapper
+108 1424
+cob=(3) /lib/x86_64-linux-gnu/libc-2.27.so
+cfi=(132) /build/glibc-OTsEL5/glibc-2.27/gmon/../sysdeps/x86_64/_mcount.S
+cfn=(508) mcount
+calls=356 -79 
+* 12184
+* 356
++1 1068
+cob=(3)
+cfi=(107) /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c
+cfn=(584) free
+calls=356 3086 
+* 33772
+* 356
++1 1068
+
+fn=(1396) malloc_wrapper
+94 577376
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=144344 -65 
+* 5684970
+* 144344
++1 721720
++2 577376
++1 288688
++2 433032
+cob=(3)
+cfi=(107)
+cfn=(528) malloc
+calls=144344 3028 
+* 35176144
+* 144344
++1 288688
+
+fn=(1386) ndpi_workflow_init
+176 16
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=4 29 
+* 156
+* 8
++1 8
+cfi=(134)
+cfn=(1388) set_ndpi_malloc
+calls=4 2135 
+* 8
+* 8
+cfi=(134)
+cfn=(1390) set_ndpi_free
+calls=4 2138 
+* 8
++1 8
+cfi=(134)
+cfn=(1392) set_ndpi_flow_malloc
+calls=4 2136 
+* 8
+* 8
+cfi=(134)
+cfn=(1394) set_ndpi_flow_free
+calls=4 2139 
+* 8
++2 4
+cfi=(134)
+cfn=(612) ndpi_init_detection_module
+calls=4 2173 
+* 67229963
+* 4
++2 12
+cfi=(134)
+cfn=(622) ndpi_calloc
+calls=4 337 
+* 6343
+* 4
++2 12
++1 24
++1 12
++2 16
++5 24
+cfi=(134)
+cfn=(1402) ndpi_set_log_level
+calls=4 6148 
+* 8
++2 12
++12 24
+cfi=(134)
+cfn=(622)
+calls=4 337 
+* 3543
+* 12
++2 4
++1 8
+
+fl=(238) /home/vastech/packetInspection/src/lib/protocols/sopcast.c
+fn=(1476) init_sopcast_dissector
+216 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(294) /home/vastech/packetInspection/src/lib/protocols/fiesta.c
+fn=(1588) init_fiesta_dissector
+96 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(283) /home/vastech/packetInspection/src/lib/protocols/mssql_tds.c
+fn=(1566) init_mssql_tds_dissector
+74 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(338) /home/vastech/packetInspection/src/lib/protocols/mqtt.c
+fn=(1676) init_mqtt_dissector
+247 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++6 4
+-1 4
++1 8
+
+fl=(327) /home/vastech/packetInspection/src/lib/protocols/vhua.c
+fn=(1654) init_vhua_dissector
+70 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(242) /home/vastech/packetInspection/src/lib/protocols/iax.c
+fn=(1484) init_iax_dissector
+98 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(298) /home/vastech/packetInspection/src/lib/protocols/dropbox.c
+fn=(1596) init_dropbox_dissector
+93 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(222) /home/vastech/packetInspection/src/lib/protocols/yahoo.c
+fn=(1444) init_yahoo_dissector
+395 4
++2 4
+-2 4
++2 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(287) /home/vastech/packetInspection/src/lib/protocols/afp.c
+fn=(1574) init_afp_dissector
+91 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(342) /home/vastech/packetInspection/src/lib/protocols/hangout.c
+fn=(1684) init_hangout_dissector
+99 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(131) /home/vastech/packetInspection/example/ndpiReader.c
+fn=(1716) processing_thread
+3073 5
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 28
+* 4
++1 2
+3188 4
+cfn=(1718) runPcapLoop
+calls=1 3015 
+* 537937975
+
+fn=(1718)
+3015 9
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 28
+* 5
++1 15
++1 11
++3 1
++2 236
++11 1180
+-2 2006
+cfn=(1804) hashedDistributionValue
+calls=118 2609 
+* 44653
+* 236
++4 826
++1 354
+cob=(4) /lib/x86_64-linux-gnu/libpthread-2.27.so
+cfi=(111) /build/glibc-OTsEL5/glibc-2.27/nptl/../nptl/pthread_mutex_lock.c
+cfn=(404) pthread_mutex_lock
+calls=118 65 
+* 5060
+* 118
++1 826
++1 826
++1 1888
+cfi=(188) /home/vastech/packetInspection/example/queue.c
+cfn=(1816) enqueue
+calls=118 71 
+* 249163
+* 118
++2 826
++1 826
++1 354
+cob=(4)
+cfi=(113) /build/glibc-OTsEL5/glibc-2.27/nptl/pthread_mutex_unlock.c
+cfn=(412) pthread_mutex_unlock
+calls=118 38 
+* 2693
+* 118
+-23 714
+cob=(6) /usr/lib/x86_64-linux-gnu/libpcap.so.1.8.1
+cfi=(125) ???
+cfn=(1722) pcap_next_ex
+calls=119 0 
+* 177978
+* 119
+* 238
++26 1
++1 28
++1 2
++1 16
+-1 24
++4 1
++1 2493952
++1 34915321
++1 34915321
++1 24939515
+cfi=(188)
+cfn=(880) isEmpty
+calls=4987903 116 
+* 317978795
+* 9975804
++1 14963704
+-4 29927414
++7 1246975
++1 2493950
++1 29927400
++1 1246975
+-2 29927400
+-9 2493952
+
+fn=(2172) breakPcapLoop
+2297 4
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 28
+* 2
++4 12
++1 12
+cob=(6)
+cfi=(125)
+cfn=(2176) pcap_breakloop
+calls=1 0 
+* 2
+* 1
++3 3
+
+fn=(886) distributePacketsThread
+3891 4
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 28
+* 1
++1 2
+cob=(3)
+cfi=(172) /build/glibc-OTsEL5/glibc-2.27/libio/ioputs.c
+cfn=(774) puts
+calls=1 33 
+* 530
+* 1
++9 2
++1 1
++1 2
++7 2
++1 9
+cfn=(902) openPcapFileOrDevice
+calls=1 2378 
+* 26789
+* 1
++1 2
++1 24
+cfn=(1384) setupDetection
+calls=4 1491 
+* 67339472
+-1 24
++3 2
++9 1
++1 3
+cfn=(1716)
+calls=1 3073 
+* 537938018
+-22 4
+
+fn=(1384)
+1491 20
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=4 29 
+* 156
+* 24
++4 20
+cob=(3)
+cfi=(118) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+cfn=(438) __memset_sse2_unaligned
+calls=4 109 
+* 52
+* 4
++1 8
++1 4
++1 4
++1 8
++2 40
++1 48
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 109 
+* 3674
+* 4
++1 40
++1 24
+cfi=(205)
+cfn=(1386)
+calls=4 176 
+* 67240273
+* 36
++3 56
+cfi=(134)
+cfn=(1404) ndpi_set_detection_preferences
+calls=4 939 
+* 60
++2 56
+cfi=(134)
+cfn=(1404)
+calls=4 939 
+* 64
++2 56
+cfi=(134)
+cfn=(1404)
+calls=4 939 
+* 64
++5 4
+-2 56
+cfi=(206) /home/vastech/packetInspection/example/ndpi_util.h
+cfn=(1406) ndpi_workflow_set_flow_detected_callback
+calls=4 187 
+* 201
++5 20
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 109 
+* 64
+* 4
++1 56
+cfi=(134)
+cfn=(1408) ndpi_set_protocol_detection_bitmask2
+calls=4 2848 
+* 89300
++2 56
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 109 
+* 1896
+* 4
++2 56
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 109 
+* 1868
+* 4
++2 56
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 109 
+* 972
+* 4
++3 12
++3 12
++37 32
+
+fn=(2170) sigproc
+2310 12
+cob=(3)
+cfi=(132)
+cfn=(509) mcount'2
+calls=1 29 
+* 32
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=2 29 
+* 60
+* 3
++1 3
++5 10
++1 1
++5 2
++3 4
+cfn=(2172)
+calls=1 -28 
+* 64
+-3 10
+-6 2
++11 6
+
+fn=(902)
+2378 4
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 53
+* 6
++1 1
++1 1
++2 1
++21 8
+cob=(6)
+cfi=(125)
+cfn=(906) pcap_open_live
+calls=1 0 
+* 18950
+* 1
+* 3
++2 3
++2 1
++4 5
+cob=(6)
+cfi=(125)
+cfn=(1136) pcap_open_offline
+calls=1 0 
+* 6540
+* 1
+* 3
++14 6
++1 5
+cob=(3)
+cfi=(178) /build/glibc-OTsEL5/glibc-2.27/stdio-common/printf.c
+cfn=(806) printf
+calls=1 28 
+* 1113
+* 1
+* 1
++14 3
+cfn=(1382) configurePcapHandle
+calls=1 -82 
+* 70
++3 3
++10 1
++1 5
+
+fn=(1382)
+2358 4
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=1 29 
+* 53
+* 4
++2 3
++12 6
+
+fn=(1804)
+2609 472
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=118 29 
+* 4887
+* 2124
++32 118
++3 118
++1 118
++1 118
++3 118
++1 236
++1 118
++3 118
++8 354
+cob=(6)
+cfi=(125)
+cfn=(1808) pcap_datalink
+calls=118 0 
+* 590
+* 118
+* 118
++4 826
++27 472
++1 354
++1 590
+cob=(3)
+cfi=(358) /build/glibc-OTsEL5/glibc-2.27/inet/htons.c
+cfn=(1812) htons
+calls=118 29 
+* 354
+* 118
+* 236
++2 236
++2 236
++1 236
++2 236
++12 236
++52 826
++2 1888
++1 1888
++1 118
++1 118
++2 236
++5 118
++27 472
++3 826
++1 590
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 118
++2 354
++1 708
++11 590
++1 708
++1 118
++2 472
++5 472
++41 236
++67 354
++2 708
++2 118
++1 118
++3 236
++1 236
++9 118
++1 472
++1 236
++1 236
++4 1534
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 236
++5 708
++1 354
++7 590
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 1062
++2 472
++3 708
++2 354
++1 708
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 118
++1 708
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 236
++9 354
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 118
++1 354
+cob=(3)
+cfi=(358)
+cfn=(1812)
+calls=118 29 
+* 354
+* 118
+* 118
++1 1534
++2 354
++1 354
++1 354
++1 354
++1 354
++1 354
++3 708
++1 118
++1 590
+
+fl=(135) /home/vastech/packetInspection/src/lib/third_party/src/ahocorasick.c
+fn=(542) ac_automata_reset
+221 24
++1 24
+-1 24
++2 24
+
+fn=(540) ac_automata_register_nodeptr
+304 81500
++1 81500
++4 68
+-2 272
+cfi=(134)
+cfn=(668) ndpi_realloc
+calls=68 +61 
+* 184832
++4 136
+-4 68
++6 204
++1 272
+-1 48696
++1 64928
+
+fn=(554) ac_automata_add
+81 4008
++1 4008
+-1 4008
++3 4008
++1 4008
+-1 8016
++3 4008
++1 4008
+-1 4008
+-12 28056
++15 4008
+-13 8016
++13 28784
++2 46944
++1 93888
+cfi=(137) /home/vastech/packetInspection/src/lib/third_party/src/node.c
+cfn=(556) node_find_next
+calls=23472 * 
+* 639544
+* 46944
++7 32552
+-10 16276
++10 16276
+cfi=(137)
+cfn=(558) node_create_next
+calls=16276 +60 
+* 16636856
+* 16276
++1 16276
++2 48828
+-2 32552
++2 16276
+cfn=(540)
+calls=16276 304 
+* 462068
+-13 32552
++17 4008
++1 4008
+-1 4008
++3 4004
++1 8008
+-1 4004
++1 4004
+cfi=(137)
+cfn=(562) node_register_matchstr
+calls=4004 +67 
+* 132132
++1 4004
++2 4004
++1 24048
+
+fn=(522) ac_automata_init
+51 72
++1 24
+-1 24
++1 24
+cfi=(134)
+cfn=(524) ndpi_malloc
+calls=24 331 
+* 7594
+fi=(136) /usr/include/x86_64-linux-gnu/bits/string_fortified.h
++19 48
+fe=(135)
+-19 24
+fi=(136)
++19 432
+fe=(135)
+-17 24
+cfi=(137)
+cfn=(532) node_create
+calls=24 -6 
+* 23666
++1 24
+-1 24
++2 48
+cfi=(134)
+cfn=(524)
+calls=24 331 
+* 7848
++2 24
+-2 24
++2 24
+-1 24
++1 24
+cfn=(540)
+calls=24 304 
+* 408
++1 48
+cfn=(542)
+calls=24 221 
+* 96
++2 24
+-1 24
++1 24
++2 120
+
+fl=(331) /home/vastech/packetInspection/src/lib/protocols/diameter.c
+fn=(1662) init_diameter_dissector
+121 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++6 4
+-1 4
++1 8
+
+fl=(136)
+fn=(534) node_init
+71 16300
+fi=(137)
+-11 16300
++3 16300
+-3 16300
+fe=(136)
++11 16300
+fi=(137)
+-8 16300
+fe=(136)
++8 48900
+fi=(137)
+-7 32600
+cfi=(134)
+cfn=(524)
+calls=16300 331 
+* 4938180
++3 16300
+-3 16300
++4 16300
+-1 16300
++1 16300
+cfi=(134)
+cfn=(524)
+calls=16300 331 
+* 4999113
+* 16300
++2 32600
+fe=(136)
+
+fl=(246) /home/vastech/packetInspection/src/lib/protocols/ssh.c
+fn=(1492) init_ssh_dissector
+90 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(265) /home/vastech/packetInspection/src/lib/protocols/bgp.c
+fn=(1530) init_bgp_dissector
+58 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(302) /home/vastech/packetInspection/src/lib/protocols/lotus_notes.c
+fn=(1604) init_lotus_notes_dissector
+73 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(226) /home/vastech/packetInspection/src/lib/protocols/socks45.c
+fn=(1452) init_socks_dissector
+138 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(291) /home/vastech/packetInspection/src/lib/protocols/maplestory.c
+fn=(1582) init_maplestory_dissector
+85 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(346) /home/vastech/packetInspection/src/lib/protocols/tinc.c
+fn=(1692) init_tinc_dissector
+144 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(250) /home/vastech/packetInspection/src/lib/protocols/teamviewer.c
+fn=(1500) init_teamviewer_dissector
+106 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(269) /home/vastech/packetInspection/src/lib/protocols/kontiki.c
+fn=(1538) init_kontiki_dissector
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(306) /home/vastech/packetInspection/src/lib/protocols/sflow.c
+fn=(1612) init_sflow_dissector
+49 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(209) /home/vastech/packetInspection/src/lib/protocols/ssl.c
+fn=(1418) init_ssl_dissector
+748 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(230) /home/vastech/packetInspection/src/lib/protocols/mail_imap.c
+fn=(1460) init_mail_imap_dissector
+309 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(236) /home/vastech/packetInspection/src/lib/protocols/non_tcp_udp.c
+fn=(1472) init_non_tcp_udp_dissector
+98 24
+fi=(136)
+-27 4
+fe=(236)
++27 8
++3 4
++2 12
+-2 12
+fi=(136)
+-30 16
+fe=(236)
++30 12
++2 4
+-2 4
++2 28
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++2 32
+-2 4
++2 4
+-2 4
++2 4
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++6 4
++1 24
+
+fl=(350) /home/vastech/packetInspection/src/lib/protocols/bittorrent.c
+fn=(1700) init_bittorrent_dissector
+495 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(273) /home/vastech/packetInspection/src/lib/protocols/openft.c
+fn=(1546) init_openft_dissector
+58 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(310) /home/vastech/packetInspection/src/lib/protocols/ciscovpn.c
+fn=(1620) init_ciscovpn_dissector
+76 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(213) /home/vastech/packetInspection/src/lib/protocols/rdp.c
+fn=(1426) init_rdp_dissector
+60 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(234) /home/vastech/packetInspection/src/lib/protocols/fbzero.c
+fn=(1468) init_fbzero_dissector
+122 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(354) /home/vastech/packetInspection/src/lib/protocols/lisp.c
+fn=(1708) init_lisp_dissector
+79 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(314) /home/vastech/packetInspection/src/lib/protocols/skinny.c
+fn=(1628) init_skinny_dissector
+66 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(217) /home/vastech/packetInspection/src/lib/protocols/edonkey.c
+fn=(1434) init_edonkey_dissector
+215 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(318) /home/vastech/packetInspection/src/lib/protocols/oracle.c
+fn=(1636) init_oracle_dissector
+66 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(259) /home/vastech/packetInspection/src/lib/protocols/ntp.c
+fn=(1518) init_ntp_dissector
+67 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(278) /home/vastech/packetInspection/src/lib/protocols/ipp.c
+fn=(1556) init_ipp_dissector
+114 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(322) /home/vastech/packetInspection/src/lib/protocols/ftp_data.c
+fn=(1644) init_ftp_data_dissector
+249 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(237) /home/vastech/packetInspection/src/lib/protocols/tvants.c
+fn=(1474) init_tvants_dissector
+76 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(282) /home/vastech/packetInspection/src/lib/protocols/tftp.c
+fn=(1564) init_tftp_dissector
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(337) /home/vastech/packetInspection/src/lib/protocols/coap.c
+fn=(1674) init_coap_dissector
+155 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++6 4
+-1 4
++1 8
+
+fl=(326) /home/vastech/packetInspection/src/lib/protocols/upnp.c
+fn=(1652) init_upnp_dissector
+56 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(206)
+fn=(1406)
+187 16
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=4 29 
+* 137
+* 12
++1 12
++1 12
++1 12
+
+fl=(241) /home/vastech/packetInspection/src/lib/protocols/pplive.c
+fn=(1482) init_pplive_dissector
+222 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(297) /home/vastech/packetInspection/src/lib/protocols/armagetron.c
+fn=(1594) init_armagetron_dissector
+100 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(221) /home/vastech/packetInspection/src/lib/protocols/msn.c
+fn=(1442) init_msn_dissector
+513 4
++2 4
+-2 4
+fi=(136)
+71 4
+fe=(221)
+517 12
+-2 12
+fi=(136)
+71 16
+fe=(221)
+517 28
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(286) /home/vastech/packetInspection/src/lib/protocols/dhcpv6.c
+fn=(1572) init_dhcpv6_dissector
+60 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(341) /home/vastech/packetInspection/src/lib/protocols/git.c
+fn=(1682) init_git_dissector
+76 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(330) /home/vastech/packetInspection/src/lib/protocols/quic.c
+fn=(1660) init_quic_dissector
+143 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++6 4
+-1 4
++1 8
+
+fl=(143) /home/vastech/packetInspection/src/lib/third_party/src/ndpi_patricia.c
+fn=(620) ndpi_New_Patricia
+369 12
++1 12
+-1 12
++1 24
+cfi=(134)
+cfn=(622)
+calls=12 -33 
+* 3944
++5 12
+-3 12
++1 12
++1 12
++1 12
++1 12
++2 24
+
+fn=(642) ndpi_New_Prefix2
+212 155080
++5 62032
++10 62032
+-14 31016
++15 93048
+-14 31016
+fi=(136)
+34 62032
+fe=(143)
+245 31016
++1 31016
++1 31016
+-2 62032
++8 124064
+-23 124064
+cfi=(134)
+cfn=(622)
+calls=31016 337 
+* 10557014
++7 31016
+-7 31016
++7 62032
+
+fn=(638) ndpi_patricia_lookup
+648 217112
++6 62032
++1 93048
++1 186096
++2 31016
++16 31016
++7 31016
+-23 62036
++23 2508996
+-1 716856
++2 653616
+-34 355756
++30 1246740
++2 716856
++14 421668
++15 8016
++8 31012
+-2 31012
++2 31012
++2 31012
+-4 31012
++4 31012
++3 124804
+-3 756
++3 756
++5 756
++1 4536
+-1 30164
++1 643128
+-1 346608
++6 30920
++9 123680
++1 61840
+-1 368
++1 143396
++2 11964
+-2 23928
++2 14328
+-2 28656
++12 28696
++17 93024
+cfi=(134)
+cfn=(622)
+calls=31008 337 
+* 10675514
++1 31008
+-1 31008
++1 31008
++1 31008
++1 31008
+-1 31008
++1 31008
+cfn=(640) ndpi_Ref_Prefix
+calls=31008 334 
+* 11888272
++1 31008
+-1 31008
++2 62016
++1 31008
++1 31008
++2 62016
++18 61520
++1 32
++5 8
++2 16
++1 24
+-1 16
++1 24
++4 32
++4 8
++2 32
+-35 248
+-1 248
++1 248
++1 1736
+-1 496
++2 264
++1 30520
+-64 90768
+-3 30256
++4 30256
+-4 52472
++4 22216
+-4 22216
++3 404772
+825 92232
+cfi=(134)
+cfn=(622)
+calls=30744 337 
+* 10585140
++2 61488
++3 30744
+-2 30744
++1 30744
++2 30744
+-1 30744
++2 30744
++1 61488
++1 215208
+-1 61488
++2 28976
++1 28976
++6 28976
++2 86928
+-2 1768
++2 5304
++4 61448
++4 3388
++2 3388
++7 30492
+-7 27356
++7 248652
+756 12
++7 8
+cfn=(640)
+calls=4 334 
+* 1518
++5 4
+-5 4
++5 4
++21 232
++1 232
++11 128
+-1 32
++2 16
+659 12
+cfi=(134)
+cfn=(622)
+calls=4 337 
+* 1358
+* 4
++1 4
++1 4
+-1 4
++1 4
+cfn=(640)
+calls=4 334 
+* 912
++1 4
+-1 4
++2 8
++1 4
++1 4
++5 4
++1 4
+839 1768
++1 3536
+-85 16684
+-12 16684
++12 33356
++90 40
++1 40
+-33 16
++36 54672
+723 184
+
+fn=(640)
+334 62032
++2 93048
++2 155080
+cfn=(642)
+calls=31016 212 
+* 11580542
+
+fl=(245) /home/vastech/packetInspection/src/lib/protocols/qq.c
+fn=(1490) init_qq_dissector
+661 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(264) /home/vastech/packetInspection/src/lib/protocols/mysql.c
+fn=(1528) init_mysql_dissector
+76 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(301) /home/vastech/packetInspection/src/lib/protocols/citrix.c
+fn=(1602) init_citrix_dissector
+87 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(225) /home/vastech/packetInspection/src/lib/protocols/soulseek.c
+fn=(1450) init_soulseek_dissector
+271 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(290) /home/vastech/packetInspection/src/lib/protocols/florensia.c
+fn=(1580) init_florensia_dissector
+120 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(345) /home/vastech/packetInspection/src/lib/protocols/smpp.c
+fn=(1690) init_smpp_dissector
+310 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(334) /home/vastech/packetInspection/src/lib/protocols/kakaotalk_voice.c
+fn=(1668) init_kakaotalk_voice_dissector
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(249) /home/vastech/packetInspection/src/lib/protocols/vnc.c
+fn=(1498) init_vnc_dissector
+67 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(268) /home/vastech/packetInspection/src/lib/protocols/snmp_proto.c
+fn=(1536) init_snmp_dissector
+131 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(305) /home/vastech/packetInspection/src/lib/protocols/netflow.c
+fn=(1610) init_netflow_dissector
+174 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(208) /home/vastech/packetInspection/src/lib/protocols/starcraft.c
+fn=(1416) init_starcraft_dissector
+146 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(229) /home/vastech/packetInspection/src/lib/protocols/mail_pop.c
+fn=(1458) init_mail_pop_dissector
+203 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(349) /home/vastech/packetInspection/src/lib/protocols/skype.c
+fn=(1698) init_skype_dissector
+119 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(253) /home/vastech/packetInspection/src/lib/protocols/halflife2_and_mods.c
+fn=(1506) init_halflife2_dissector
+68 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(272) /home/vastech/packetInspection/src/lib/protocols/kerberos.c
+fn=(1544) init_kerberos_dissector
+70 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(309) /home/vastech/packetInspection/src/lib/protocols/noe.c
+fn=(1618) init_noe_dissector
+57 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(212) /home/vastech/packetInspection/src/lib/protocols/rtsp.c
+fn=(1424) init_rtsp_dissector
+109 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(233) /home/vastech/packetInspection/src/lib/protocols/dns.c
+fn=(1466) init_dns_dissector
+242 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(353) /home/vastech/packetInspection/src/lib/protocols/csgo.c
+fn=(1706) init_csgo_dissector
+113 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(313) /home/vastech/packetInspection/src/lib/protocols/tor.c
+fn=(1626) init_tor_dissector
+122 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(216) /home/vastech/packetInspection/src/lib/protocols/teredo.c
+fn=(1432) init_teredo_dissector
+47 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(357) /home/vastech/packetInspection/src/lib/protocols/nest_log_sink.c
+fn=(1714) init_nest_log_sink_dissector
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++9 4
+-1 4
++1 8
+
+fl=(137)
+fn=(558)
+160 65104
++2 65104
+cfn=(556)
+calls=16276 -69 
+* 312952
++1 32552
++4 16276
+cfn=(532)
+calls=16276 48 
+* 15492387
++1 48828
+-1 16276
++1 16276
+cfn=(560) node_register_outgoing
+calls=16276 +37 
+* 489721
++3 81380
+
+fn=(564) node_has_matchstr
+138 12012
++14 8008
+
+fn=(538) node_assign_id
+225 65200
++1 16300
+
+fn=(532)
+48 16300
++1 32600
+cfi=(134)
+cfn=(524)
+calls=16300 331 
+* 5008260
+* 16300
++1 32600
+cfi=(136)
+cfn=(534)
+calls=16300 +21 
+* 10246993
++1 32600
+cfn=(538)
+calls=16300 225 
+* 81500
++2 48900
+
+fn=(556)
+93 39748
+-3 39748
++3 79496
++2 500984
+-2 213024
++5 32552
++1 32552
+-3 14392
+
+fn=(560)
+205 81380
++1 32552
+-1 32552
++1 32552
++4 284
+-2 568
++2 284
+-2 568
+cfi=(134)
+cfn=(668)
+calls=284 368 
+* 129093
++3 568
+-3 284
++6 284
++1 284
+-1 852
++1 568
++1 1136
+-2 15992
++1 15992
+-1 47976
++1 31984
++1 63968
+
+fn=(562)
+178 20020
++2 4004
+cfn=(564)
+calls=4004 -42 
+* 20020
+* 8008
++4 20020
++9 16016
++1 8008
+fi=(136)
+34 16016
+fe=(137)
+196 4004
++1 16016
+
+fl=(134)
+fn=(664) ndpi_init_protocol_match
+741 9648
++5 1072
+-4 1072
++4 5360
+-37 6432
+cfn=(666) ndpi_string_to_automa.constprop.18
+calls=1072 -44 
+* 12961662
++63 8576
+-25 424
++3 416
+cfn=(654) ndpi_strdup
+calls=208 382 
+* 72969
+* 208
++2 208
++4 1040
+-4 832
++1 416
++1 416
++2 416
+cfn=(650) ndpi_build_default_ports
+calls=208 446 
+* 2496
+-4 4
++4 20
+-4 16
++1 8
++1 8
++2 8
+cfn=(650)
+calls=4 446 
+* 48
+* 1696
+cfn=(650)
+calls=212 446 
+* 2544
++2 212
+-2 848
++2 424
+-2 1696
+cfn=(652) ndpi_set_proto_defaults
+calls=212 537 
+* 4664
+* 636
+-8 8
+cfn=(654)
+calls=4 382 
+* 1370
+* 8
+
+fn=(668)
+368 1408
++1 352
+-1 352
++1 352
+cfn=(524)
+calls=352 -38 
+* 97513
++2 352
+-2 352
++2 352
+fi=(136)
+34 1408
+cob=(3)
+cfi=(144) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+cfn=(634) memcpy@GLIBC_2.2.5
+calls=352 +95 
+* 157551
+* 352
+fe=(134)
+375 704
+cfn=(580) ndpi_free
+calls=352 -25 
+* 51117
++3 1760
+
+fn=(1388)
+2135 8
+
+fn=(1390)
+2138 8
+
+fn=(658) addDefaultPort.constprop.19
+602 4480
++10 5760
++9 1920
+-1 640
++1 640
+-1 1280
++1 1280
+cfn=(660) ndpi_tsearch
+calls=640 81 
+* 315721
+* 640
++2 1280
++4 4
++1 8
+cfn=(580)
+calls=4 350 
+* 535
+-16 1920
++1 1280
+cfn=(524)
+calls=640 331 
+* 198870
++2 640
+-2 640
++2 640
++16 5120
+
+fn=(1392)
+2136 8
+
+fn=(626) add_to_ptree.isra.3
+2081 124064
++5 93048
+-5 93048
++5 31016
+cfn=(628) fill_prefix_v4
+calls=31016 -68 
+* 1240640
++2 93048
+cfi=(143)
+cfn=(638)
+calls=31016 648 
+* 44966254
++3 217112
+
+fn=(650)
+446 1960
++3 3920
++1 3920
++1 3920
++1 3920
++1 3920
++3 1960
+
+fn=(652)
+537 1960
++7 980
+-11 1960
++11 980
+-11 3920
++11 980
+-11 980
++11 1960
++27 8600
+-20 6080
+cfn=(654)
+calls=760 382 
+* 277208
++5 760
+-3 1520
++1 760
++1 760
++2 760
++7 760
+-8 1520
+-2 4560
+fi=(136)
+34 1520
+fe=(134)
+564 760
+fi=(136)
+34 1520
+fe=(134)
+567 14624
+-5 7600
++1 7600
++1 2016
+cfn=(658)
+calls=288 +38 
+* 250612
++3 576
++1 2464
+cfn=(658)
+calls=352 +34 
+* 292686
+* 352
+
+fn=(662) ndpi_default_ports_tree_node_t_cmp
+582 30520
++1 5088
+
+fn=(524)
+331 577376
+cfi=(205)
+cfn=(1396)
+calls=144344 94 
+* 44036682
+
+fn=(580)
+350 1068
++1 356
+cfi=(205)
+cfn=(1400)
+calls=356 108 
+* 50228
+
+fn=(672) ndpi_add_content_subprotocol
+719 576
+cfn=(666)
+calls=192 -54 
+* 1602436
+
+fn=(1408)
+2848 20
+fi=(136)
+34 8
+fe=(134)
+2860 4
+-12 12
+fi=(136)
+34 4
+fe=(134)
+2860 4
+-9 4
+fi=(136)
+34 48
+fe=(134)
+2860 4
+-3 4
+fi=(136)
+34 4
+fe=(134)
+2860 4
+cfi=(207) /home/vastech/packetInspection/src/lib/protocols/http.c
+cfn=(1410) init_http_dissector
+calls=4 935 
+* 288
++3 16
+cfi=(208)
+cfn=(1416)
+calls=4 146 
+* 288
++3 16
+cfi=(209)
+cfn=(1418)
+calls=4 748 
+* 288
++3 16
+cfi=(210) /home/vastech/packetInspection/src/lib/protocols/stun.c
+cfn=(1420) init_stun_dissector
+calls=4 248 
+* 288
++3 16
+cfi=(211) /home/vastech/packetInspection/src/lib/protocols/rtp.c
+cfn=(1422) init_rtp_dissector
+calls=4 386 
+* 288
++3 16
+cfi=(212)
+cfn=(1424)
+calls=4 109 
+* 288
++3 16
+cfi=(213)
+cfn=(1426)
+calls=4 60 
+* 288
++3 16
+cfi=(214) /home/vastech/packetInspection/src/lib/protocols/sip.c
+cfn=(1428) init_sip_dissector
+calls=4 184 
+* 288
++3 16
+cfi=(215) /home/vastech/packetInspection/src/lib/protocols/hep.c
+cfn=(1430) init_hep_dissector
+calls=4 61 
+* 288
++3 16
+cfi=(216)
+cfn=(1432)
+calls=4 47 
+* 288
++3 16
+cfi=(217)
+cfn=(1434)
+calls=4 215 
+* 288
+
+ob=(3)
+fl=(160) /build/glibc-OTsEL5/glibc-2.27/io/../sysdeps/unix/sysv/linux/open64.c
+fn=(1152) open
+36 1
++3 1
+-3 3
++3 1
+-3 1
++3 5
++8 4
++2 5
+-2 4
+cfi=(187) /build/glibc-OTsEL5/glibc-2.27/nptl/../sysdeps/unix/sysv/linux/x86_64/cancellation.S
+cfn=(864) __libc_enable_asynccancel
+calls=1 +12 
+* 11
+* 10
+
+ob=(6)
+fl=(125)
+fn=(962) 0x000000000000df60
+0 8
+cob=(3)
+cfi=(101) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/../strrchr.S
+cfn=(368) __strrchr_sse2
+calls=1 24 
+0 54
+0 1
+0 18
+
+fn=(1060) pcap_set_snaplen
+0 13
+
+fn=(1068) 0x0000000000008e80
+0 14
+cob=(1) /lib/x86_64-linux-gnu/ld-2.27.so
+cfi=(90) /build/glibc-OTsEL5/glibc-2.27/elf/../sysdeps/x86_64/dl-trampoline.h
+cfn=(322) _dl_runtime_resolve_xsave
+calls=1 71 
+0 1108
+0 5
+0 5
+cfn=(1078) 0x00000000000073c0
+calls=1 0 
+0 1177
+0 12
+
+fn=(1078)
+0 23
+cfn=(1086) 0x000000000000e4f0
+calls=1 0 
+0 1143
+0 11
+
+ob=(3)
+fl=(160)
+fn=(1152)
+47 5
+cfi=(187)
+cfn=(884) __libc_disable_asynccancel
+calls=1 +41 
+* 12
+
+ob=(6)
+fl=(125)
+fn=(1136)
+0 3
+cfn=(1138) pcap_open_offline_with_tstamp_precision
+calls=1 0 
+0 6537
+
+fn=(1138)
+0 12
+
+ob=(3)
+fl=(160)
+fn=(1152)
+47 2
+
+fl=(201) /build/glibc-OTsEL5/glibc-2.27/libio/iofopen.c
+fn=(1144) fopen@@GLIBC_2.2.5
+88 5
+-23 1
++23 2
+-23 1
+cob=(2) ???
+cfi=(18) ???
+cfn=(788) 0x00000000050ad2c0
+calls=1 -65 
+* 237
++2 3
++3 1
++2 4
+-2 1
++2 3
+cfi=(149) /build/glibc-OTsEL5/glibc-2.27/libio/genops.c
+cfn=(680) _IO_no_init
+calls=1 590 
+* 61
++1 1
++1 1
+-1 1
++1 1
+cfi=(173) /build/glibc-OTsEL5/glibc-2.27/libio/fileops.c
+cfn=(1146) _IO_new_file_init_internal
+calls=1 +33 
+* 133
++4 5
+cfi=(173)
+cfn=(1150) _IO_file_fopen@@GLIBC_2.2.5
+calls=1 214 
+* 177
+* 2
+-41 2
++53 7
+
+fl=(128) /build/glibc-OTsEL5/glibc-2.27/setjmp/../sysdeps/x86_64/bsd-_setjmp.S
+fn=(500) _setjmp
+30 1
++2 1
+cfi=(129) /build/glibc-OTsEL5/glibc-2.27/setjmp/../sysdeps/x86_64/setjmp.S
+cfn=(502) __sigsetjmp
+calls=1 -6 
+* 27
+
+fl=(149)
+fn=(680)
+590 207
++1 23
+cfn=(682) _IO_old_init
+calls=23 -30 
+* 600
++2 23
+-1 23
++1 23
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++2 1
++6 1
++1 6
+-1 22
++1 132
+-2 44
+
+fn=(686) _IO_setb
+347 69
++1 92
++3 23
++2 92
+-3 23
++3 46
++3 69
+
+fn=(694) _IO_default_xsputn
+392 140
+-3 235
+fi=(176) /build/glibc-OTsEL5/glibc-2.27/libio/libioP.h
+870 47
+fe=(149)
+389 47
+fi=(176)
+870 47
+fe=(149)
+389 235
+fi=(176)
+870 94
+fe=(149)
+407 46
++8 47
++2 94
+-20 188
++2 141
++3 94
++2 96
+cfi=(144)
+cfn=(698) __mempcpy_sse2_unaligned
+calls=24 116 
+* 288
+* 24
++1 24
+-1 24
++1 48
++17 47
+-29 47
++29 375
+-15 23
++5 69
+-1 46
++1 6
+-1 4
++2 92
+
+fn=(1164) _IO_sgetn
+427 242
+fi=(176)
+870 484
+fe=(149)
+427 242
++2 242
+fi=(176)
+870 242
++2 484
++1 484
+fe=(149)
+429 242
++1 484
+-1 242
+cfi=(173)
+cfn=(1166) _IO_file_xsgetn
+calls=242 1295 
+* 106636
+
+fn=(1148) _IO_link_in
+87 12
++1 6
++4 1
+-2 3
++2 9
+cob=(4)
+cfi=(179) /build/glibc-OTsEL5/glibc-2.27/nptl/cleanup_defer_compat.c
+cfn=(808) _pthread_cleanup_push_defer
+calls=1 -64 
+* 12
++1 12
++2 1
+-1 1
+-1 1
++2 1
+-2 1
++2 14
++2 1
+-2 1
++5 1
+-2 1
+-1 1
++3 15
++2 1
+-1 1
++1 9
++1 8
+cob=(4)
+cfi=(179)
+cfn=(810) _pthread_cleanup_pop_restore
+calls=1 -41 
+* 9
++3 14
+
+fn=(780) _IO_doallocbuf
+362 2
+-1 3
++3 4
++4 4
+-3 1
+fi=(176)
+870 3
++2 2
++1 2
+fe=(149)
+365 2
+cfi=(174) /build/glibc-OTsEL5/glibc-2.27/libio/filedoalloc.c
+cfn=(782) _IO_file_doallocate
+calls=1 78 
+* 309
+
+ob=(6)
+fl=(125)
+fn=(1138)
+0 3
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1694
+0 5
+0 7
+cfn=(1156) pcap_fopen_offline_with_tstamp_precision
+calls=1 0 
+0 4806
+0 10
+
+fn=(1156)
+0 17
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1701
+0 5
+0 9
+cfn=(1182) 0x000000000001f690
+calls=1 0 
+0 43
+0 12
+cfn=(1200) 0x0000000000020e80
+calls=1 0 
+0 1873
+0 17
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1102
+0 5
+0 22
+
+fn=(1218) 0x000000000000f630
+0 2
+cfn=(978) 0x000000000000f4e0
+calls=1 0 
+0 381
+0 5
+
+fn=(1730) 0x0000000000020950
+0 2596
+cfn=(1252) 0x0000000000020330
+calls=118 0 
+0 155623
+0 5546
+
+ob=(3)
+fl=(149)
+fn=(780)
+365 2
+
+fn=(1170) __underflow
+288 253
+-1 4
++6 3
+-6 332
++6 417
++3 168
++2 168
++6 168
++7 84
+fi=(176)
+870 252
++2 168
++1 168
+fe=(149)
+311 84
++1 84
+-1 84
++1 168
+-1 84
+cfi=(173)
+cfn=(1172) _IO_file_underflow@@GLIBC_2.2.5
+calls=84 478 
+* 11143
+-23 166
++21 252
+
+fn=(1174) _IO_switch_to_get_mode
+164 336
++1 252
++3 252
++5 84
+-1 168
++1 84
++7 84
+-4 84
++2 168
++2 84
++1 84
++1 336
+
+fn=(682)
+561 23
+-2 23
++1 23
+-1 23
++2 46
++1 23
++15 23
+-14 23
++1 23
++13 23
++5 23
+-17 23
++1 23
++1 23
++1 23
++14 23
+-13 23
++1 23
++1 23
++2 23
++1 23
++1 23
++1 23
++6 23
++1 2
++2 23
+
+fn=(798) __overflow
+217 2
++2 3
++2 1
+fi=(176)
+870 3
++2 2
++1 2
+fe=(149)
+221 1
++1 2
+-1 1
+cfi=(173)
+cfn=(778) _IO_file_overflow@@GLIBC_2.2.5
+calls=1 747 
+* 189
+
+fl=(358)
+fn=(1812)
+29 1888
++4 944
+
+fl=(129)
+fn=(502)
+26 1
++9 1
++1 2
++1 1
++4 1
++1 1
++1 1
++1 1
++1 1
++2 2
++2 1
++1 1
++1 1
++2 2
++2 1
++8 1
+cfi=(130) /build/glibc-OTsEL5/glibc-2.27/setjmp/sigjmp.c
+cfn=(504) __sigjmp_save
+calls=1 -34 
+* 8
+
+fl=(203) /build/glibc-OTsEL5/glibc-2.27/libio/iofread.c
+fn=(1162) fread
+31 968
++1 484
+-1 242
++4 484
++2 1936
++1 726
+cfi=(149)
+cfn=(1164)
+calls=242 427 
+* 110024
+fi=(176)
+796 242
+fe=(203)
+38 242
+fi=(176)
+796 242
++1 2178
+fe=(203)
+40 484
+-3 3388
++4 242
+-1 242
++1 1452
+
+fl=(194) /build/glibc-OTsEL5/glibc-2.27/string/strdup.c
+fn=(916) strdup
+40 4
++1 1
+cfi=(138) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/../strlen.S
+cfn=(552) __strlen_sse2
+calls=1 +38 
+* 34
+* 1
+* 1
++1 2
+cob=(2)
+cfi=(18)
+cfn=(788)
+calls=1 -42 
+* 1629
++2 2
++4 1
+-1 2
++1 2
+-1 2
+cfi=(144)
+cfn=(634)
+calls=1 +82 
+* 10
+* 1
+
+fl=(186) /build/glibc-OTsEL5/glibc-2.27/misc/../sysdeps/unix/sysv/linux/x86_64/clone.S
+fn=(862) clone
+78 1
++1 1
++1 1
++10 1
++3 1
++1 1
++1 1
+cob=(4)
+cfi=(181) /build/glibc-OTsEL5/glibc-2.27/nptl/pthread_create.c
+cfn=(866) start_thread
+calls=1 378 
+* 605305013
+
+fl=(189) /build/glibc-OTsEL5/glibc-2.27/nptl/../sysdeps/unix/sysv/linux/x86_64/lowlevellock.S
+fn=(890) __lll_unlock_wake_private
+328 1
++2 1
++5 1
++1 1
++1 1
++1 1
++1 1
++2 1
++3 1
++3 1
+
+fn=(888) __lll_lock_wait_private
+78 1
++2 1
++4 1
++1 1
++1 1
++2 1
++1 1
++2 1
++1 1
++1 1
++2 2
++1 2
++2 2
++1 2
++2 1
++3 1
++3 1
+
+fl=(62) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/ifunc-avx2.h
+fn=(208) rindex
+32 1
+-2 1
++2 2
+-2 3
+fi=(383) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/strrchr.c
+-2 1
+fe=(62)
+
+fn=(258) strlen
+32 1
+-2 1
++2 2
+-2 3
+fi=(385) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/strlen.c
+-1 1
+fe=(62)
+
+fl=(132)
+fn=(508)
+29 5132977
++2 5132977
++2 5132977
++2 5132977
++2 5132977
++2 5132977
++2 5132977
++2 5132977
++5 5132977
++2 5132977
++1 5132977
+cfi=(133) /build/glibc-OTsEL5/glibc-2.27/gmon/mcount.c
+cfn=(510) __mcount_internal
+calls=5132977 +9 
+* 137484484
++3 5132976
++2 5132976
++2 5132976
++2 5132976
++2 5132976
++2 5132976
++2 5132976
++2 5132976
++2 5132976
+
+fn=(509)
+29 1
++2 1
++2 1
++2 1
++2 1
++2 1
++2 1
++2 1
++5 1
++2 1
++1 1
+cfi=(133)
+cfn=(510)
+calls=1 +9 
+* 12
++3 1
++2 1
++2 1
++2 1
++2 1
++2 1
++2 1
++2 1
++2 1
+
+fl=(141) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/strcpy-sse2-unaligned.S
+fn=(600) __strncpy_sse2_unaligned
+43 1
++1 1
++1 1
++2 1
++2 1
++5 1
++1 1
++1 1
+297 1
++1 1
++1 1
++1 1
++1 1
++6 1
++2 1
+524 1
++1 1
++1 4
+1269 1
++1 1
++8 1
+
+fl=(199) /build/glibc-OTsEL5/glibc-2.27/stdio-common/snprintf.c
+fn=(1122) snprintf
+28 9
++4 1
++1 1
+-1 5
++1 1
+cfi=(200) /build/glibc-OTsEL5/glibc-2.27/libio/vsnprintf.c
+cfn=(1124) vsnprintf
+calls=1 +62 
+* 518
++4 5
+
+fl=(152) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/../strchr.S
+fn=(692) __strchrnul_sse2
+24 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 48
++1 27
++2 27
++7 27
++4 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++52 21
++2 21
++7 21
+
+fl=(117) /build/glibc-OTsEL5/glibc-2.27/misc/../sysdeps/unix/sysv/linux/mmap64.c
+fn=(434) mmap
+44 10
++3 5
+-6 60
++6 5
++5 50
++2 35
+-7 10
+
+fl=(133)
+fn=(510)
+60 5132978
++12 10265956
+-12 5132978
++12 10265956
++9 5074767
++1 10149534
++11 5074765
++4 5074765
+-4 5074765
++4 15224295
++1 5074765
++1 10149530
++4 44
++1 22
+-1 22
++1 22
++70 116422
+-5 5074744
++5 10149532
+-59 10149486
++1 10149486
++4 5074743
++1 5074743
+-13 22
++1 44
++1 22
++1 22
++1 22
++57 44
+
+fl=(109) /build/glibc-OTsEL5/glibc-2.27/malloc/arena.c
+fn=(920) get_free_list
+759 1
++1 2
++25 2
+
+fn=(924) new_heap
+453 2
++6 1
+-6 3
++1 1
++5 1
+-5 1
++5 1
++2 2
++13 1
+-7 3
++7 2
++40 4
+cfi=(184) /build/glibc-OTsEL5/glibc-2.27/misc/../sysdeps/unix/syscall-template.S
+cfn=(842) mprotect
+calls=1 78 
+* 5
+* 2
++6 1
++1 1
++1 1
++2 7
+-37 7
+cfi=(117)
+cfn=(434)
+calls=1 44 
+* 35
++1 2
++2 2
++3 4
++4 4
+cfi=(184)
+cfn=(926) munmap
+calls=1 78 
+* 5
+* 1
+-3 3
+cfi=(184)
+cfn=(926)
+calls=1 78 
+* 5
+* 1
+
+fn=(922) arena_get2.part.3
+872 5
++10 4
++2 3
++23 3
++12 5
+-33 2
++23 7
+692 3
+cfn=(924)
+calls=1 453 
+* 108
++2 1
+-2 1
++2 1
++9 1
+fi=(107)
+1816 5
+fe=(109)
+703 8
+fi=(107)
+1816 16
++1 12
+-1 480
++1 362
+-1 2
++1 2
++4 1
+-4 2
++4 2
++2 1
++3 1
+fe=(109)
+711 1
+-4 1
+-2 1
++5 1
++2 1
+-5 2
++5 1
++1 2
++2 1
+-1 1
++1 3
++2 1
++1 1
++4 2
+-2 1
++2 1
+-4 1
++1 1
++3 6
++3 2
++5 1
++2 5
++2 7
+-61 2
++63 5
++12 7
+912 2
+
+fl=(101)
+fn=(368)
+24 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++11 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
++1 3
+
+fl=(108) /build/glibc-OTsEL5/glibc-2.27/malloc/hooks.c
+fn=(1740) realloc_hook_ini
+37 9
++1 1
+fi=(109)
+291 1
+fe=(108)
+39 1
+-1 2
+fi=(109)
+291 1
+fe=(108)
+39 1
+fi=(109)
+291 1
+fi=(107)
+3138 2
++4 6
++7 2
++6 1
++3 1
+-5 1
++2 2
++2 2
++14 4
++1 2
++4 8
++2 2
++41 4
+-43 5
+-15 3
++1 7
+fe=(108)
+42 9
+fi=(107)
+3228 7
++2 6
+cfn=(1744) _int_realloc
+calls=1 4502 
+* 878
++2 1
+-2 1
++2 5
++1 13
+fe=(108)
+
+fl=(119) /build/glibc-OTsEL5/glibc-2.27/gmon/../sysdeps/posix/profil.c
+fn=(644) __profil_counter
+41 1758
++5 879
+-5 3516
++5 6153
++2 1758
++1 364
+fi=(145) /build/glibc-OTsEL5/glibc-2.27/gmon/../sysdeps/unix/sysv/linux/x86_64/profil-counter.h
+-18 879
+fe=(119)
+
+fl=(200)
+fn=(1124)
+95 11
++9 1
+-5 1
++5 4
++6 6
+cfi=(149)
+cfn=(680)
+calls=1 590 
+* 48
++1 1
++2 4
+-2 1
++1 1
++1 1
+cfi=(150) /build/glibc-OTsEL5/glibc-2.27/libio/strops.c
+cfn=(684) _IO_str_init_static_internal
+calls=1 -77 
+* 53
++1 4
+cfi=(151) /build/glibc-OTsEL5/glibc-2.27/stdio-common/vfprintf.c
+cfn=(688) vfprintf
+calls=1 1244 
+* 367
++2 3
++1 2
++2 10
+
+fl=(178)
+fn=(806)
+28 11
++4 1
++1 2
+-1 5
++1 3
+cfi=(151)
+cfn=(688)
+calls=1 1244 
+* 1086
++4 5
+
+ob=(6)
+fl=(125)
+fn=(1730)
+0 4130
+
+fn=(906)
+0 14
+cfn=(908) pcap_create
+calls=1 0 
+0 12350
+0 6
+cfn=(1060)
+calls=1 0 
+0 13
+0 5
+cfn=(1062) pcap_set_promisc
+calls=1 0 
+0 7
+0 5
+cfn=(1064) pcap_set_timeout
+calls=1 0 
+0 7
+0 5
+cfn=(1066) pcap_activate
+calls=1 0 
+0 3981
+0 21
+cfn=(1116) pcap_statustostr
+calls=1 0 
+0 9
+0 11
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 2317
+0 5
+0 5
+cfn=(1130) pcap_close
+calls=1 0 
+0 188
+0 1
+
+fn=(1086)
+0 29
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1108
+0 5
+0 4
+cfn=(1102) pcap_freecode
+calls=1 0 
+0 5
+0 2
+cfn=(1102)
+calls=1 0 
+0 5
+0 12
+
+fn=(1724) 0x000000000001ecc0
+0 3083
+cfn=(1792) 0x000000000000e430
+calls=118 0 
+0 944
+0 944
+cfn=(1730)
+calls=118 0 
+0 167895
+0 2256
+
+fn=(908)
+0 12
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 2826
+0 5
+0 34
+cfn=(962)
+calls=1 0 
+0 81
+cfn=(950) 0x000000000000c590
+calls=1 0 
+0 85
+cfn=(932) 0x000000000000d040
+calls=1 0 
+0 1214
+0 24
+cfn=(974) 0x000000000000ab70
+calls=1 0 
+0 8068
+0 1
+
+fn=(976) 0x000000000000f570
+0 2
+cfn=(978)
+calls=1 0 
+0 1448
+0 26
+
+fn=(1064)
+0 7
+
+fn=(1130)
+0 6
+cob=(3)
+cfi=(107)
+cfn=(584)
+calls=1 3086 
+0 74
+0 1
+0 2
+cfn=(1086)
+calls=1 0 
+0 27
+0 3
+cob=(3)
+cfi=(107)
+cfn=(584)
+calls=1 3086 
+0 74
+0 1
+
+fn=(1062)
+0 7
+
+fn=(1066)
+0 9
+cfn=(1068)
+calls=1 0 
+0 2321
+0 25
+cfn=(1116)
+calls=1 0 
+0 9
+0 6
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1605
+0 5
+0 1
+
+fn=(1182)
+0 27
+
+ob=(5)
+fl=(134)
+fn=(1408)
+2893 16
+cfi=(218) /home/vastech/packetInspection/src/lib/protocols/fasttrack.c
+cfn=(1436) init_fasttrack_dissector
+calls=4 85 
+* 288
++3 16
+cfi=(219) /home/vastech/packetInspection/src/lib/protocols/gnutella.c
+cfn=(1438) init_gnutella_dissector
+calls=4 361 
+* 288
++3 16
+cfi=(220) /home/vastech/packetInspection/src/lib/protocols/directconnect.c
+cfn=(1440) init_directconnect_dissector
+calls=4 436 
+* 288
++3 16
+cfi=(221)
+cfn=(1442)
+calls=4 513 
+* 324
++3 16
+cfi=(222)
+cfn=(1444)
+calls=4 395 
+* 288
++3 16
+cfi=(223) /home/vastech/packetInspection/src/lib/protocols/oscar.c
+cfn=(1446) init_oscar_dissector
+calls=4 807 
+* 288
++3 16
+cfi=(224) /home/vastech/packetInspection/src/lib/protocols/applejuice.c
+cfn=(1448) init_applejuice_dissector
+calls=4 58 
+* 288
++3 16
+cfi=(225)
+cfn=(1450)
+calls=4 271 
+* 288
++3 16
+cfi=(226)
+cfn=(1452)
+calls=4 138 
+* 288
++3 16
+cfi=(227) /home/vastech/packetInspection/src/lib/protocols/irc.c
+cfn=(1454) init_irc_dissector
+calls=4 781 
+* 288
++3 16
+cfi=(228) /home/vastech/packetInspection/src/lib/protocols/jabber.c
+cfn=(1456) init_jabber_dissector
+calls=4 294 
+* 288
++3 16
+cfi=(229)
+cfn=(1458)
+calls=4 203 
+* 288
++3 16
+cfi=(230)
+cfn=(1460)
+calls=4 309 
+* 288
++3 16
+cfi=(231) /home/vastech/packetInspection/src/lib/protocols/mail_smtp.c
+cfn=(1462) init_mail_smtp_dissector
+calls=4 179 
+* 288
++3 16
+cfi=(232) /home/vastech/packetInspection/src/lib/protocols/usenet.c
+cfn=(1464) init_usenet_dissector
+calls=4 95 
+* 288
++3 16
+cfi=(233)
+cfn=(1466)
+calls=4 242 
+* 288
++3 16
+cfi=(234)
+cfn=(1468)
+calls=4 122 
+* 288
++3 16
+cfi=(235) /home/vastech/packetInspection/src/lib/protocols/vmware.c
+cfn=(1470) init_vmware_dissector
+calls=4 47 
+* 288
++3 16
+cfi=(236)
+cfn=(1472)
+calls=4 98 
+* 2300
++3 16
+cfi=(237)
+cfn=(1474)
+calls=4 76 
+* 288
++3 16
+cfi=(238)
+cfn=(1476)
+calls=4 216 
+* 288
++3 16
+cfi=(239) /home/vastech/packetInspection/src/lib/protocols/tvuplayer.c
+cfn=(1478) init_tvuplayer_dissector
+calls=4 151 
+* 288
++3 16
+cfi=(240) /home/vastech/packetInspection/src/lib/protocols/ppstream.c
+cfn=(1480) init_ppstream_dissector
+calls=4 227 
+* 288
++3 16
+cfi=(241)
+cfn=(1482)
+calls=4 222 
+* 288
++3 16
+cfi=(242)
+cfn=(1484)
+calls=4 98 
+* 288
++3 16
+cfi=(243) /home/vastech/packetInspection/src/lib/protocols/mgcp.c
+cfn=(1486) init_mgpc_dissector
+calls=4 81 
+* 288
++3 16
+cfi=(244) /home/vastech/packetInspection/src/lib/protocols/zattoo.c
+cfn=(1488) init_zattoo_dissector
+calls=4 231 
+* 288
++3 16
+cfi=(245)
+cfn=(1490)
+calls=4 661 
+* 288
++3 16
+cfi=(246)
+cfn=(1492)
+calls=4 90 
+* 288
++3 16
+cfi=(247) /home/vastech/packetInspection/src/lib/protocols/ayiya.c
+cfn=(1494) init_ayiya_dissector
+calls=4 76 
+* 288
++3 16
+cfi=(248) /home/vastech/packetInspection/src/lib/protocols/thunder.c
+cfn=(1496) init_thunder_dissector
+calls=4 212 
+* 288
++3 16
+cfi=(249)
+cfn=(1498)
+calls=4 67 
+* 288
++3 16
+cfi=(250)
+cfn=(1500)
+calls=4 106 
+* 288
++3 16
+cfi=(251) /home/vastech/packetInspection/src/lib/protocols/dhcp.c
+cfn=(1502) init_dhcp_dissector
+calls=4 158 
+* 288
++3 16
+cfi=(252) /home/vastech/packetInspection/src/lib/protocols/steam.c
+cfn=(1504) init_steam_dissector
+calls=4 290 
+* 288
++3 16
+cfi=(253)
+cfn=(1506)
+calls=4 68 
+* 288
++3 16
+cfi=(254) /home/vastech/packetInspection/src/lib/protocols/xbox.c
+cfn=(1508) init_xbox_dissector
+calls=4 95 
+* 256
++3 16
+cfi=(255) /home/vastech/packetInspection/src/lib/protocols/http_activesync.c
+cfn=(1510) init_http_activesync_dissector
+calls=4 59 
+* 288
++3 16
+cfi=(256)
+cfn=(1512)
+calls=4 58 
+* 288
++3 16
+cfi=(257) /home/vastech/packetInspection/src/lib/protocols/mining.c
+cfn=(1514) init_mining_dissector
+calls=4 84 
+* 288
++3 16
+cfi=(258) /home/vastech/packetInspection/src/lib/protocols/telnet.c
+cfn=(1516) init_telnet_dissector
+calls=4 108 
+* 288
++3 16
+cfi=(259)
+cfn=(1518)
+calls=4 67 
+* 288
++3 16
+cfi=(260)
+cfn=(1520)
+calls=4 91 
+* 288
++3 16
+cfi=(261) /home/vastech/packetInspection/src/lib/protocols/ssdp.c
+cfn=(1522) init_ssdp_dissector
+calls=4 70 
+* 288
++3 16
+cfi=(262) /home/vastech/packetInspection/src/lib/protocols/world_of_warcraft.c
+cfn=(1524) init_world_of_warcraft_dissector
+calls=4 205 
+* 288
++3 16
+cfi=(263) /home/vastech/packetInspection/src/lib/protocols/postgres.c
+cfn=(1526) init_postgres_dissector
+calls=4 121 
+* 288
++3 16
+cfi=(264)
+cfn=(1528)
+calls=4 76 
+* 288
++3 16
+cfi=(265)
+cfn=(1530)
+calls=4 58 
+* 288
++3 16
+cfi=(266) /home/vastech/packetInspection/src/lib/protocols/battlefield.c
+cfn=(1532) init_battlefield_dissector
+calls=4 118 
+* 288
++3 16
+cfi=(267) /home/vastech/packetInspection/src/lib/protocols/pcanywhere.c
+cfn=(1534) init_pcanywhere_dissector
+calls=4 57 
+* 288
++3 16
+cfi=(268)
+cfn=(1536)
+calls=4 131 
+* 288
++3 16
+cfi=(269)
+cfn=(1538)
+calls=4 69 
+* 288
++3 16
+cfi=(270) /home/vastech/packetInspection/src/lib/protocols/icecast.c
+cfn=(1540) init_icecast_dissector
+calls=4 96 
+* 288
++3 16
+cfi=(271) /home/vastech/packetInspection/src/lib/protocols/shoutcast.c
+cfn=(1542) init_shoutcast_dissector
+calls=4 108 
+* 288
++3 16
+cfi=(272)
+cfn=(1544)
+calls=4 70 
+* 288
++3 16
+cfi=(273)
+cfn=(1546)
+calls=4 58 
+* 288
++3 16
+cfi=(274) /home/vastech/packetInspection/src/lib/protocols/syslog.c
+cfn=(1548) init_syslog_dissector
+calls=4 122 
+* 288
++3 16
+cfi=(275) /home/vastech/packetInspection/src/lib/protocols/directdownloadlink.c
+cfn=(1550) init_directdownloadlink_dissector
+calls=4 722 
+* 288
++3 16
+cfi=(276) /home/vastech/packetInspection/src/lib/protocols/netbios.c
+cfn=(1552) init_netbios_dissector
+calls=4 380 
+* 288
++3 16
+cfi=(277) /home/vastech/packetInspection/src/lib/protocols/mdns_proto.c
+cfn=(1554) init_mdns_dissector
+calls=4 149 
+* 288
++3 16
+cfi=(278)
+cfn=(1556)
+calls=4 114 
+* 288
++3 16
+cfi=(279)
+cfn=(1558)
+calls=4 94 
+* 288
++3 16
+cfi=(280) /home/vastech/packetInspection/src/lib/protocols/warcraft3.c
+cfn=(1560) init_warcraft3_dissector
+calls=4 96 
+* 288
++3 16
+cfi=(281) /home/vastech/packetInspection/src/lib/protocols/xdmcp.c
+cfn=(1562) init_xdmcp_dissector
+calls=4 68 
+* 288
++3 16
+cfi=(282)
+cfn=(1564)
+calls=4 69 
+* 288
++3 16
+cfi=(283)
+cfn=(1566)
+calls=4 74 
+* 288
++3 16
+cfi=(284) /home/vastech/packetInspection/src/lib/protocols/pptp.c
+cfn=(1568) init_pptp_dissector
+calls=4 60 
+* 288
++3 16
+cfi=(285) /home/vastech/packetInspection/src/lib/protocols/stealthnet.c
+cfn=(1570) init_stealthnet_dissector
+calls=4 58 
+* 288
++3 16
+cfi=(286)
+cfn=(1572)
+calls=4 60 
+* 288
++3 16
+cfi=(287)
+cfn=(1574)
+calls=4 91 
+* 288
++3 16
+cfi=(288) /home/vastech/packetInspection/src/lib/protocols/checkmk.c
+cfn=(1576) init_checkmk_dissector
+calls=4 74 
+* 288
++3 16
+cfi=(289) /home/vastech/packetInspection/src/lib/protocols/aimini.c
+cfn=(1578) init_aimini_dissector
+calls=4 284 
+* 288
++3 16
+cfi=(290)
+cfn=(1580)
+calls=4 120 
+* 288
++3 16
+cfi=(291)
+cfn=(1582)
+calls=4 85 
+* 288
++3 16
+cfi=(292) /home/vastech/packetInspection/src/lib/protocols/dofus.c
+cfn=(1584) init_dofus_dissector
+calls=4 142 
+* 288
++3 16
+cfi=(293) /home/vastech/packetInspection/src/lib/protocols/world_of_kung_fu.c
+cfn=(1586) init_world_of_kung_fu_dissector
+calls=4 56 
+* 288
++3 16
+cfi=(294)
+cfn=(1588)
+calls=4 96 
+* 288
++3 16
+cfi=(295) /home/vastech/packetInspection/src/lib/protocols/crossfire.c
+cfn=(1590) init_crossfire_dissector
+calls=4 80 
+* 288
++3 16
+cfi=(296) /home/vastech/packetInspection/src/lib/protocols/guildwars.c
+cfn=(1592) init_guildwars_dissector
+calls=4 69 
+* 288
++3 16
+cfi=(297)
+cfn=(1594)
+calls=4 100 
+* 288
++3 16
+cfi=(298)
+cfn=(1596)
+calls=4 93 
+* 288
++3 16
+cfi=(299) /home/vastech/packetInspection/src/lib/protocols/spotify.c
+cfn=(1598) init_spotify_dissector
+calls=4 138 
+* 288
++3 16
+cfi=(300) /home/vastech/packetInspection/src/lib/protocols/radius.c
+cfn=(1600) init_radius_dissector
+calls=4 70 
+* 288
++3 16
+cfi=(301)
+cfn=(1602)
+calls=4 87 
+* 288
++3 16
+cfi=(302)
+cfn=(1604)
+calls=4 73 
+* 288
++3 16
+cfi=(303) /home/vastech/packetInspection/src/lib/protocols/gtp.c
+cfn=(1606) init_gtp_dissector
+calls=4 80 
+* 288
++3 16
+cfi=(304) /home/vastech/packetInspection/src/lib/protocols/dcerpc.c
+cfn=(1608) init_dcerpc_dissector
+calls=4 60 
+* 288
++3 16
+cfi=(305)
+cfn=(1610)
+calls=4 174 
+* 288
++3 16
+cfi=(306)
+cfn=(1612)
+calls=4 49 
+* 288
++3 16
+cfi=(307) /home/vastech/packetInspection/src/lib/protocols/h323.c
+cfn=(1614) init_h323_dissector
+calls=4 105 
+* 288
++3 16
+cfi=(308) /home/vastech/packetInspection/src/lib/protocols/openvpn.c
+cfn=(1616) init_openvpn_dissector
+calls=4 126 
+* 288
++3 16
+cfi=(309)
+cfn=(1618)
+calls=4 57 
+* 288
++3 16
+cfi=(310)
+cfn=(1620)
+calls=4 76 
+* 288
++3 16
+cfi=(311) /home/vastech/packetInspection/src/lib/protocols/teamspeak.c
+cfn=(1622) init_teamspeak_dissector
+calls=4 69 
+* 288
++3 16
+cfi=(312) /home/vastech/packetInspection/src/lib/protocols/viber.c
+cfn=(1624) init_viber_dissector
+calls=4 51 
+* 288
++3 16
+cfi=(313)
+cfn=(1626)
+calls=4 122 
+* 288
++3 16
+cfi=(314)
+cfn=(1628)
+calls=4 66 
+* 288
++3 16
+cfi=(315) /home/vastech/packetInspection/src/lib/protocols/rtcp.c
+cfn=(1630) init_rtcp_dissector
+calls=4 72 
+* 288
++3 16
+cfi=(316) /home/vastech/packetInspection/src/lib/protocols/rsync.c
+cfn=(1632) init_rsync_dissector
+calls=4 60 
+* 288
++3 16
+cfi=(317) /home/vastech/packetInspection/src/lib/protocols/whoisdas.c
+cfn=(1634) init_whois_das_dissector
+calls=4 66 
+* 288
++3 16
+cfi=(318)
+cfn=(1636)
+calls=4 66 
+* 288
++3 16
+cfi=(319)
+cfn=(1638)
+calls=4 52 
+* 288
++3 16
+cfi=(320) /home/vastech/packetInspection/src/lib/protocols/rtmp.c
+cfn=(1640) init_rtmp_dissector
+calls=4 95 
+* 288
++3 16
+cfi=(321) /home/vastech/packetInspection/src/lib/protocols/ftp_control.c
+cfn=(1642) init_ftp_control_dissector
+calls=4 1005 
+* 288
++3 16
+cfi=(322)
+cfn=(1644)
+calls=4 249 
+* 288
++3 16
+cfi=(323)
+cfn=(1646)
+calls=4 158 
+* 288
++3 16
+cfi=(324) /home/vastech/packetInspection/src/lib/protocols/megaco.c
+cfn=(1648) init_megaco_dissector
+calls=4 53 
+* 288
++3 16
+cfi=(325) /home/vastech/packetInspection/src/lib/protocols/redis_net.c
+cfn=(1650) init_redis_dissector
+calls=4 94 
+* 288
++3 16
+cfi=(326)
+cfn=(1652)
+calls=4 56 
+* 288
++3 16
+cfi=(327)
+cfn=(1654)
+calls=4 70 
+* 288
++3 16
+cfi=(328) /home/vastech/packetInspection/src/lib/protocols/zeromq.c
+cfn=(1656) init_zmq_dissector
+calls=4 101 
+* 288
++3 16
+cfi=(329) /home/vastech/packetInspection/src/lib/protocols/telegram.c
+cfn=(1658) init_telegram_dissector
+calls=4 73 
+* 288
++3 16
+cfi=(330)
+cfn=(1660)
+calls=4 143 
+* 288
++3 16
+cfi=(331)
+cfn=(1662)
+calls=4 121 
+* 288
++3 16
+cfi=(332) /home/vastech/packetInspection/src/lib/protocols/apple_push.c
+cfn=(1664) init_apple_push_dissector
+calls=4 67 
+* 288
++3 16
+cfi=(333) /home/vastech/packetInspection/src/lib/protocols/eaq.c
+cfn=(1666) init_eaq_dissector
+calls=4 83 
+* 288
++3 16
+cfi=(334)
+cfn=(1668)
+calls=4 69 
+* 288
++3 16
+cfi=(335) /home/vastech/packetInspection/src/lib/protocols/mpegts.c
+cfn=(1670) init_mpegts_dissector
+calls=4 55 
+* 288
++3 16
+cfi=(336) /home/vastech/packetInspection/src/lib/protocols/ubntac2.c
+cfn=(1672) init_ubntac2_dissector
+calls=4 85 
+* 288
++3 16
+cfi=(337)
+cfn=(1674)
+calls=4 155 
+* 288
++3 16
+cfi=(338)
+cfn=(1676)
+calls=4 247 
+* 288
++3 16
+cfi=(339) /home/vastech/packetInspection/src/lib/protocols/someip.c
+cfn=(1678) init_someip_dissector
+calls=4 219 
+* 288
++3 16
+cfi=(340) /home/vastech/packetInspection/src/lib/protocols/rx.c
+cfn=(1680) init_rx_dissector
+calls=4 217 
+* 288
++3 16
+cfi=(341)
+cfn=(1682)
+calls=4 76 
+* 288
++3 16
+cfi=(342)
+cfn=(1684)
+calls=4 99 
+* 288
++3 16
+cfi=(343) /home/vastech/packetInspection/src/lib/protocols/drda.c
+cfn=(1686) init_drda_dissector
+calls=4 94 
+* 288
++3 16
+cfi=(344) /home/vastech/packetInspection/src/lib/protocols/bjnp.c
+cfn=(1688) init_bjnp_dissector
+calls=4 53 
+* 288
++3 16
+cfi=(345)
+cfn=(1690)
+calls=4 310 
+* 288
++3 16
+cfi=(346)
+cfn=(1692)
+calls=4 144 
+* 288
++3 16
+cfi=(347) /home/vastech/packetInspection/src/lib/protocols/fix.c
+cfn=(1694) init_fix_dissector
+calls=4 67 
+* 288
++3 16
+cfi=(348) /home/vastech/packetInspection/src/lib/protocols/nintendo.c
+cfn=(1696) init_nintendo_dissector
+calls=4 58 
+* 288
++5 16
+cfi=(349)
+cfn=(1698)
+calls=4 119 
+* 288
++3 16
+cfi=(350)
+cfn=(1700)
+calls=4 495 
+* 288
++3 16
+cfi=(351) /home/vastech/packetInspection/src/lib/protocols/whatsapp.c
+cfn=(1702) init_whatsapp_dissector
+calls=4 65 
+* 288
++3 16
+cfi=(352) /home/vastech/packetInspection/src/lib/protocols/amqp.c
+cfn=(1704) init_amqp_dissector
+calls=4 77 
+* 288
++3 16
+cfi=(353)
+cfn=(1706)
+calls=4 113 
+* 288
++3 16
+cfi=(354)
+cfn=(1708)
+calls=4 79 
+* 288
++3 16
+cfi=(355) /home/vastech/packetInspection/src/lib/protocols/ajp.c
+cfn=(1710) init_ajp_dissector
+calls=4 141 
+* 288
++3 16
+cfi=(356) /home/vastech/packetInspection/src/lib/protocols/memcached.c
+cfn=(1712) init_memcached_dissector
+calls=4 179 
+* 288
++3 16
+cfi=(357)
+cfn=(1714)
+calls=4 69 
+* 288
++4 4
++6 4
++1 4
++1 8
+-8 4
++8 4468
++1 1272
++8 440
+fi=(136)
+34 440
+fe=(134)
+3333 1320
+fi=(136)
+34 8360
+fe=(134)
+3335 440
++2 880
++5 48
+fi=(136)
+34 48
+fe=(134)
+3342 144
+fi=(136)
+34 912
+fe=(134)
+3345 96
++6 4
+-1 4
++1 3832
++1 1272
++7 348
+fi=(136)
+34 348
+fe=(134)
+3359 1044
+fi=(136)
+34 6612
+fe=(134)
+3361 1044
++5 4
+-1 4
++1 648
++1 1908
++4 1200
++5 36
+fi=(136)
+34 36
+fe=(134)
+3376 108
+fi=(136)
+34 684
+fe=(134)
+3378 72
+-12 144
++12 600
+-12 2400
++15 32
+
+fn=(1412)
+2804 636
+-4 636
++4 1908
+-4 636
++4 636
+-4 636
++4 1908
++21 1908
++1 1272
+-1 636
++1 1272
++11 636
+-11 1908
++5 1272
++6 2544
++1 4452
+fi=(136)
+71 636
+fe=(134)
+2840 636
+fi=(136)
+71 4452
+fe=(134)
+2840 636
++2 1272
+fi=(136)
+71 596
+fe=(134)
+2837 596
+fi=(136)
+71 2384
+fe=(134)
+2837 1192
+
+fn=(622)
+337 92792
++1 185584
++1 185584
+cfn=(524)
+calls=92792 -8 
+* 28857408
++2 92792
+-2 92792
++2 92792
+fi=(136)
+71 371168
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=92792 +38 
+* 1397984
+* 92792
+* 92792
+fe=(134)
+345 278376
+
+fn=(1404)
+939 12
++22 12
+-22 36
++18 12
+-18 36
++18 16
++7 4
+-7 4
++8 4
+-24 12
++23 4
+-23 4
++1 4
++3 16
++19 4
+-19 4
++1 4
+
+fn=(660)
+81 1280
+-5 4480
++10 15264
+cfn=(662)
+calls=5088 582 
+* 35608
+* 15260
++2 20336
+-5 17172
++9 1272
+cfn=(524)
+calls=636 331 
+* 198669
++1 1272
++1 636
++1 636
++1 1272
++3 2544
+-12 4
++12 16
+
+fn=(666)
+665 20040
++7 8016
++5 12024
++3 4008
++1 4008
+-2 4008
++9 4008
+-10 4008
++1 4008
++1 4008
++1 4008
++7 4008
++3 8016
+cob=(3)
+cfi=(138)
+cfn=(552)
+calls=4008 79 
+* 73456
+* 4008
+* 4008
++2 12024
+cfi=(135)
+cfn=(554)
+calls=4008 81 
+* 18459284
++2 4008
++1 24048
+
+fn=(1402)
+6148 4
++1 4
+
+fn=(628)
+2018 124064
+fi=(136)
+71 31016
+fe=(134)
+2016 93048
++6 62032
+fi=(136)
+34 31016
+fe=(134)
+2016 31016
++6 31016
+fi=(136)
+71 62032
+fe=(134)
+2022 62032
+fi=(136)
+34 31016
+cob=(3)
+cfi=(144)
+cfn=(634)
+calls=31016 +95 
+* 372192
+* 31016
+fe=(134)
+2023 31016
++1 31016
++1 31016
+-2 31016
++6 31016
+-1 31016
++1 93048
+
+fn=(654)
+382 3888
++1 972
+cob=(3)
+cfi=(138)
+cfn=(552)
+calls=972 79 
+* 16016
+* 972
++1 972
+-1 972
++1 1944
+cfn=(524)
+calls=972 -53 
+* 299075
++2 972
+-2 972
++2 972
++1 972
+fi=(136)
+34 3888
+cob=(3)
+cfi=(144)
+cfn=(634)
+calls=972 +95 
+* 11184
+* 972
+* 972
+fe=(134)
+388 972
++4 4860
+
+fn=(1394)
+2139 8
+
+fn=(612)
+2173 8
++1 4
+-1 32
++1 4
+cfn=(524)
+calls=4 331 
+* 1528
++3 8
+fi=(136)
+71 20
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 +38 
+* 91300
+* 4
+fe=(134)
+2189 8
+cfi=(143)
+cfn=(620)
+calls=4 369 
+* 1274
+* 16
+-90 24
++5 4
+fi=(362) /usr/include/x86_64-linux-gnu/bits/byteswap.h
+47 4
+fe=(134)
+2104 8
+-1 4
++1 4
+cfn=(626)
+calls=4 -23 
+* 2710
+* 31012
+fi=(362)
+47 31012
+fe=(134)
+2104 62024
+-1 31012
++1 31012
+cfn=(626)
+calls=31012 -23 
+* 46855520
+* 62032
++2 93048
+-7 93048
++99 4
+fi=(136)
+71 4
+fe=(134)
+2198 4
++14 4
++9 4
+-9 4
++1 4
+-16 4
++16 4
+-9 4
++6 4
+fi=(136)
+71 4
+fe=(134)
+2204 4
++1 4
+-3 4
+fi=(136)
+71 12
+fe=(134)
+2205 4
++4 4
++9 4
+-9 4
++12 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6697
++1 4
+-1 4
++1 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6903
++1 4
+-1 4
++1 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6667
++1 4
+-1 4
++1 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6903
++6 4
+-6 4
++6 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6667
++1 4
+-1 4
++1 4
+cfi=(135)
+cfn=(522)
+calls=4 51 
+* 6903
++5 4
+-5 4
++3 4
++2 4
+cfi=(143)
+cfn=(620)
+calls=4 369 
+* 1413
++1 4
+-1 4
++1 4
+cfi=(143)
+cfn=(620)
+calls=4 369 
+* 1413
++3 4
+-3 4
++3 12
+fi=(136)
+71 4
+fe=(134)
+1000 8
+fi=(136)
+71 8
+fe=(134)
+994 4
+fi=(136)
+71 4
+fe=(134)
+1000 4
+fi=(136)
+71 4
+cob=(3)
+cfi=(118)
+cfn=(438)
+calls=4 +38 
+* 9036
+* 4
+fe=(134)
+1000 28
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1823
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4623
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4691
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4691
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4771
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4771
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 7965
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4931
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5011
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 7649
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 7729
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4931
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 7915
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4855
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 14581
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8407
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8331
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8875
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8681
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8681
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8117
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5091
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5171
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1889
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 12671
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5091
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 14185
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 88
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5247
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8041
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5171
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5171
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5091
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++6 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8921
++5 36
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 40
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1935
++6 4
++1 36
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 8929
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 5327
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1889
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 4969
++6 4
++1 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 5327
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 12747
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 44
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 5091
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 5259
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 12287
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 1817
++6 4
++1 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 52
+cfn=(652)
+calls=4 537 
+* 7039
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4939
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9009
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9089
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 88
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5411
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 16673
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 40
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8281
++5 36
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9161
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8285
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5091
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5407
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5007
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9123
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8525
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 16665
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8879
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5209
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5419
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9363
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9401
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9157
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5411
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4771
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4927
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9237
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5175
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++6 36
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8921
++5 40
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9001
++6 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 17145
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9241
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8281
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5411
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5171
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5491
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8605
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5007
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9401
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5247
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5491
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1889
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5685
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5651
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 4847
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9561
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5007
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 34977
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 8757
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9005
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 18415
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5259
++5 44
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5167
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 9161
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1825
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 1817
++5 32
+cfn=(650)
+calls=4 446 
+* 48
+* 32
+cfn=(650)
+calls=4 446 
+* 48
+* 48
+cfn=(652)
+calls=4 537 
+* 5659
+910 20
++1 16
+cfn=(664)
+calls=4 741 
+* 113599
+* 4272
+cfn=(664)
+calls=1068 741 
+* 12974282
+-1 2144
++7 24
++1 24
+cfn=(672)
+calls=4 719 
+* 42576
+* 1128
+cfn=(672)
+calls=188 719 
+* 1560436
+-1 584
++6 8828
++1 11020
+cfn=(666)
+calls=2204 665 
+* 3293333
+* 20
+cfn=(666)
+calls=4 665 
+* 8796
+-1 4428
++5 2136
++1 2660
+cfn=(666)
+calls=532 665 
+* 790095
+* 20
+cfn=(666)
+calls=4 665 
+* 8682
+-1 1072
++44 16
+fi=(368) /usr/include/x86_64-linux-gnu/bits/stdio2.h
+104 8
+fe=(134)
+976 1944
++1 2904
+-5 3888
++1 2916
+-1 4
+fi=(368)
+64 4
+fe=(134)
+2245 4
++1 4
+fi=(368)
+64 36
+cob=(3)
+cfi=(147) /build/glibc-OTsEL5/glibc-2.27/debug/snprintf_chk.c
+cfn=(676) __snprintf_chk
+calls=4 -35 
+* 2688
+* 4
+fe=(134)
+2246 16
+fi=(368)
+64 144
+cob=(3)
+cfi=(147)
+cfn=(676)
+calls=16 -35 
+* 10752
+* 16
+fe=(134)
+2245 40
++5 48
+
+fl=(317)
+fn=(1634)
+66 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(188)
+fn=(1818) newNode
+13 472
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=118 +16 
+* 4906
+* 708
++2 236
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=118 3028 
+* 18389
+* 118
+* 118
++4 236
++3 354
++1 354
++1 236
++1 472
++1 472
++1 472
++1 472
++1 472
++1 472
++1 236
++7 236
+
+fn=(1816)
+71 472
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=118 -42 
+* 4906
+* 708
++3 354
++2 236
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=118 3028 
+* 31658
+* 118
+* 118
++1 708
+cob=(3)
+cfi=(144)
+cfn=(634)
+calls=118 +52 
+* 1180
+* 118
++3 354
++2 590
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=118 3028 
+* 55931
+* 118
+* 118
++1 944
+cob=(3)
+cfi=(144)
+cfn=(634)
+calls=118 +46 
+* 117797
+* 118
++3 1298
+cfn=(1818)
+calls=118 -73 
+* 29431
+* 236
++4 472
++3 210
++1 210
++8 70
+-3 192
++1 144
++2 354
+
+fn=(880)
+116 19951612
+cob=(3)
+cfi=(132)
+cfn=(508)
+calls=4987903 -87 
+* 234431435
+* 9975804
++1 43644140
++1 9975804
+
+fl=(220)
+fn=(1440)
+436 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(258)
+fn=(1516)
+108 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(277)
+fn=(1554)
+149 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(207)
+fn=(1410)
+935 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
+1069 4
+942 4
+1069 8
+
+fl=(321)
+fn=(1642)
+1005 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(262)
+fn=(1524)
+205 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(281)
+fn=(1562)
+68 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(336)
+fn=(1672)
+85 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(325)
+fn=(1650)
+94 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(240)
+fn=(1480)
+227 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(296)
+fn=(1592)
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(285)
+fn=(1570)
+58 4
++2 4
+-2 4
++2 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(340)
+fn=(1680)
+217 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(255)
+fn=(1510)
+59 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(329)
+fn=(1658)
+73 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(244)
+fn=(1488)
+231 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(263)
+fn=(1526)
+121 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(300)
+fn=(1600)
+70 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(224)
+fn=(1448)
+58 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(289)
+fn=(1578)
+284 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(344)
+fn=(1688)
+53 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(333)
+fn=(1666)
+83 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(248)
+fn=(1496)
+212 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(267)
+fn=(1534)
+57 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(304)
+fn=(1608)
+60 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(228)
+fn=(1456)
+294 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(293)
+fn=(1586)
+56 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(348)
+fn=(1696)
+58 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(252)
+fn=(1504)
+290 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(271)
+fn=(1542)
+108 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(308)
+fn=(1616)
+126 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(211)
+fn=(1422)
+386 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(232)
+fn=(1464)
+95 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(352)
+fn=(1704)
+77 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(275)
+fn=(1550)
+722 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(312)
+fn=(1624)
+51 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(215)
+fn=(1430)
+61 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(356)
+fn=(1712)
+179 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++9 4
+-1 4
++1 8
+
+fl=(316)
+fn=(1632)
+60 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(219)
+fn=(1438)
+361 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(257)
+fn=(1514)
+84 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(276)
+fn=(1552)
+380 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(320)
+fn=(1640)
+95 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(261)
+fn=(1522)
+70 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(280)
+fn=(1560)
+96 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(335)
+fn=(1670)
+55 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(324)
+fn=(1648)
+53 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(239)
+fn=(1478)
+151 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(295)
+fn=(1590)
+80 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(284)
+fn=(1568)
+60 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(339)
+fn=(1678)
+219 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++6 4
+-1 4
++1 8
+
+fl=(254)
+fn=(1508)
+95 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 192
++8 4
+-1 4
++1 8
+
+fl=(328)
+fn=(1656)
+101 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(243)
+fn=(1486)
+81 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(299)
+fn=(1598)
+138 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(223)
+fn=(1446)
+807 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(288)
+fn=(1576)
+74 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(343)
+fn=(1686)
+94 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(332)
+fn=(1664)
+67 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(247)
+fn=(1494)
+76 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+ob=(6)
+fl=(125)
+fn=(1182)
+0 16
+
+fn=(2176)
+0 2
+
+fn=(950)
+0 12
+cob=(3)
+cfi=(101)
+cfn=(368)
+calls=1 24 
+0 54
+0 1
+0 18
+
+fn=(1102)
+0 10
+
+fn=(1354) 0x0000000000021570
+0 23
+
+fn=(932)
+0 12
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1179
+0 5
+0 18
+
+fn=(1200)
+0 22
+cob=(3)
+cfi=(203)
+cfn=(1162)
+calls=1 31 
+0 117
+0 1
+0 7
+cob=(3)
+cfi=(203)
+cfn=(1162)
+calls=1 31 
+0 117
+0 1
+0 12
+cfn=(1218)
+calls=1 0 
+0 388
+0 15
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=1 3028 
+0 229
+0 1
+0 16
+cfn=(1238) 0x0000000000020270
+calls=1 0 
+0 185
+0 21
+cfn=(1252)
+calls=1 0 
+0 346
+0 31
+cfn=(1292) 0x0000000000020500
+calls=1 0 
+0 310
+0 7
+cfn=(1354)
+calls=1 0 
+0 23
+0 24
+
+fn=(1292)
+0 22
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=1 3028 
+0 41
+0 1
+0 246
+
+fn=(1722)
+0 2618
+cfn=(1724)
+calls=119 0 
+0 175122
+0 238
+
+fn=(1792)
+0 944
+
+fn=(978)
+0 16
+cob=(3)
+cfi=(107)
+cfn=(396) calloc
+calls=1 3379 
+0 358
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1421
+0 6
+0 28
+
+fn=(1116)
+0 18
+
+fn=(1252)
+0 2142
+cfn=(1238)
+calls=119 0 
+0 16760
+0 1781
+cob=(3)
+cfi=(107)
+cfn=(1738) realloc
+calls=77 3130 
+0 17928
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 2110
+0 82
+0 1092
+cfn=(1238)
+calls=78 0 
+0 101908
+0 451
+cfn=(1238)
+calls=41 0 
+0 9573
+0 2142
+
+fn=(1808)
+0 590
+
+fn=(974)
+0 14
+cfn=(976)
+calls=1 0 
+0 1476
+0 16
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1334
+0 5
+0 20
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1054
+0 5
+0 13
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1125
+0 5
+0 14
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 1043
+0 5
+0 3
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 995
+0 5
+0 3
+cob=(1)
+cfi=(90)
+cfn=(322)
+calls=1 71 
+0 922
+0 5
+0 2
+
+ob=(5)
+fl=(266)
+fn=(1532)
+118 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(303)
+fn=(1606)
+80 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(227)
+fn=(1454)
+781 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(292)
+fn=(1584)
+142 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(347)
+fn=(1694)
+67 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(251)
+fn=(1502)
+158 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(270)
+fn=(1540)
+96 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(307)
+fn=(1614)
+105 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(210)
+fn=(1420)
+248 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(231)
+fn=(1462)
+179 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(351)
+fn=(1702)
+65 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(274)
+fn=(1548)
+122 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(311)
+fn=(1622)
+69 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(214)
+fn=(1428)
+184 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(235)
+fn=(1470)
+47 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+fl=(355)
+fn=(1710)
+141 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++7 4
+-1 4
++1 8
+
+fl=(315)
+fn=(1630)
+72 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
+
+ob=(6)
+fl=(125)
+fn=(974)
+0 4
+
+fn=(1238)
+0 3107
+cob=(3)
+cfi=(203)
+cfn=(1162)
+calls=239 31 
+0 122690
+0 239
+0 956
+
+ob=(5)
+fl=(315)
+fn=(1630)
+81 4
+-1 4
++1 8
+
+ob=(6)
+fl=(125)
+fn=(1238)
+0 1434
+
+ob=(5)
+fl=(218)
+fn=(1436)
+85 4
++1 4
+-1 4
++1 36
+cfi=(134)
+cfn=(1412)
+calls=4 2804 
+* 224
++8 4
+-1 4
++1 8
+
+ob=(4)
+fl=(197) /build/glibc-OTsEL5/glibc-2.27/nptl/../csu/errno-loc.c
+fn=(1030) __errno_location
+26 2
++1 1
+
+fl=(198) /build/glibc-OTsEL5/glibc-2.27/nptl/../sysdeps/unix/sysv/linux/close.c
+fn=(1038) close
+27 3
+-1 3
++1 1
+cfi=(193) /build/glibc-OTsEL5/glibc-2.27/nptl/../sysdeps/unix/sysv/linux/x86_64/cancellation.S
+cfn=(900) __pthread_enable_asynccancel
+calls=1 +32 
+* 11
+* 9
+cfi=(193)
+cfn=(1040) __pthread_disable_asynccancel
+calls=1 +61 
+* 12
+* 1
++1 3
+
+fl=(113)
+fn=(412)
+38 118
+344 118
+38 118
++1 118
+-1 118
++1 236
++4 236
++5 118
++3 118
++3 495
+cfi=(364) /build/glibc-OTsEL5/glibc-2.27/nptl/../sysdeps/unix/sysv/linux/x86_64/lowlevellock.S
+cfn=(2166) __lll_unlock_wake
+calls=47 358 
+* 499
+* 47
++2 47
+346 94
+56 71
+346 142
+
+fl=(364)
+fn=(2164) __lll_lock_wait
+118 47
++2 47
++4 47
++1 47
++1 47
++2 47
++1 47
++2 80
++1 80
++1 312
++2 127
++1 127
++2 127
++1 127
++2 47
++3 47
++3 47
+
+fn=(2166)
+358 47
++2 47
++5 47
++1 47
++1 47
++1 47
++1 76
++2 47
++3 47
++3 47
+
+fl=(111)
+fn=(404)
+65 354
++2 118
++2 236
+-5 118
++9 472
++2 354
++3 731
+cfi=(364)
+cfn=(2164)
+calls=47 +40 
+* 1450
+* 47
++1 354
++75 118
++3 118
++2 118
++3 118
++2 118
++1 236
+
+fl=(193)
+fn=(1040)
+88 1
++1 1
++2 1
++1 1
++1 1
++1 1
++2 1
++2 1
++1 1
++1 1
++1 1
++1 1
+
+fn=(900)
+59 1
++1 1
++1 1
++1 1
++1 1
++2 1
++2 1
++2 1
++1 1
++1 1
++2 1
+
+fl=(179)
+fn=(810)
+62 2
++3 4
++3 6
++23 4
++1 2
+
+fn=(808)
+28 2
++1 2
++1 4
++2 2
++3 4
++17 6
++2 2
++1 2
+
+fl=(181)
+fn=(866)
+378 8
++6 4
++1 1
++4 3
++3 1
+cob=(3)
+cfi=(102) /build/glibc-OTsEL5/glibc-2.27/ctype/ctype-info.c
+cfn=(370) __ctype_init
+calls=1 31 
+* 16
+* 1
++3 4
++11 5
++9 2
++20 1
+-4 1
++1 1
++3 1
+cob=(3)
+cfi=(128)
+cfn=(500)
+calls=1 30 
+* 29
+* 1
++1 1
+-1 1
++1 1
++3 2
++6 3
++15 2
++3 2
+cob=(5)
+cfi=(131)
+cfn=(886)
+calls=1 3891 
+* 605304922
+
+ob=(3)
+fl=(204) /build/glibc-OTsEL5/glibc-2.27/libio/fileno.c
+fn=(1380) fileno
+35 5
++7 1
+
+fl=(174)
+fn=(782)
+78 8
++6 4
+fi=(176)
+870 3
++2 2
++1 2
+fe=(174)
+84 3
+cfi=(173)
+cfn=(784) _IO_file_stat
+calls=1 1169 
+* 14
+* 2
++2 4
++11 4
++4 2
+cob=(2)
+cfi=(18)
+cfn=(788)
+calls=1 0 
+* 226
+* 1
++2 1
+-1 2
++2 4
+cfi=(149)
+cfn=(686)
+calls=1 347 
+* 18
++1 1
++1 8
+
+fl=(151)
+fn=(688)
+1244 322
++31 69
++8 69
++4 115
++11 92
++11 23
+fi=(377) /build/glibc-OTsEL5/glibc-2.27/stdio-common/printf-parse.h
+108 46
+fe=(151)
+1309 69
+fi=(377)
+108 23
+cfi=(152)
+cfn=(692)
+calls=23 -84 
+* 964
+* 23
+fe=(151)
+1324 23
+fi=(377)
+108 23
+fe=(151)
+1324 57
+cob=(4)
+cfi=(179)
+cfn=(808)
+calls=1 28 
+* 12
++1 16
++3 1
+fi=(378) /build/glibc-OTsEL5/glibc-2.27/stdio-common/../libio/libioP.h
+870 3
++2 1
+-2 1
++2 1
+-2 1
++3 2
+fe=(151)
+1328 22
+fi=(378)
+870 66
++2 22
+-2 22
++2 22
+-2 22
++3 44
+fe=(151)
+1328 138
+cfi=(173)
+cfn=(776) _IO_file_xsputn@@GLIBC_2.2.5
+calls=1 1220 
+* 217
+cfi=(149)
+cfn=(694)
+calls=22 392 
+* 1188
+* 46
+1696 49
++1 75
+cob=(4)
+cfi=(179)
+cfn=(810)
+calls=1 62 
+* 9
++3 276
+1283 46
++45 46
++4 69
++4 184
+-57 23
++34 23
+-8 23
+-59 46
+1378 375
+-3 25
+-5 25
+-4 25
+-1 25
+-1 25
+-1 25
+-1 25
+-1 25
+-1 25
++15 25
+-16 25
+-1 25
+-1 25
++14 25
+-4 25
++8 25
+-1 50
+1696 7
+-36 25
++2 50
++8 25
+fi=(377)
+108 100
+cfi=(152)
+cfn=(692)
+calls=25 -84 
+* 500
+* 25
+fe=(151)
+1674 25
+fi=(377)
+108 25
+fe=(151)
+1674 75
+fi=(378)
+872 75
++1 50
+fe=(151)
+1674 175
+cfi=(173)
+cfn=(776)
+calls=1 1220 
+* 269
+cfi=(149)
+cfn=(694)
+calls=24 392 
+* 244
+* 175
++2 25
+-2 25
++2 73
+-33 117
+-1 240
+cfi=(153) /build/glibc-OTsEL5/glibc-2.27/stdio-common/_itoa.c
+cfn=(700) _itoa_word
+calls=20 168 
+* 440
+* 980
+fi=(378)
+872 60
++1 40
+fe=(151)
+1642 100
+cfi=(149)
+cfn=(694)
+calls=20 392 
+* 1000
+* 380
++1 15
+fi=(378)
+872 15
++1 10
+fe=(151)
+1643 35
+cfi=(173)
+cfn=(776)
+calls=1 1220 
+* 212
+cfi=(149)
+cfn=(694)
+calls=4 392 
+* 236
+* 60
+-1 380
++1 60
+-1 300
++1 25
+cfi=(138)
+cfn=(552)
+calls=5 79 
+* 170
+* 5
+* 13
+
+fl=(153)
+fn=(700)
+168 80
++2 40
++9 280
++9 40
+
+fl=(172)
+fn=(774)
+33 6
++2 1
+cfi=(138)
+cfn=(552)
+calls=1 +44 
+* 34
+* 1
++1 1
+-1 1
++1 16
+cfi=(189)
+cfn=(888)
+calls=1 +42 
+* 21
+* 5
++3 3
++1 1
+fi=(176)
+870 3
++2 2
++1 2
+fe=(172)
+40 3
+cfi=(173)
+cfn=(776)
+calls=1 1220 
+* 177
+* 2
++1 4
++1 4
+fi=(176)
+796 2
++1 11
+cfi=(189)
+cfn=(890)
+calls=1 328 
+* 10
+* 1
+fe=(172)
+46 7
+-8 2
++3 2
+cfi=(149)
+cfn=(798)
+calls=1 217 
+* 206
+* 2
+
+fl=(118)
+fn=(438)
+109 464130
++2 92826
++1 92826
++1 61806
++1 61806
++2 12
++1 12
++2 12
++55 61794
++1 61794
++1 61760
++1 61760
++1 61760
++1 61760
++3 61760
++3 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++1 34
++2 16370
++1 16370
++1 16370
++1 16370
++1 16370
++1 16370
++1 16370
++1 34
++15 31020
++1 31020
++1 31020
++28 31020
++1 31020
++2 31020
+
+fl=(173)
+fn=(776)
+1220 16
++7 4
+-7 12
++6 20
++7 20
++21 6
++4 3
++2 9
+-1 3
++1 3
+-2 3
+cfi=(144)
+cfn=(698)
+calls=3 116 
+* 36
+* 3
+-4 1
++4 1
++2 3
+-1 1
++1 1
+-2 1
+cfi=(144)
+cfn=(698)
+calls=1 116 
+* 14
+* 1
+* 4
++4 8
++18 6
++10 36
+-24 1
+fi=(176)
+870 3
++2 2
++1 2
+fe=(173)
+1266 3
+cfn=(778)
+calls=1 747 
+* 172
+* 2
++6 2
++1 7
++2 2
++11 3
+-51 8
++1 8
++3 12
++2 256
+-2 171
++4 1
++11 5
+
+fn=(790) _IO_do_write@@GLIBC_2.2.5
+433 6
+-2 32
++11 4
++7 8
+fi=(176)
+873 4
+fe=(173)
+457 8
+cfn=(794) _IO_file_write@@GLIBC_2.2.5
+calls=2 1196 
+* 177
+* 2
++1 10
++6 2
+-4 2
++4 2
+-4 6
++1 4
++3 2
+-2 2
+-29 8
++1 16
++29 4
+
+fn=(1166)
+1295 2420
++7 484
++11 484
++2 484
++1 242
+-1 242
++1 484
+fi=(176)
+870 336
+fe=(173)
+1332 118
++9 423
++1 564
++18 57
+-8 171
++1 171
++7 57
++1 342
++3 57
+fi=(176)
+872 171
++1 114
+fe=(173)
+1364 171
+cfn=(1176) _IO_file_read
+calls=57 1153 
+* 3283
++1 114
++12 57
+-2 57
++1 57
++1 114
+-64 282
++2 423
++1 282
++8 282
++2 164
++1 82
+-1 82
+cfi=(144)
+cfn=(698)
+calls=82 116 
+* 34826
+* 82
++2 82
++4 82
+-6 82
++6 82
++51 2178
+-39 168
+cfi=(149)
+cfn=(1170)
+calls=84 288 
+* 14250
+* 168
+-39 3
++5 2
+cfi=(149)
+cfn=(780)
+calls=1 362 
+* 334
+* 1
++8 726
+cfi=(144)
+cfn=(634)
+calls=242 129 
+* 39973
+* 242
++1 484
+
+fn=(1146)
+107 2
++4 1
+-4 2
++5 1
+-1 1
++3 1
+cfi=(149)
+cfn=(1148)
+calls=1 -27 
+* 120
++1 1
++1 4
+
+fn=(1150)
+214 10
++9 2
++2 4
+364 10
+248 14
++33 1
+-96 1
++1 2
+-1 1
++4 1
+cfi=(160)
+cfn=(1152)
+calls=1 36 
+* 65
+* 1
++1 2
++3 1
+-1 1
++1 2
++3 2
+-3 1
++3 1
++10 2
+cfi=(149)
+cfn=(1148)
+calls=1 87 
+* 16
++81 3
+cfi=(202) /build/glibc-OTsEL5/glibc-2.27/string/../string/strstr.c
+cfn=(1154) __GI_strstr
+calls=1 53 
+* 25
++1 1
+-1 1
++1 1
+-59 1
+-1 1
+-13 2
++73 2
+
+fn=(794)
+1196 12
++2 12
++5 2
+cfi=(177) /build/glibc-OTsEL5/glibc-2.27/io/../sysdeps/unix/sysv/linux/write.c
+cfn=(796) write
+calls=2 27 
+* 105
++1 4
++5 2
++1 2
+-12 4
++5 10
++10 6
++3 18
+
+fn=(784)
+1169 1
++1 3
+cfi=(175) /build/glibc-OTsEL5/glibc-2.27/io/../sysdeps/unix/sysv/linux/wordsize-64/fxstat.c
+cfn=(786) _fxstat
+calls=1 34 
+* 10
+
+fn=(1172)
+478 252
++6 252
+-14 420
++17 504
++13 168
++20 168
+cfi=(149)
+cfn=(1174)
+calls=84 164 
+* 2016
++11 84
+-5 84
+fi=(176)
+872 84
+fe=(173)
+526 168
+fi=(176)
+872 84
+fe=(173)
+527 84
++2 84
+fi=(176)
+873 84
+fe=(173)
+528 168
+fi=(176)
+873 84
+fe=(173)
+531 336
+cfn=(1176)
+calls=84 1153 
+* 4843
++2 168
++16 84
+-9 84
++9 168
++2 84
++1 168
+-1 84
++1 336
+
+fn=(1176)
+1153 282
++3 423
+cfi=(162) /build/glibc-OTsEL5/glibc-2.27/io/../sysdeps/unix/sysv/linux/read.c
+cfn=(1178) read
+calls=141 27 
+* 7421
+
+fn=(778)
+747 6
++7 2
+-8 12
++8 8
++35 4
++3 2
++3 3
++1 3
++1 5
++5 4
+-12 1
++1 1
++11 3
+-12 1
+cfn=(790)
+calls=1 433 
+* 150
++9 2
+-1 1
++1 1
+-1 1
+cfn=(790)
+calls=1 433 
+* 149
+* 2
+
+fl=(162)
+fn=(1178)
+27 564
+-1 987
++1 141
+cfi=(187)
+cfn=(864)
+calls=141 +32 
+* 1551
+* 1640
+cfi=(187)
+cfn=(884)
+calls=141 +61 
+* 1692
+* 141
++1 705
+
+fl=(138)
+fn=(552)
+79 4988
++1 4988
++1 4988
++1 4988
++1 4988
++1 4988
++1 4988
++2 4988
++2 4988
++31 4904
++1 4904
++1 4904
++1 4904
++1 4904
++1 4440
++2 4440
++4 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++1 464
++5 3712
++4 84
++1 1176
++1 656
++15 8
++1 8
++1 16
++51 8
++1 8
++1 8
++1 8
++1 8
++1 8
++1 8
++1 8
++16 8
++2 8
++1 112
++2 8
++1 8
++1 8
++2 8
+
+fl=(57) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/ifunc-unaligned-ssse3.h
+fn=(196) strncpy
+33 4
+fi=(58) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/multiarch/strncpy.c
+-4 1
+fe=(57)
+
+fl=(150)
+fn=(684)
+36 176
++4 44
++6 110
+cfi=(149)
+cfn=(686)
+calls=22 347 
+* 396
++5 22
+-3 22
++1 22
++1 22
++1 22
++2 22
++1 22
++1 22
++9 22
++1 132
+-23 22
++1 88
+
+fl=(187)
+fn=(884)
+88 144
++1 144
++2 144
++1 144
++1 144
++1 144
++2 144
++2 144
++1 144
++1 144
++1 144
++1 144
+
+fn=(864)
+59 144
++1 144
++1 144
++1 144
++1 144
++2 144
++2 144
++2 144
++1 144
++1 144
++2 144
+
+fl=(107)
+fn=(528)
+3028 434112
++5 289408
++1 289408
++5 1014154
++3 144704
+-2 434112
++2 434112
++3 289406
++10 577712
+-16 576364
+-56 5
+cfn=(422) tcache_init.part.4
+calls=1 +3 
+* 1375
++62 3
++2 5
++1 3
+-1 144512
++1 433536
+2941 552
++2 552
++1 276
+3081 723520
+-18 1588708
++2 433284
+cfn=(424) _int_malloc
+calls=144428 3521 
+* 24441943
++3 144428
+-3 144428
++3 144428
++8 722140
++2 1877532
+
+fn=(614) malloc_consolidate
+4403 61
++19 61
+-19 61
++30 61
+-30 122
++29 61
+-29 61
++32 61
+-15 61
++15 122
++1 122
+-1 1098
++1 1098
++3 339
++1 452
++8 113
+-3 113
++3 113
++1 113
++1 339
++2 226
++1 1
++2 1
+-1 1
++2 15
++3 226
++1 113
++2 226
++6 113
++4 113
+-3 113
++1 113
++2 113
++5 113
++1 113
++1 113
+-2 226
++3 113
++9 399
++3 2440
++1 366
+-27 339
+
+fn=(1738)
+3130 546
++7 156
++1 156
++4 616
++7 154
++6 77
++3 77
+-5 77
++2 154
++2 154
++14 308
++1 154
++4 616
++2 154
++41 308
+-43 385
+-15 231
++1 539
++87 693
+3139 1
+3249 7
+3139 1
+cfi=(108)
+cfn=(1740)
+calls=1 37 
+* 989
++89 539
++2 462
+cfn=(1744)
+calls=77 4502 
+* 9843
++2 77
+-2 77
++2 385
++1 1001
+
+fn=(422)
+2986 1
+-9 1
++9 3
++10 5
++7 2
++2 1
++1 2
+-1 1
++1 78
++3 2
+fi=(109)
+878 1
+cfn=(920)
+calls=1 759 
+* 5
++1 1
+-1 1
++1 4
+cfn=(922)
+calls=1 -7 
+* 1098
+fe=(107)
+2987 4
+cfn=(424)
+calls=1 3521 
+* 159
++1 1
+-1 1
++1 1
++7 3
+
+fn=(426) sysmalloc
+2274 22888
++20 2861
++11 2861
+-11 2861
++11 2861
++1 11440
+fi=(109)
+535 2857
+fe=(107)
+2321 5714
+fi=(109)
+535 2857
+fe=(107)
+2321 5714
++66 2857
++1 8571
++10 2857
+-9 2857
++9 22856
+-91 12
++14 16
++6 8
++77 11428
++3 8571
++8 2857
+-2 5714
++2 8571
+-1 2857
+fi=(109)
+535 5714
++1 2857
++1 5714
++3 8571
++10 2857
++1 2857
+fe=(107)
+2418 8571
++1 2857
+-1 2857
++1 2857
+-1 2857
++1 2857
+-1 2857
++1 2857
+2724 5714
++1 2857
++5 5714
++3 5714
++5 2857
+-3 2857
++3 2857
+-2 2857
++2 8571
++1 2857
+-1 2857
+-1 2857
++4 2857
+-3 5714
++1 2857
++2 2857
+2346 12
++16 4
+-1 4
++1 8
++5 12
++1 20
++3 12
++1 20
+2747 25749
+fi=(109)
+542 28570
+cfi=(184)
+cfn=(842)
+calls=2857 78 
+* 14285
+* 19999
++5 5714
+fe=(107)
+2329 28
+cfi=(117)
+cfn=(434)
+calls=4 44 
+* 140
++2 8
+
+fn=(396)
+3379 2
+-13 2
++15 2
+-15 2
++13 2
+-13 4
++10 2
+-10 2
++10 2
++5 4
++8 4
++1 4
++12 6
++2 8
++32 6
+cfn=(424)
+calls=2 +85 
+* 322
++2 2
+-2 2
++2 8
++75 14
+-75 16
++3 6
++28 2
++3 4
+-14 2
++14 8
++11 2
++1 4
++1 4
++2 4
+-80 22
++7 2
++8 2
+-7 4
++7 4
++2 4
++1 10
++63 6
+cfi=(118)
+cfn=(438)
+calls=2 109 
+* 192
+* 2
+* 4
+-37 10
++4 8
++6 4
+-11 4
+
+fn=(424)
+3521 866610
++32 144435
+-32 144435
++32 1298076
++4 866610
++24 288870
++2 334713
++3 111571
++2 223142
++2 4
+-6 8
++6 12
++6 12
++1 8
++7 16
+-1 8
++1 8
++5 12
++1 12
+1887 131
+3682 131
+1887 262
+4131 1300528
+3553 1226
++86 65923
++62 6690
++1 585
++20 144304
+-1 288608
++1 144304
+-1 144304
++1 288608
+-2 721515
++6 432909
++66 144303
+-40 288606
+3879 144303
+3731 144303
++1 144303
++20 288606
++40 288606
+-60 288606
+-12 1
++6 3
++66 1
+-40 2
+3879 1
+3731 1
++1 1
++20 2
++40 2
+-60 1028
++3 16695
++1 11130
++3 5565
++10 5565
+-15 5565
++15 16355
++34 513
+-5 513
++1 513
++4 513
++29 1014
++8 476
++1 144
++1 48
+-1 48
++4 48
+-3 48
++3 48
+-4 177
++1 59
+-1 59
++4 59
+-3 59
++3 59
++43 1014
++9 507
+-9 2028
++10 507
+-9 507
++1 507
++1 507
++1 507
++6 507
++9 1014
+3593 24
++49 432708
++2 144236
+-2 144236
++2 288472
++2 127
++1 254
++6 127
+-4 127
++1 127
++1 127
++2 254
++1 127
++6 508
+-1 254
++1 381
++5 810
++3 116
+-2 494
+3814 800
++1 1600
++1 800
+3703 122
+cfn=(614)
+calls=61 4403 
+* 10228
+* 2882241
+-62 1873417
+3786 6
+-1 6
++1 12
++1 6
++4 18
++1 24
++95 1521
++17 278492
++2 780
++3 195
+-3 195
++3 390
++1 4
++67 278488
++1 278488
++1 278488
++1 278488
++1 278488
++5 280060
++14 8098
++2 3405
++2 6810
+3820 428
+2929 12
+3751 5389
+-1 10778
++1 10504
++4 5052
++1 5052
+-1 5052
++2 10104
++3 5052
+-2 5052
++1 10104
++1 5052
++2 4494
++1 4494
++3 26964
++6 4494
+-6 13482
++2 13482
+1887 4494
+3769 4494
+1887 8988
+3766 3348
++6 558
+-6 1674
++2 1674
+1887 558
+3769 558
+1887 1116
+3720 2
+3865 428
+-45 54
+2930 6
++2 6
+-2 12
++1 6
+3796 6
+2932 6
+3795 6
++1 6
+-95 16
+-31 58
++1 58
++1 116
++1 116
+2929 58
+3674 58
++1 58
+2929 58
++1 58
+-2 58
++2 58
+-2 58
+3670 58
+2932 116
+3893 278504
+2941 18
+-1 18
++2 12
++1 12
++1 6
+3895 6
++95 417366
++3 555612
+-3 416643
++3 555340
+-3 277558
++3 416217
++97 138932
++3 138932
+-2 277864
++2 280725
++17 8583
+4008 644
++3 1288
++2 332
++1 332
++1 332
+-2 1328
+-27 332
++7 78
++2 312
++1 156
+-1 448
++1 224
++24 936
++3 624
++5 312
+-3 624
++3 4041
++3 624
++3 49
+-1 49
++1 98
++1 49
+1887 49
+4103 49
+1887 136434
+4103 136336
+1887 272672
+3993 224
+4125 8583
+cfn=(426)
+calls=2861 2274 
+* 357525
++1 2861
+-1 2861
++1 2861
+1887 8583
+4046 263
+-5 263
++6 526
++8 263
+-6 263
++1 263
++1 263
++1 263
++3 263
++1 263
++1 526
++2 96
++1 96
++2 864
++2 288
++1 192
+-3 1503
++2 501
++1 334
++30 136071
++3 272142
+-3 136071
++1 136071
++2 408213
++2 136071
+-2 272142
+-1 136071
++1 272142
++2 272142
+3913 2
++1 12
++6 4
++6 2
+-1 4
++1 34
++3 4
++13 2
++1 4
+-5 2
++11 2
+-4 2
++1 2
++1 2
++1 2
++1 2
++5 18
++2 6
++1 4
++71 1089
+3926 22
+
+fn=(584)
+3086 3949
++5 718
++1 718
++6 718
++5 359
+-2 359
++2 718
++18 1077
++2 1077
+4149 718
++6 1436
++1 718
++4 1436
++9 1077
+-2 718
++3 718
++1 1164
++13 248
+3125 3949
+-2 1436
+4259 248
++3 124
++1 124
+-1 372
++10 124
+-4 124
++4 248
++3 248
++5 372
++3 248
++1 248
++1 248
+1894 372
+4291 248
++7 248
++5 372
++13 124
+-1 124
++2 248
++4 124
+-2 124
++1 124
++1 124
++2 68
++1 68
++2 68
++1 68
++2 204
++1 68
++30 136
+-34 56
++1 56
++2 168
++1 56
++30 112
++20 248
++1 744
+2929 705
++3 235
+-2 470
++1 235
++1 470
+4307 372
+-41 1116
+
+fn=(1744)
+4502 468
++19 312
++1 312
++6 234
++2 78
++1 234
++2 312
++3 156
++99 222
++2 148
++8 8
+-1 8
++1 32
++5 8
+-5 16
++1 8
++4 8
+-4 24
++3 8
++1 8
+cfn=(1746) _int_free
+calls=8 4139 
+* 824
++4 74
++1 624
+4546 18
++13 9
+-1 18
++2 5
+-1 10
++5 75
++75 462
++1 132
+-70 20
+cfn=(424)
+calls=4 3521 
+* 1192
++1 4
+-1 4
++1 4
++3 4
++6 16
++13 4
++3 8
++1 8
++2 8
++25 16
+cfn=(1746)
+calls=4 4139 
+* 412
++2 4
+-32 4
++6 8
+cfi=(144)
+cfn=(634)
+calls=4 129 
+* 4072
+* 4
+* 4
+-36 70
+
+fn=(1746)
+4139 120
++10 36
++6 48
++1 36
++4 48
++9 60
+-2 24
++3 24
+4390 132
+4184 24
++75 24
++6 84
++7 12
+-4 12
++4 24
++3 24
++5 36
++3 24
++1 24
++1 24
+1894 36
+4291 24
++7 24
++5 36
++4 24
++9 12
+-1 12
++2 36
++4 12
+-2 12
++1 12
++1 12
++2 12
++1 12
++2 12
++1 12
++2 36
++1 12
++30 24
++20 24
+
+fl=(147)
+fn=(676)
+29 147
++4 21
++1 21
+-1 105
++1 21
+cfi=(148) /build/glibc-OTsEL5/glibc-2.27/debug/vsnprintf_chk.c
+cfn=(678) __vsnprintf_chk
+calls=21 -3 
+* 14206
++4 105
+
+fl=(184)
+fn=(926)
+78 8
++1 2
+
+fn=(1020) ioctl
+78 5
++2 5
+
+fn=(842)
+78 11432
++1 2858
+
+fl=(130)
+fn=(504)
+29 1
+-1 2
++1 2
++5 3
+
+fl=(177)
+fn=(796)
+27 8
+-1 14
++1 2
+cfi=(187)
+cfn=(864)
+calls=2 +32 
+* 22
+* 23
+cfi=(187)
+cfn=(884)
+calls=2 +61 
+* 24
+* 2
++1 10
+
+fl=(144)
+fn=(634)
+129 32823
++2 32823
++1 32823
++1 725
++1 725
++5 131
++1 131
++1 131
++1 131
++5 131
+267 32098
++1 32098
++1 31632
++1 31632
++1 120
++1 120
++27 466
++1 466
++1 466
++1 466
++1 466
++3 31512
++1 31512
++1 31512
++1 31512
++1 31512
++3 120
++1 120
++1 120
++1 120
++1 120
++10 594
++1 594
++1 196
++1 196
++2 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++1 194
++2 194
++3 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++2 2
++3 398
++1 398
++2 13
++3 13
++1 13
++1 13
++1 13
++1 13
++2 13
++1 13
++3 13
++1 13
++2 13
++2 13
++2 13
++2 13
++3 13
++1 13
++4 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++1 215
++2 13
++1 13
++1 13
++1 13
++2 13
++2 13
++5 385
++1 385
++1 385
++1 385
++1 385
++2 385
++3 385
++1 385
++1 385
++1 385
++2 385
++2 385
++2 385
++3 385
++1 385
++4 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++1 22949
++2 385
++1 385
++1 385
++1 385
++2 385
++2 385
+
+fn=(698)
+116 110
++1 110
++1 110
++13 110
++1 110
++1 108
++1 108
++5 27
++1 27
++1 27
++1 27
++5 27
+267 2
++1 2
++1 2
++1 2
++36 2
++1 2
++1 2
++1 2
++1 2
++17 81
++1 81
++1 3
++1 3
++2 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++1 2
++2 2
++3 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++2 1
++3 78
++1 78
++58 78
++1 78
++1 78
++1 78
++1 78
++2 78
++3 78
++1 78
++1 78
++1 78
++2 78
++2 78
++2 78
++3 78
++1 78
++4 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++1 2480
++2 78
++1 78
++1 78
++1 78
++2 78
++2 78
+
+fl=(102)
+fn=(370)
+31 5
++2 1
++2 1
+-4 1
++4 1
+-4 1
++2 3
++2 2
++1 1
+
+fl=(148)
+fn=(678)
+31 210
++5 42
++11 84
+-5 21
++5 84
++6 126
+cfi=(149)
+cfn=(680)
+calls=21 590 
+* 1008
++1 21
++5 21
+-5 21
++1 21
++4 21
++1 21
++2 105
+cfi=(150)
+cfn=(684)
+calls=21 -26 
+* 1113
++1 84
+cfi=(151)
+cfn=(688)
+calls=21 1244 
+* 10867
++2 63
++1 42
++2 231
+
+fl=(175)
+fn=(786)
+34 1
+-1 1
++1 1
++1 6
++4 1
+
+fl=(196) /build/glibc-OTsEL5/glibc-2.27/socket/../sysdeps/unix/syscall-template.S
+fn=(1004) socket
+78 4
++1 1
+
+fl=(202)
+fn=(1154)
+53 7
++10 4
++26 9
+-23 5
+
+ob=(2)
+fl=(18)
+fn=(788)
+0 3
+cob=(3)
+cfi=(107)
+cfn=(528)
+calls=3 3028 
+0 2089
+
+ob=(1)
+fl=(90)
+fn=(322)
+71 17
++3 17
++2 17
++10 17
++6 17
++1 17
++1 17
++1 17
++1 17
++1 17
++1 17
++4 17
++1 17
++3 17
++1 17
++2 17
++1 17
++1 17
++1 17
++1 17
++1 17
++2 17
++7 17
++1 17
++1 17
+cfi=(91) /build/glibc-OTsEL5/glibc-2.27/elf/../elf/dl-runtime.c
+cfn=(324) _dl_fixup
+calls=17 -59 
+* 17370
++1 17
++5 17
++1 17
++1 17
++2 17
++1 17
++1 17
++1 17
++1 17
++1 17
++1 17
++2 17
++2 17
++4 17
++3 17
+
+fl=(21) /build/glibc-OTsEL5/glibc-2.27/string/../sysdeps/x86_64/strcmp.S
+fn=(56) strcmp
+144 166
++1 166
++2 166
++1 166
++21 166
++1 166
++1 162
++1 162
++1 145
++1 145
++1 145
++1 145
++21 145
++1 145
++1 145
++1 145
++1 145
++1 145
++1 145
++5 1
++1 1
++9 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
+-7 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 21
++1 5
++1 2
++1 2
++1 2
++2 2
++1 2
++1 2
++1 2
++1 2
++1 2
+-5 3
++1 3
++1 3
++1 3
++1 3
++1 3
++10 17
++1 17
++1 17
++2 17
++6 17
++1 17
++1 17
++1 17
++1 17
++5 17
++2 15
++1 15
++1 30
++8 15
++1 15
++3 15
++1 15
++1 15
++1 15
++1 15
++1 15
++31 1
++1 1
++1 1
++1 1
++1 1
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 2
++4 1
++1 1
++3 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 1
++1 1
++1 1
++1 1
+571 1
++1 1
++1 1
++1 1
++1 1
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++4 1
++1 1
++1 1
++6 1
++1 1
++1 2
++4 1
++1 1
++3 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 1
++1 1
++1 1
++1 1
++72 1
++1 1
++1 1
++1 1
++1 1
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++4 1
++1 1
++1 1
++6 1
++1 1
++1 2
++4 1
++1 1
++3 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 1
++1 1
++1 1
++1 1
++72 1
++1 1
++1 1
++1 1
++1 1
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++4 1
++1 1
++1 1
++6 1
++1 1
++1 2
++4 1
++1 1
++3 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 1
++1 1
++1 1
++1 1
+1946 1
++1 1
++1 1
++1 1
++1 1
++2 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++1 1
++4 1
++1 1
++1 1
++6 1
++1 1
++1 2
++4 1
++1 1
++3 1
++1 1
++1 1
++3 1
++1 1
++1 1
++6 1
++1 1
++1 1
++1 1
++1 1
++1 1
+2200 20
++2 20
++1 20
++1 20
++1 20
+-3 2
++1 2
++1 2
++1 2
++1 6
++5 2
++6 2
++1 2
++8 2
++1 2
+-16 164
++6 164
++1 164
++8 164
++1 164
+
+fl=(6) /build/glibc-OTsEL5/glibc-2.27/elf/dl-lookup.c
+fn=(190) do_lookup_x
+338 119
++1 17
+-1 102
++6 34
++12 17
++30 17
+-41 17
++41 17
++35 34
+-65 85
++14 249
++8 166
++1 249
++3 83
++1 166
++4 166
++3 166
+-5 83
++5 249
++3 581
+-99 66
+540 528
++1 198
+cfi=(36) /build/glibc-OTsEL5/glibc-2.27/elf/dl-misc.c
+cfn=(116) _dl_name_match_p
+calls=66 282 
+* 4950
+* 264
++3 198
+349 166
++3 166
++4 166
++4 166
++4 166
+fi=(55) /build/glibc-OTsEL5/glibc-2.27/elf/../sysdeps/generic/ldsodefs.h
+102 51
+fe=(6)
+503 34
++3 104
+-60 6
++64 24
++12 102
++2 17
++24 136
+397 63
+-1 42
++2 42
++2 20
+90 60
+375 20
+90 20
+374 20
+90 20
+400 40
+90 40
+413 54
+-10 175
++2 68
++2 34
+-1 51
+78 119
++12 85
++3 119
+cfi=(21)
+cfn=(56)
+calls=17 +51 
+* 645
+* 51
++5 17
+-1 17
++1 17
++2 34
++19 17
++1 153
+452 170
+180 21
+-59 85
+cfi=(21)
+cfn=(56)
+calls=17 +23 
+* 785
+* 85
+
+fn=(188) _dl_lookup_symbol_x
+790 170
+555 17
+790 68
+555 51
+-1 34
++2 17
+-1 17
++1 51
+-1 51
++1 102
+-1 102
++1 306
+-1 323
+793 17
+-1 17
++4 17
++4 17
+-8 17
++1 17
++7 68
++5 51
++6 51
+-7 187
++9 221
+cfn=(190)
+calls=17 338 
+* 13314
++3 85
++25 34
++24 119
++31 17
++9 68
++14 51
++3 68
++5 17
++2 153
+
+fl=(36)
+fn=(116)
+282 330
++1 132
+cfi=(21)
+cfn=(56)
+calls=66 144 
+* 1584
+* 66
++1 66
+-1 66
++3 66
++2 132
++6 66
++1 330
+-3 66
+-4 132
++1 198
+cfi=(21)
+cfn=(56)
+calls=66 144 
+* 1584
+* 132
+
+fl=(91)
+fn=(324)
+66 34
++6 34
+-6 17
++3 34
++3 51
+-4 17
++5 17
++2 17
+-2 85
++2 17
+-2 17
++2 17
++5 34
++4 34
++4 17
++7 17
+-7 34
++4 34
++1 68
++2 68
++7 34
+-1 17
++1 17
++10 153
+cfi=(6)
+cfn=(188)
+calls=17 790 
+* 15915
+* 17
++4 85
++10 119
++16 17
+-8 17
++8 51
++4 51
+fi=(5) /build/glibc-OTsEL5/glibc-2.27/elf/../sysdeps/x86_64/dl-machine.h
++96 17
+fe=(91)
+-92 51
+-33 68
+-13 17
++1 34
+fi=(195) /build/glibc-OTsEL5/glibc-2.27/elf/../sysdeps/x86_64/dl-irel.h
+-73 3
+cob=(3)
+cfi=(62)
+cfn=(258)
+calls=1 * 
+* 8
+cob=(3)
+cfi=(57)
+cfn=(196)
+calls=1 +1 
+* 5
+cob=(3)
+cfi=(62)
+cfn=(208)
+calls=1 * 
+* 8
+* 3
+fe=(91)
+
+totals: 605320536

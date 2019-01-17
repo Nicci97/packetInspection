@@ -417,12 +417,10 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
   // flow.src_ip = iph->saddr, flow.dst_ip = iph->daddr;
   // flow.src_port = htons(*sport), flow.dst_port = htons(*dport);
   flow.protocol = protocol_hash, flow.vlan_id = vlan_id;
+  
   flow.src_ip = src_ip_hash, flow.dst_ip = dst_ip_hash;
   flow.src_port = src_port_hash, flow.dst_port = dst_port_hash;
-
   flow.hashval = hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
-
-  //hashval = flow.protocol + flow.vlan_id + flow.src_ip + flow.dst_ip + flow.src_port + flow.dst_port;
   idx = hashval % workflow->prefs.num_roots;
   ret = ndpi_tfind(&flow, &workflow->ndpi_flows_root[idx], ndpi_workflow_node_cmp);
 
@@ -506,6 +504,7 @@ static struct ndpi_flow_info *get_ndpi_flow_info(struct ndpi_workflow * workflow
       return newflow;
     }
   } else {
+
     struct ndpi_flow_info *flow = *(struct ndpi_flow_info**)ret;
 
     if(is_changed) {
